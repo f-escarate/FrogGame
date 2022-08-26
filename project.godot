@@ -11,7 +11,13 @@ config_version=4
 [application]
 
 config/name="FrogGame"
+run/main_scene="res://GUI/mainMenu.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=720
+window/size/height=1080
 
 [gui]
 
