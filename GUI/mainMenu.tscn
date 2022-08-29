@@ -4,34 +4,46 @@
 [ext_resource path="res://GUI/mainMenu.gd" type="Script" id=3]
 
 [node name="MarginContainer" type="MarginContainer"]
-margin_right = 720.0
-margin_bottom = 1080.0
+size_flags_vertical = 0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 96.0
+margin_right = 193.0
 margin_bottom = 94.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 96.0
+margin_right = 193.0
 margin_bottom = 16.0
-text = "K-pop Frog"
+size_flags_horizontal = 0
+text = "Frog Againt the World"
+align = 1
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 20.0
-margin_right = 96.0
-margin_bottom = 42.0
+margin_right = 193.0
+margin_bottom = 94.0
+size_flags_horizontal = 5
+size_flags_vertical = 9
+
+[node name="Start" type="Button" parent="VBoxContainer/Buttons"]
+margin_right = 193.0
+margin_bottom = 22.0
+size_flags_vertical = 2
 text = "Start"
 
-[node name="Settings" type="Button" parent="VBoxContainer"]
-margin_top = 46.0
-margin_right = 96.0
-margin_bottom = 68.0
+[node name="Settings" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 26.0
+margin_right = 193.0
+margin_bottom = 48.0
+size_flags_vertical = 2
 text = "Settings"
 
-[node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 72.0
-margin_right = 96.0
-margin_bottom = 94.0
+[node name="Exit" type="Button" parent="VBoxContainer/Buttons"]
+margin_top = 52.0
+margin_right = 193.0
+margin_bottom = 74.0
+size_flags_vertical = 2
 text = "Exit"
