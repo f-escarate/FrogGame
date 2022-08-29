@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Clicker",
+"language": "GDScript",
+"path": "res://Controllers/Clicker.gd"
+} ]
+_global_script_class_icons={
+"Clicker": ""
+}
+
 [application]
 
 config/name="FrogGame"
@@ -18,6 +28,7 @@ config/icon="res://icon.png"
 
 window/size/width=480
 window/size/height=720
+window/handheld/orientation="portrait"
 
 [gui]
 
@@ -38,6 +49,10 @@ click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [physics]
 
