@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/KomikuBicycle.mp3-10553a698a609a7cab711d9c83f3254a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Songs/KomikuBicycle.mp3"
+dest_files=[ "res://.import/KomikuBicycle.mp3-10553a698a609a7cab711d9c83f3254a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
