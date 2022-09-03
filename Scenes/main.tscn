@@ -19,4 +19,7 @@ stream = ExtResource( 4 )
 margin_right = 40.0
 margin_bottom = 14.0
 theme = ExtResource( 2 )
-text = "asdasdasd"
+text = "contador de aciertos: 0"
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2( 240, 70 )
