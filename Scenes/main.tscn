@@ -9,7 +9,7 @@
 script = ExtResource( 1 )
 
 [node name="Settings" type="TouchScreenButton" parent="."]
-position = Vector2( 416, 0 )
+position = Vector2( 656, 2 )
 normal = ExtResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

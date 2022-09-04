@@ -5,6 +5,7 @@
 
 [node name="Bar" type="Sprite"]
 modulate = Color( 0.0509804, 0.705882, 0.184314, 0.333333 )
-scale = Vector2( 5, 0.3 )
+position = Vector2( 133, 14.7 )
+scale = Vector2( 5.21875, 0.446875 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
