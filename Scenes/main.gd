@@ -15,7 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	currentController.refreshNotes()
+	currentController.refreshNotes(delta)
 
 func _input(event):
 	if event is InputEventScreenTouch and event.is_pressed():
@@ -26,7 +26,7 @@ func _input(event):
 		var hasRhythm: bool = currentController.hasRhythm(event)
 		if hasRhythm:
 			self.flow += 1
-			self.flow_counter.text = "contador de aciertos: " + str(self.flow)
+			self.flow_counter.text = "hits: " + str(self.flow)
 
 func _on_Settings_Pressed():
 	isButtonPressed = true

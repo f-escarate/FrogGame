@@ -16,10 +16,12 @@ normal = ExtResource( 3 )
 stream = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = 124.0
+margin_top = 436.0
+margin_right = 323.0
+margin_bottom = 452.0
 theme = ExtResource( 2 )
-text = "contador de aciertos: 0"
+text = "hits: 0"
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2( 240, 70 )
