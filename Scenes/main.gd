@@ -26,7 +26,7 @@ func _input(event):
 		var hasRhythm: bool = currentController.hasRhythm(event)
 		if hasRhythm:
 			self.flow += 1
-			self.flow_counter.text = "contador de aciertos: " + str(self.flow)
+			self.flow_counter.text = "hits: " + str(self.flow)
 
 func _on_Settings_Pressed():
 	isButtonPressed = true

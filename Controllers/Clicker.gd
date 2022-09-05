@@ -8,13 +8,14 @@ var displayIndex : int
 var bar : Sprite
 var barSize : float
 const SPEED: float = 1000.0
-onready var time: float = 0.00
+onready var noteTime: float = 0.0
 onready var displayTime: float = 0.0
+
 
 func _init(player : AudioStreamPlayer):
 	# Load rhythm file
 	var file = File.new()
-	file.open("res://Assets/Songs/KomikuBicycle.rhythm", File.READ)
+	file.open("res://Assets/Songs/KomikuBicycle.tres", File.READ)
 	var content = file.get_as_text()
 	file.close()
 	
@@ -37,9 +38,8 @@ func _init(player : AudioStreamPlayer):
 # It's called every cycle in order to refresh the rhythm
 func refreshNotes(delta) -> void:
 	# We get the current time	
-	self.time += delta
+	self.noteTime += delta
 	self.displayTime += delta
-	print(self.time)
 	
 	# Spawn the marks that show the rhythm
 	var deltaX = (self.rhythm[self.displayIndex] - self.displayTime)*self.SPEED
@@ -48,14 +48,14 @@ func refreshNotes(delta) -> void:
 		self.bar.rhythmMark(self.SPEED, self.barSize)
 	
 	# Advance to the next note if the player didn't touch the current one
-	var diff = self.rhythm[self.index] - self.time
+	var diff = self.rhythm[self.index] - self.noteTime
 	if diff < -0.09:
 		advanceNote()
 
 # Receives an InputEventScreenTouch and returns a boolean that is true if the player has reached the rhythm and false if not
 # warning-ignore:unused_argument
 func hasRhythm(event: InputEventScreenTouch) -> bool:
-	if self.rhythm[self.index] - self.time < 0.09:
+	if self.rhythm[self.index] - self.noteTime < 0.09:
 		advanceNote()
 		print("OK",self.index)
 		return true
@@ -66,7 +66,7 @@ func advanceNote():
 	self.index += 1
 	# We repeat the song rhythm
 	if self.index == len(self.rhythm):
-		self.time = 0
+		self.noteTime = 0
 		self.index = 0
 
 # Updates the next note that has to be displayed
