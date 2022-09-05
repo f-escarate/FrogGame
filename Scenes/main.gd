@@ -15,7 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	currentController.refreshNotes()
+	currentController.refreshNotes(delta)
 
 func _input(event):
 	if event is InputEventScreenTouch and event.is_pressed():

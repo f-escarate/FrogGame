@@ -1,10 +1,6 @@
 extends Node2D
 class_name Clicker
 
-var time0 : float # initial time, in microseconds
-var displayTime0 : float # initial time, in microseconds is used to display the bars
-var deltaT : float # difference between the current time and time0, in seconds
-var displayDeltaT : float # difference between the time and displayTime0, in seconds
 var musicPlayer : AudioStreamPlayer
 var rhythm : Array
 var index : int = 0
@@ -12,6 +8,8 @@ var displayIndex : int
 var bar : Sprite
 var barSize : float
 const SPEED: float = 1000.0
+onready var time: float = 0.00
+onready var displayTime: float = 0.0
 
 func _init(player : AudioStreamPlayer):
 	# Load rhythm file
@@ -26,8 +24,6 @@ func _init(player : AudioStreamPlayer):
 		self.rhythm[i] = float(self.rhythm[i])
 	
 	# Set initial values for fields
-	self.time0 = OS.get_ticks_usec()
-	self.displayTime0 = self.time0
 	self.musicPlayer = player
 	# Play the song
 	self.musicPlayer.play()
@@ -39,27 +35,27 @@ func _init(player : AudioStreamPlayer):
 	self.barSize = self.bar.size/2
 
 # It's called every cycle in order to refresh the rhythm
-func refreshNotes() -> void:
-	# We get the current time
-	var timef = OS.get_ticks_usec()
+func refreshNotes(delta) -> void:
+	# We get the current time	
+	self.time += delta
+	self.displayTime += delta
+	print(self.time)
 	
 	# Spawn the marks that show the rhythm
-	self.displayDeltaT = (timef - self.displayTime0) / 1000000.0 # We transform it to seconds
-	var deltaX = (self.rhythm[self.displayIndex] - self.displayDeltaT)*self.SPEED
+	var deltaX = (self.rhythm[self.displayIndex] - self.displayTime)*self.SPEED
 	if deltaX <= self.barSize:
 		self.advanceDisplayNote()
 		self.bar.rhythmMark(self.SPEED, self.barSize)
 	
 	# Advance to the next note if the player didn't touch the current one
-	self.deltaT = (timef - time0) / 1000000.0 # We transform it to seconds
-	var diff = self.rhythm[self.index] - deltaT
-	if diff < -0.1:
+	var diff = self.rhythm[self.index] - self.time
+	if diff < -0.09:
 		advanceNote()
 
 # Receives an InputEventScreenTouch and returns a boolean that is true if the player has reached the rhythm and false if not
 # warning-ignore:unused_argument
 func hasRhythm(event: InputEventScreenTouch) -> bool:
-	if self.rhythm[self.index] - self.deltaT < 0.1:
+	if self.rhythm[self.index] - self.time < 0.09:
 		advanceNote()
 		print("OK",self.index)
 		return true
@@ -70,14 +66,14 @@ func advanceNote():
 	self.index += 1
 	# We repeat the song rhythm
 	if self.index == len(self.rhythm):
-		self.time0 = OS.get_ticks_usec()
+		self.time = 0
 		self.index = 0
 
 # Updates the next note that has to be displayed
 func advanceDisplayNote():
 	# We repeat the song rhythm
 	if self.displayIndex == len(self.rhythm) - 1:
-		self.displayTime0 = OS.get_ticks_usec()
+		self.displayTime = 0
 		self.displayIndex = 0
 	else:
 		self.displayIndex = self.displayIndex+1
