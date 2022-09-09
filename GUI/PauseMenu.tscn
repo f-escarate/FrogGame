@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://GUI/PauseMenu.gd" type="Script" id=2]
+
+[node name="MarginContainer" type="MarginContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 12.0
+margin_right = 150.0
+margin_bottom = 28.0
+text = "asdasdasdasdads"
