@@ -4,6 +4,7 @@ onready var settings = $Settings
 onready var flow_counter = $Label
 onready var musicPlayer = $AudioStreamPlayer
 onready var progressBar = $ProgressBar
+onready var pauseMenu = $PauseMenu
 onready var currentController = Clicker.new(musicPlayer)
 onready var isButtonPressed : bool = false
 
@@ -33,7 +34,7 @@ func _input(event):
 
 func _on_Settings_Pressed():
 	isButtonPressed = true
-	print("settings")
+	pauseMenu.pauseGame()
 
 func makeProgress():
 	if self.progressBar.value == GlobalVars.maxVal:
