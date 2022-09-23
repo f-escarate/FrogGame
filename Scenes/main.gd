@@ -3,15 +3,17 @@ extends Node2D
 onready var settings = $Settings
 onready var flow_counter = $Label
 onready var musicPlayer = $AudioStreamPlayer
+onready var progressBar = $ProgressBar
 onready var currentController = Clicker.new(musicPlayer)
 onready var isButtonPressed : bool = false
-onready var flow : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	settings.connect("pressed", self, "_on_Settings_Pressed")
 	add_child(currentController)
 	currentController.global_position = $Pivot.global_position
+	self.progressBar.max_value = GlobalVars.maxVal
+	self.progressBar.value = GlobalVars.currentVal
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,9 +27,18 @@ func _input(event):
 			return		
 		var hasRhythm: bool = currentController.hasRhythm(event)
 		if hasRhythm:
-			self.flow += 1
-			self.flow_counter.text = "hits: " + str(self.flow)
+			self.makeProgress()
+			self.flow_counter.text = "hits: {count}/{total}".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
+			
 
 func _on_Settings_Pressed():
 	isButtonPressed = true
 	print("settings")
+
+func makeProgress():
+	if self.progressBar.value == GlobalVars.maxVal:
+		GlobalVars.increaseMaxVal()
+		self.progressBar.max_value = GlobalVars.maxVal
+	GlobalVars.currentVal += 1
+	self.progressBar.value = GlobalVars.currentVal
+	

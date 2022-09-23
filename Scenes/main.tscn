@@ -25,3 +25,11 @@ text = "hits: 0"
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2( 240, 70 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = 247.0
+margin_top = 102.0
+margin_right = 471.0
+margin_bottom = 116.0
+theme = ExtResource( 2 )
+step = 1.0

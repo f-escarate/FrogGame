@@ -24,6 +24,10 @@ config/name="FrogGame"
 run/main_scene="res://GUI/mainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVars="*res://Scripts/globalVars.gd"
+
 [display]
 
 window/size/width=720
