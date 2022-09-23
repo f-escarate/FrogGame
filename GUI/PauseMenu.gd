@@ -1,16 +1,31 @@
 extends MarginContainer
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
+onready var resume = $"%Resume"
+onready var main_menu = $"%MainMenu"
+onready var exit = $"%Exit"
+onready var volume = $"%Volume"
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	resume.connect("pressed", self, "_on_resume_pressed")
+	main_menu.connect("pressed", self, "_on_main_menu_pressed")
+	exit.connect("pressed", self, "_on_exit_pressed")
+	volume.connect("value_changed", self, "_on_volume_value_changed")
+	hide()
+	
+	resume.grab_focus()
+func _input(event):
+	if event.is_action_pressed("menu"):
+		visible = !visible
+		get_tree().paused = visible
+func _on_resume_pressed():
+	hide()
+	get_tree().paused = false
+func _on_main_menu_pressed():
+	get_tree().paused = false
+	get_tree().change_scene("res://scenes/ui/main_menu.tscn")
+func _on_exit_pressed():
+	get_tree().quit()
+func _on_volume_value_changed(value: float):
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Music"),
+		linear2db(value)
+	)
