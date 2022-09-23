@@ -21,9 +21,10 @@ func _init(player : AudioStreamPlayer):
 	
 	# Create list with the seconds of the rhythm 
 	self.rhythm = content.split("\n")
+	self.rhythm.pop_back() # Removes the last element, because is a "" string
+	# Casting the strings to floats
 	for i in range(len(self.rhythm)):
 		self.rhythm[i] = float(self.rhythm[i])
-	
 	# Set initial values for fields
 	self.musicPlayer = player
 	# Play the song
@@ -57,7 +58,6 @@ func refreshNotes(delta) -> void:
 func hasRhythm(event: InputEventScreenTouch) -> bool:
 	if self.rhythm[self.index] - self.noteTime < 0.09:
 		advanceNote()
-		print("OK",self.index)
 		return true
 	return false
 
@@ -71,9 +71,8 @@ func advanceNote():
 
 # Updates the next note that has to be displayed
 func advanceDisplayNote():
+	self.displayIndex = self.displayIndex+1
 	# We repeat the song rhythm
-	if self.displayIndex == len(self.rhythm) - 1:
-		self.displayTime = 0
+	if self.displayIndex == len(self.rhythm):
 		self.displayIndex = 0
-	else:
-		self.displayIndex = self.displayIndex+1
+		self.displayTime = 0
