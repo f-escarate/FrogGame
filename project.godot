@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "Clicker",
 "class": "GuitarClicker",
 "language": "GDScript",
-"path": "res://Controllers/GuitarClicker.gd"
+"path": "res://Controllers/GuitarClicker/GuitarClicker.gd"
 }, {
 "base": "Clicker",
 "class": "NormalClicker",
 "language": "GDScript",
-"path": "res://Controllers/NormalClicker.gd"
+"path": "res://Controllers/NormalClicker/NormalClicker.gd"
 } ]
 _global_script_class_icons={
 "Clicker": "",

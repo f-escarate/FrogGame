@@ -1,6 +1,6 @@
 extends Sprite
 
-onready var Mark = preload("res://Scenes/rhythmMark.tscn")
+onready var Mark = preload("res://Controllers/NormalClicker/rhythmMark.tscn")
 var size = texture.get_size().x
 const mark_scale = 0.02
 
@@ -13,7 +13,6 @@ func _ready():
 #	pass
 
 func rhythmMark(speed : float, size: float):
-	
 	# Left mark
 	var left_mark = Mark.instance()
 	self.add_child(left_mark)

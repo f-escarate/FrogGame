@@ -4,7 +4,7 @@ class_name NormalClicker
 var displayIndex : int
 var bar : Sprite
 var barSize : float
-const SPEED: float = 1000.0
+const SPEED: float = 3000.0
 onready var displayTime: float = 0.0
 
 
@@ -14,7 +14,7 @@ func _init(player).(player):
 	self.musicPlayer.play()
 	
 	# Bar
-	var rhythmBar = preload("res://Scenes/rhythmBar.tscn")
+	var rhythmBar = preload("res://Controllers/NormalClicker/rhythmBar.tscn")
 	self.bar = rhythmBar.instance()
 	self.add_child(self.bar)
 	self.barSize = self.bar.size/2
@@ -26,7 +26,7 @@ func refreshNotes(delta) -> void:
 	self.displayTime += delta
 	
 	# Spawn the marks that show the rhythm
-	var deltaX = (self.rhythm[self.displayIndex] - self.displayTime)*self.SPEED
+	var deltaX = (self.rhythm[self.displayIndex] - self.displayTime) * self.SPEED
 	if deltaX <= self.barSize:
 		self.advanceDisplayNote()
 		self.bar.rhythmMark(self.SPEED, self.barSize)
