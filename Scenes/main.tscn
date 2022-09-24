@@ -11,7 +11,8 @@
 script = ExtResource( 1 )
 
 [node name="mainCharacter" parent="." instance=ExtResource( 6 )]
-position = Vector2( 342, 514 )
+position = Vector2( 343, 637 )
+scale = Vector2( 0.736111, 0.736111 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -34,10 +35,10 @@ theme = ExtResource( 2 )
 text = "hits: 0"
 
 [node name="ProgressBar" type="ProgressBar" parent="GUI"]
-margin_left = 236.0
-margin_top = 159.0
-margin_right = 449.0
-margin_bottom = 170.0
+margin_left = 227.0
+margin_top = 123.0
+margin_right = 523.0
+margin_bottom = 156.0
 theme = ExtResource( 2 )
 step = 1.0
 
