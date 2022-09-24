@@ -4,6 +4,7 @@ onready var settings = $GUI/Settings
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
+onready var pivot = $Pivot
 onready var musicPlayer = $AudioStreamPlayer
 onready var mc = $mainCharacter
 onready var currentController = NormalClicker.new(musicPlayer)
@@ -12,8 +13,8 @@ onready var isButtonPressed : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	settings.connect("pressed", self, "_on_Settings_Pressed")
-	add_child(currentController)
-	currentController.global_position = $Pivot.global_position
+	addController(currentController)
+	
 	self.progressBar.max_value = GlobalVars.maxVal
 	self.progressBar.value = GlobalVars.currentVal
 
@@ -43,9 +44,17 @@ func makeProgress():
 		# Returns true if the player has cleared the 4 phases
 		if GlobalVars.increaseMaxVal():
 			mc.playGuitar()
-			currentController.queue_free()
+			currentController.queue_free()	
+			
 			currentController = GuitarClicker.new(musicPlayer)
+			addController(currentController)
+			
 		self.progressBar.max_value = GlobalVars.maxVal
 	GlobalVars.currentVal += 1
 	self.progressBar.value = GlobalVars.currentVal
+
+func addController(controller):
+	add_child(controller)
+	controller.global_position = pivot.global_position
+	
 	
