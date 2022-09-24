@@ -39,6 +39,7 @@ func _on_Settings_Pressed():
 func makeProgress():
 	if self.progressBar.value == GlobalVars.maxVal:
 		GlobalVars.increaseMaxVal()
+		$mainCharacter.playGuitar()
 		self.progressBar.max_value = GlobalVars.maxVal
 	GlobalVars.currentVal += 1
 	self.progressBar.value = GlobalVars.currentVal
