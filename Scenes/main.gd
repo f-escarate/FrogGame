@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var settings = $Settings
-onready var flow_counter = $Label
+onready var settings = $GUI/Settings
+onready var flow_counter = $GUI/Label
+onready var progressBar = $GUI/ProgressBar
 onready var musicPlayer = $AudioStreamPlayer
-onready var progressBar = $ProgressBar
 onready var pauseMenu = $PauseMenu
 onready var currentController = Clicker.new(musicPlayer)
 onready var isButtonPressed : bool = false
