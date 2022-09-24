@@ -3,8 +3,8 @@ extends Node2D
 onready var settings = $GUI/Settings
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
+onready var pauseMenu = $GUI/PauseMenu
 onready var musicPlayer = $AudioStreamPlayer
-onready var pauseMenu = $PauseMenu
 onready var currentController = Clicker.new(musicPlayer)
 onready var isButtonPressed : bool = false
 
