@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/KomikuNotAClub.mp3-8b391c80f5c12b83c8999bc693fc2c69.mp3str"
+
+[deps]
+
+source_file="res://Assets/Songs/KomikuNotAClub.mp3"
+dest_files=[ "res://.import/KomikuNotAClub.mp3-8b391c80f5c12b83c8999bc693fc2c69.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
