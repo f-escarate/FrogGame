@@ -129,6 +129,8 @@ start_node = "looking"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
 [node name="mainCharacter" type="Sprite"]
+position = Vector2( -17, 174 )
+scale = Vector2( 0.9, 0.937153 )
 texture = ExtResource( 2 )
 hframes = 13
 vframes = 2

@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
 [ext_resource path="res://GUI/mainButtonStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://GUI/mainMenu.gd" type="Script" id=3]
+[ext_resource path="res://images/background.png" type="Texture" id=4]
 
 [node name="MarginContainer" type="MarginContainer"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 205.0
-margin_bottom = 78.0
+margin_left = 84.0
+margin_top = 158.0
+margin_right = 287.0
+margin_bottom = 234.0
 size_flags_vertical = 0
 theme = ExtResource( 1 )
 script = ExtResource( 3 )
@@ -21,6 +22,16 @@ margin_right = 203.0
 margin_bottom = 76.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="VBoxContainer"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="VBoxContainer/ParallaxBackground"]
+motion_mirroring = Vector2( 521, 800 )
+
+[node name="Background" type="Sprite" parent="VBoxContainer/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 261, 397 )
+texture = ExtResource( 4 )
+normal_map = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 203.0

@@ -27,10 +27,10 @@ position = Vector2( 656, 2 )
 normal = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="GUI"]
-margin_left = 124.0
-margin_top = 436.0
-margin_right = 323.0
-margin_bottom = 452.0
+margin_left = 250.0
+margin_top = 248.0
+margin_right = 449.0
+margin_bottom = 264.0
 theme = ExtResource( 2 )
 text = "hits: 0"
 
@@ -43,3 +43,7 @@ theme = ExtResource( 2 )
 step = 1.0
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
+margin_left = 246.0
+margin_top = 367.0
+margin_right = 459.0
+margin_bottom = 466.0
