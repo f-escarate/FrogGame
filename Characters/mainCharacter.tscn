@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Characters/mainCharacter.gd" type="Script" id=1]
 [ext_resource path="res://images/frogSinging.png" type="Texture" id=2]
+[ext_resource path="res://images/blink.png" type="Texture" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 
@@ -37,6 +38,80 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
 }
 
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "blinking"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "looking"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "blinking"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "looking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/blinking/node = SubResource( 7 )
+states/blinking/position = Vector2( 441.667, 57.2222 )
+states/looking/node = SubResource( 8 )
+states/looking/position = Vector2( 164.333, 58.1934 )
+transitions = [ "looking", "blinking", SubResource( 13 ), "blinking", "looking", SubResource( 14 ) ]
+start_node = "looking"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
 [node name="mainCharacter" type="Sprite"]
 texture = ExtResource( 2 )
 hframes = 13
@@ -51,3 +126,16 @@ anims/RESET = SubResource( 2 )
 anims/singing = SubResource( 3 )
 
 [node name="eyes" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 11
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="eyes"]
+anims/RESET = SubResource( 4 )
+anims/blinking = SubResource( 5 )
+anims/looking = SubResource( 6 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="eyes"]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer2")
+active = true
+parameters/playback = SubResource( 12 )
