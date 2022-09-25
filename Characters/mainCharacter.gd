@@ -1,7 +1,7 @@
-extends Sprite
+extends Node2D
 
-onready var anim_player = $AnimationPlayer
-onready var anim_tree = $AnimationTree
+onready var anim_player = $body/AnimationPlayer
+onready var anim_tree = $body/AnimationTree
 onready var playback = anim_tree.get("parameters/playback")
 
 # Called when the node enters the scene tree for the first time.

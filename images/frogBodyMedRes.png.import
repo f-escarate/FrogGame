@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blink.png-325d1e447d2b33b2ff51fca080405969.stex"
+path="res://.import/frogBodyMedRes.png-698d090f297fc867eeaff2030c16a86f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/blink.png"
-dest_files=[ "res://.import/blink.png-325d1e447d2b33b2ff51fca080405969.stex" ]
+source_file="res://images/frogBodyMedRes.png"
+dest_files=[ "res://.import/frogBodyMedRes.png-698d090f297fc867eeaff2030c16a86f.stex" ]
 
 [params]
 
