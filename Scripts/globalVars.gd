@@ -8,7 +8,7 @@ onready var earnMultiplier = 1
 onready var moneyPerClick = 1
 onready var totalMoney = 0
 
-const NUMPHASES: int = 1
+const NUMPHASES: int = 3
 var currentPhase : int = 0
 
 # Called when the node enters the scene tree for the first time.
