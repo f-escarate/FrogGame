@@ -1,19 +1,24 @@
 extends Node
 
-onready var maxVal = 7
+# Progress vars
+onready var maxVal = 2
 onready var currentVal = 0
 onready var growFactor = 1.2
+const NUMPHASES: int = 1
+var currentPhase : int = 0
 
+# Hit consts
+const GOOD_HIT = 0.09
+
+# Money vars
 onready var earnMultiplier = 1
 onready var moneyPerClick = 1
 onready var totalMoney = 0
 
-const NUMPHASES: int = 3
-var currentPhase : int = 0
+# GUI vars
+onready var width = ProjectSettings.get_setting("display/window/size/width")
+onready var height = ProjectSettings.get_setting("display/window/size/height")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)

@@ -26,10 +26,6 @@ func _ready():
 	exit.connect("pressed", self, "_on_Exit_pressed")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _on_Start_pressed():
 	get_tree().change_scene("res://Scenes/main.tscn")
 

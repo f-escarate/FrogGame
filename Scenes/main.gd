@@ -7,8 +7,7 @@ onready var pauseMenu = $GUI/PauseMenu
 onready var pivot = $Pivot
 onready var musicPlayer = $AudioStreamPlayer
 onready var mc = $mainCharacter
-onready var currentController = NormalClicker.new(musicPlayer)
-onready var isButtonPressed : bool = false
+onready var currentController = NormalClicker.new(musicPlayer, self)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,22 +20,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	currentController.refreshNotes(delta)
-
-func _input(event):
-	if event is InputEventScreenTouch and event.is_pressed():
-		# If there is a button being pressed, nothing happens
-		if isButtonPressed:
-			isButtonPressed = false
-			return		
-		var hasRhythm: bool = currentController.hasRhythm(event)
-		if hasRhythm:
-			self.makeProgress()
-			self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
-			self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.NUMPHASES})
-			
-
+	
 func _on_Settings_Pressed():
-	isButtonPressed = true
 	pauseMenu.pauseGame()
 
 func makeProgress():
@@ -46,15 +31,16 @@ func makeProgress():
 			mc.playGuitar()
 			currentController.queue_free()	
 			
-			currentController = GuitarClicker.new(musicPlayer)
+			currentController = GuitarClicker.new(musicPlayer, self)
 			addController(currentController)
 			
 		self.progressBar.max_value = GlobalVars.maxVal
 	GlobalVars.currentVal += 1
 	self.progressBar.value = GlobalVars.currentVal
+	self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
+	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.NUMPHASES})
 
 func addController(controller):
-	add_child(controller)
-	controller.global_position = pivot.global_position
+	pivot.add_child(controller)
 	
 	

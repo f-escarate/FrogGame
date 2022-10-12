@@ -5,23 +5,18 @@ var musicPlayer : AudioStreamPlayer
 var rhythm : Array
 var index : int = 0
 onready var noteTime: float = 0.0
+var displayIndex : int
+onready var displayTime: float = 0.0
+var main
 
-
-func _init(player : AudioStreamPlayer):
+func _init(player : AudioStreamPlayer, aMain):
 	# Set initial values for fields
 	self.musicPlayer = player
+	self.main = aMain
 
 # It's called every cycle in order to refresh the rhythm
 func refreshNotes(delta) -> void:
 	pass
-
-# Receives an InputEventScreenTouch and returns a boolean that is true if the player has reached the rhythm and false if not
-# warning-ignore:unused_argument
-func hasRhythm(event: InputEventScreenTouch) -> bool:
-	if self.rhythm[self.index] - self.noteTime < 0.09:
-		advanceNote()
-		return true
-	return false
 
 # Updates the next note that has to be touched
 func advanceNote():
@@ -30,6 +25,14 @@ func advanceNote():
 	if self.index == len(self.rhythm):
 		self.noteTime = 0
 		self.index = 0
+
+# Updates the next note that has to be displayed
+func advanceDisplayNote():
+	self.displayIndex = self.displayIndex+1
+	# We repeat the song rhythm
+	if self.displayIndex == len(self.rhythm):
+		self.displayIndex = 0
+		self.displayTime = 0
 
 func getRhythmListFromFile(filePath):
 	# Load rhythm file
