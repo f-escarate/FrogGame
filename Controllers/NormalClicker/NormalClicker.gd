@@ -3,7 +3,9 @@ class_name NormalClicker
 
 var bar : Sprite
 var barSize : float
-const SPEED: float = 3000.0
+const SPEED: float = 2000.0
+var index : int = 0
+onready var noteTime: float = 0.0
 
 func _init(player, main).(player, main):
 	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuBicycle.tres")
@@ -41,15 +43,6 @@ func refreshNotes(delta) -> void:
 	var diff = self.rhythm[self.index] - self.noteTime
 	if diff < -GlobalVars.GOOD_HIT:
 		advanceNote()
-		
-			
-func isPressed():		
-	if self.rhythm[self.index] - self.noteTime < 0.09:
-		advanceNote()
-		self.main.makeProgress()
-		return true
-	return false
-
 
 # Updates the next note that has to be touched
 func advanceNote():
@@ -58,11 +51,11 @@ func advanceNote():
 	if self.index == len(self.rhythm):
 		self.noteTime = 0
 		self.index = 0
-
-# Updates the next note that has to be displayed
-func advanceDisplayNote():
-	self.displayIndex = self.displayIndex+1
-	# We repeat the song rhythm
-	if self.displayIndex == len(self.rhythm):
-		self.displayIndex = 0
-		self.displayTime = 0
+			
+func isPressed():		
+	if self.rhythm[self.index] - self.noteTime < 0.09:
+		advanceNote()
+		self.main.makeProgress()
+		self.main.okMsg()
+		return true
+	return false

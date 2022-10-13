@@ -3,8 +3,6 @@ class_name Clicker
 
 var musicPlayer : AudioStreamPlayer
 var rhythm : Array
-var index : int = 0
-onready var noteTime: float = 0.0
 var displayIndex : int
 onready var displayTime: float = 0.0
 var main
@@ -18,22 +16,14 @@ func _init(player : AudioStreamPlayer, aMain):
 func refreshNotes(delta) -> void:
 	pass
 
-# Updates the next note that has to be touched
-func advanceNote():
-	self.index += 1
-	# We repeat the song rhythm
-	if self.index == len(self.rhythm):
-		self.noteTime = 0
-		self.index = 0
-
 # Updates the next note that has to be displayed
 func advanceDisplayNote():
 	self.displayIndex = self.displayIndex+1
 	# We repeat the song rhythm
 	if self.displayIndex == len(self.rhythm):
 		self.displayIndex = 0
-		self.displayTime = 0
-
+		self.displayTime -= self.rhythm[len(self.rhythm)-1]
+		
 func getRhythmListFromFile(filePath):
 	# Load rhythm file
 	var file = File.new()

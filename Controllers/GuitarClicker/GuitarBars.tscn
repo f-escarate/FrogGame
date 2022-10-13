@@ -4,22 +4,29 @@
 [ext_resource path="res://Controllers/GuitarClicker/GuitarBars.gd" type="Script" id=2]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( -99, -200 )
+scale = Vector2( 2, 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Bar" parent="." instance=ExtResource( 1 )]
+margin_left = 1.0
+margin_top = -300.0
+margin_right = 49.0
+margin_bottom = 0.0
 
 [node name="Bar2" parent="." instance=ExtResource( 1 )]
 margin_left = 50.0
+margin_top = -300.0
 margin_right = 98.0
+margin_bottom = 0.0
 
 [node name="Bar3" parent="." instance=ExtResource( 1 )]
-margin_left = 100.0
-margin_right = 148.0
+margin_left = -49.0
+margin_top = -300.0
+margin_right = -1.0
+margin_bottom = 0.0
 
 [node name="Bar4" parent="." instance=ExtResource( 1 )]
-margin_left = 150.0
-margin_right = 198.0
+margin_left = -98.0
+margin_top = -300.0
+margin_right = -50.0
+margin_bottom = 0.0

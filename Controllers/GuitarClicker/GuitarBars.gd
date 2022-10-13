@@ -7,19 +7,15 @@ onready var bar3 = $Bar4
 onready var bars : Array = [bar0, bar1, bar2, bar3]
 
 var depth : int
-
-var guitarClicker
 var main
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.depth = bar0.margin_bottom
+	self.depth = bar0.length
 	for bar in self.bars:
-		bar.guitarClicker = self.guitarClicker
 		bar.main = self.main
 
-func setParams(clicker, aMain):
-	self.guitarClicker = clicker
+func setParams(aMain):
 	self.main = aMain
 	
 

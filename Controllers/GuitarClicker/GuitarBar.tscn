@@ -3,14 +3,18 @@
 [ext_resource path="res://Controllers/GuitarClicker/GuitarBar.gd" type="Script" id=1]
 
 [node name="Bar" type="ColorRect"]
-margin_right = 48.0
-margin_bottom = 200.0
-color = Color( 0.976471, 0.796078, 0.635294, 1 )
+margin_left = -24.0
+margin_right = 24.0
+margin_bottom = 300.0
+color = Color( 0.964706, 0.933333, 0.768627, 0.329412 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MarkContainer" type="Node2D" parent="."]
 
 [node name="Button" type="Button" parent="."]
-margin_top = 175.0
+margin_top = 275.0
 margin_right = 48.0
-margin_bottom = 200.0
+margin_bottom = 300.0

@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var gui = $GUI
 onready var settings = $GUI/Settings
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
@@ -8,6 +9,8 @@ onready var pivot = $Pivot
 onready var musicPlayer = $AudioStreamPlayer
 onready var mc = $mainCharacter
 onready var currentController = NormalClicker.new(musicPlayer, self)
+
+onready var floatingText = preload("res://Scenes/FloatingText.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +42,11 @@ func makeProgress():
 	self.progressBar.value = GlobalVars.currentVal
 	self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
 	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.NUMPHASES})
+
+func okMsg(msg = "OK!!!"):
+	var ftext = floatingText.instance()
+	ftext.setText(msg)
+	gui.add_child(ftext)
 
 func addController(controller):
 	pivot.add_child(controller)
