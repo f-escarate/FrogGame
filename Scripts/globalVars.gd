@@ -17,9 +17,10 @@ onready var moneyPerClick = 1
 onready var totalMoney = 0
 
 # GUI vars
+onready var safe_area = OS.get_window_safe_area()
+onready var screen_size = safe_area.end - safe_area.position
 onready var width = ProjectSettings.get_setting("display/window/size/width")
 onready var height = ProjectSettings.get_setting("display/window/size/height")
-
 
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)

@@ -27,6 +27,11 @@ func _init(player, main).(player, main):
 	self.add_child(self.bar)
 	self.barSize = self.bar.size/2
 
+func _ready():
+	# Get initial display time
+	var requiredTime = self.barSize/self.SPEED
+	self.displayTime = self.rhythm[0]-requiredTime
+
 # It's called every cycle in order to refresh the rhythm
 func refreshNotes(delta) -> void:
 	# We get the current time	
