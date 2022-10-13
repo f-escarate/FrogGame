@@ -31,18 +31,22 @@ func _process(delta):
 func _on_Settings_Pressed():
 	pauseMenu.pauseGame()
 
-func makeProgress():
-	if self.progressBar.value == GlobalVars.maxVal:
-		# Returns true if the player has cleared the 4 phases
+
+func makeProgress(multiplier = 1):
+	
+	GlobalVars.currentVal += 1*multiplier
+	
+	if GlobalVars.currentVal >= GlobalVars.maxVal:
+		# Returns true if the player has cleared all the phases
 		if GlobalVars.increaseMaxVal():
 			mc.playGuitar()
 			currentController.queue_free()	
 			
 			currentController = GuitarClicker.new(musicPlayer, self)
 			addController(currentController)
-			
 		self.progressBar.max_value = GlobalVars.maxVal
-	GlobalVars.currentVal += 1
+		
+	
 	self.progressBar.value = GlobalVars.currentVal
 	self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
 	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.NUMPHASES})

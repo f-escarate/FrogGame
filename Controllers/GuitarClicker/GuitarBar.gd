@@ -19,10 +19,8 @@ func guitarMark(speed : float, noteIndex : int):
 
 func isPressed():
 	var firstMark = markContainer.get_child(0)
-	
 	if firstMark != null and abs(firstMark.rect_position.y-self.length) < GlobalVars.GOOD_HIT*firstMark.speed:
 		firstMark.queue_free()
-		self.main.makeProgress()
+		self.main.makeProgress(GlobalVars.GUITAR_CLICKER_PROGRESS)
 		self.main.okMsg()
-		return true
-	return false
+		return

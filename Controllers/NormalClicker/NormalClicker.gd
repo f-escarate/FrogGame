@@ -11,14 +11,6 @@ func _init(player, main).(player, main):
 	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuBicycle.tres")
 	# Play the song
 	self.musicPlayer.play()
-	
-	# creating a button to click
-	var button = Button.new()
-	button.margin_right = GlobalVars.width
-	button.margin_bottom = GlobalVars.height
-	button.modulate = Color(0,0,0,0)
-	button.connect("pressed", self, "isPressed")
-	self.add_child(button)
 		
 	# Bar
 	var rhythmBar = preload("res://Controllers/NormalClicker/rhythmBar.tscn")
@@ -60,7 +52,8 @@ func advanceNote():
 func isPressed():		
 	if self.rhythm[self.index] - self.noteTime < 0.09:
 		advanceNote()
-		self.main.makeProgress()
+		self.main.makeProgress(GlobalVars.NORMAL_CLICKER_PROGRESS)
 		self.main.okMsg()
-		return true
-	return false
+		return
+	.isPressed()
+	

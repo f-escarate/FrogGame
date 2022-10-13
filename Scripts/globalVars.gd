@@ -7,6 +7,10 @@ onready var growFactor = 1.2
 const NUMPHASES: int = 1
 var currentPhase : int = 0
 
+# Clicker Progress Bars
+const NORMAL_CLICKER_PROGRESS = 2
+const GUITAR_CLICKER_PROGRESS = 3
+
 # Hit consts
 const GOOD_HIT = 0.09
 const PERFECT_HIT = 0.05

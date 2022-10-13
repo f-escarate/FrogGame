@@ -11,10 +11,21 @@ func _init(player : AudioStreamPlayer, aMain):
 	# Set initial values for fields
 	self.musicPlayer = player
 	self.main = aMain
+	
+	# creating a button to click
+	var button = Button.new()
+	button.margin_right = GlobalVars.width
+	button.margin_bottom = GlobalVars.height
+	button.modulate = Color(0,0,0,0)
+	button.connect("pressed", self, "isPressed")
+	self.add_child(button)
 
 # It's called every cycle in order to refresh the rhythm
 func refreshNotes(delta) -> void:
 	pass
+	
+func isPressed():
+	self.main.makeProgress()
 
 # Updates the next note that has to be displayed
 func advanceDisplayNote():
