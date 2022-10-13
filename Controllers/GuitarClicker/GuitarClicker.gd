@@ -5,7 +5,7 @@ var guitarGUI : Node2D
 const SPEED : float = 300.0
 
 func _init(player, aMain).(player, aMain):
-	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuNotAClub.tres") # poner otro archivo de musica
+	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuNotAClub.tres")
 	self.musicPlayer.stream = load("res://Assets/Songs/KomikuNotAClub.mp3")
 	self.musicPlayer.play()
 		

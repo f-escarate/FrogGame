@@ -9,6 +9,7 @@ onready var noteTime: float = 0.0
 
 func _init(player, main).(player, main):
 	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuBicycle.tres")
+	self.musicPlayer.stream = load("res://Assets/Songs/KomikuBicycle.mp3")
 	# Play the song
 	self.musicPlayer.play()
 		

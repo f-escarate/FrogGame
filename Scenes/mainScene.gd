@@ -5,6 +5,7 @@ onready var settings = $GUI/Settings
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
+onready var instrumentSelector = $GUI/Instruments
 onready var pivot = $Pivot
 onready var musicPlayer = $AudioStreamPlayer
 onready var mc = $mainCharacter
@@ -19,10 +20,12 @@ func _ready():
 	self.rect_position = GlobalVars.safe_area.position
 	
 	settings.connect("pressed", self, "_on_Settings_Pressed")
-	addController(currentController)
+	pivot.add_child(currentController)
 	
 	self.progressBar.max_value = GlobalVars.maxVal
 	self.progressBar.value = GlobalVars.currentVal
+	
+	self.instrumentSelector.setParams(musicPlayer, self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -39,11 +42,8 @@ func makeProgress(multiplier = 1):
 	if GlobalVars.currentVal >= GlobalVars.maxVal:
 		# Returns true if the player has cleared all the phases
 		if GlobalVars.increaseMaxVal():
-			mc.playGuitar()
-			currentController.queue_free()	
-			
-			currentController = GuitarClicker.new(musicPlayer, self)
-			addController(currentController)
+			# Go to boss
+			pass
 		self.progressBar.max_value = GlobalVars.maxVal
 		
 	
@@ -55,8 +55,9 @@ func okMsg(msg = "OK!!!"):
 	var ftext = floatingText.instance()
 	ftext.setText(msg)
 	gui.add_child(ftext)
-
-func addController(controller):
-	pivot.add_child(controller)
 	
+func setController(controller):
+	currentController.queue_free()
+	currentController = controller
+	pivot.add_child(controller)
 	
