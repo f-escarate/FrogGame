@@ -13,9 +13,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
 
-[node name="mainCharacter" parent="." instance=ExtResource( 2 )]
-position = Vector2( 343, 637 )
-scale = Vector2( 0.736111, 0.736111 )
+[node name="Position" type="Node2D" parent="."]
+position = Vector2( 360, 600 )
+
+[node name="mainCharacter" parent="Position" instance=ExtResource( 2 )]
+
+[node name="Tween" type="Tween" parent="Position"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

@@ -131,6 +131,7 @@ start_node = "looking"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
 [node name="mainCharacter" type="Node2D"]
+scale = Vector2( 0.735, 0.735 )
 script = ExtResource( 1 )
 
 [node name="body" type="Sprite" parent="."]
@@ -139,7 +140,6 @@ scale = Vector2( 2.20675, 2.20675 )
 texture = ExtResource( 2 )
 hframes = 13
 vframes = 2
-frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="body"]
 anims/RESET = SubResource( 16 )
@@ -155,7 +155,6 @@ parameters/playback = SubResource( 26 )
 [node name="eyes" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 hframes = 11
-frame = 8
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="eyes"]
 anims/RESET = SubResource( 19 )

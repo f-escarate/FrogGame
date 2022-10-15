@@ -8,10 +8,12 @@ onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
 onready var pivot = $Pivot
 onready var musicPlayer = $AudioStreamPlayer
-onready var mc = $mainCharacter
+onready var char_position = $Position
+onready var mc = $Position/mainCharacter
+onready var char_tween = $Position/Tween
 onready var currentController = NormalClicker.new(musicPlayer, self)
 onready var floatingText = preload("res://Scenes/FloatingText.tscn")
-
+onready var factory = EnemyFactory.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +23,7 @@ func _ready():
 	
 	settings.connect("pressed", self, "_on_Settings_Pressed")
 	pivot.add_child(currentController)
+	char_position.add_child(factory)
 	
 	self.progressBar.max_value = GlobalVars.maxVal
 	self.progressBar.value = GlobalVars.currentVal
@@ -43,7 +46,8 @@ func makeProgress(multiplier = 1):
 		# Returns true if the player has cleared all the phases
 		if GlobalVars.increaseMaxVal():
 			# Go to boss
-			pass
+			self.spawnBoss()
+			
 		self.progressBar.max_value = GlobalVars.maxVal
 		
 	
@@ -61,3 +65,8 @@ func setController(controller):
 	currentController = controller
 	pivot.add_child(controller)
 	
+func spawnBoss():
+	factory.createWitch()
+	char_tween.interpolate_property(mc, "position", Vector2(0, 0), Vector2(-200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
+	char_tween.start()

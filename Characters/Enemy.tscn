@@ -1,0 +1,152 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Characters/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://images/catWitch.png" type="Texture" id=2]
+[ext_resource path="res://images/eyesCatWitch.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "sing"
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.202522, 0.405043, 0.601869, 0.801543, 1.00976 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "sing"
+
+[sub_resource type="AnimationNodeStateMachine" id=1]
+states/sing/node = SubResource( 15 )
+states/sing/position = Vector2( 247, 76.3333 )
+start_node = "sing"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "blinking"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0774642, 0.158635, 0.218232, 0.294183, 0.355704 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "looking"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.00550213 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "blinking"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "looking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+"states/blinking 2/node" = SubResource( 6 )
+"states/blinking 2/position" = Vector2( 419, 169.667 )
+"states/looking 2/node" = SubResource( 7 )
+"states/looking 2/position" = Vector2( 219, 169.667 )
+transitions = [ "looking 2", "blinking 2", SubResource( 8 ), "blinking 2", "looking 2", SubResource( 9 ) ]
+start_node = "looking 2"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=11]
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2( 0.735, 0.735 )
+script = ExtResource( 1 )
+
+[node name="bodyEnemy" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+texture = ExtResource( 2 )
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bodyEnemy"]
+anims/RESET = SubResource( 14 )
+anims/sing = SubResource( 13 )
+
+[node name="AnimationTree" type="AnimationTree" parent="bodyEnemy"]
+tree_root = SubResource( 1 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 2 )
+
+[node name="eyesEnemy" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="eyesEnemy"]
+anims/RESET = SubResource( 3 )
+anims/blinking = SubResource( 4 )
+anims/looking = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="eyesEnemy"]
+tree_root = SubResource( 10 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 11 )
