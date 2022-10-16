@@ -2,6 +2,7 @@ extends Control
 
 onready var gui = $GUI
 onready var settings = $GUI/Settings
+onready var store = $GUI/Store
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
@@ -29,6 +30,7 @@ func _ready():
 	self.progressBar.value = GlobalVars.currentVal
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

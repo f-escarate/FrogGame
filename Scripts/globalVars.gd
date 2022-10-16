@@ -32,3 +32,20 @@ func increaseMaxVal():
 	self.currentVal = 0.0
 	self.currentPhase = (self.currentPhase+1)%NUMPHASES
 	return !bool(self.currentPhase)
+
+
+# Tienda
+var Items_Tiendita = {} setget set_Tiendita
+
+func _ready():
+	load_tiendita()
+
+func load_tiendita():
+	var file = File.new()
+	file.open("res://CompraVenta/Tienda.json",File.READ)
+	var content = file.get_as_text()
+	file.close()
+	self.Items_Tiendita = JSON.parse(content).result
+
+func set_Tiendita(value):
+	Items_Tiendita = value
