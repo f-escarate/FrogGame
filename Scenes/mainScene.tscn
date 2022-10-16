@@ -33,18 +33,19 @@ position = Vector2( 656, 2 )
 normal = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="GUI"]
-margin_left = 250.0
-margin_top = 248.0
-margin_right = 449.0
-margin_bottom = 264.0
+margin_left = 229.0
+margin_top = 160.0
+margin_right = 428.0
+margin_bottom = 196.0
 theme = ExtResource( 5 )
 text = "hits: 0"
 
 [node name="ProgressBar" type="ProgressBar" parent="GUI"]
-margin_left = 227.0
-margin_top = 20.0
-margin_right = 523.0
+margin_left = 210.0
+margin_top = 13.0
+margin_right = 510.0
 margin_bottom = 53.0
+rect_pivot_offset = Vector2( 150, 0 )
 theme = ExtResource( 5 )
 step = 1.0
 

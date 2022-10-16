@@ -4,7 +4,7 @@
 [ext_resource path="res://Controllers/GuitarClicker/GuitarBars.gd" type="Script" id=2]
 
 [node name="Node2D" type="Node2D"]
-scale = Vector2( 2, 3 )
+scale = Vector2( 2, 2.5 )
 script = ExtResource( 2 )
 
 [node name="Bar" parent="." instance=ExtResource( 1 )]

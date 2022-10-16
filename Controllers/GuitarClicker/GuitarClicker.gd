@@ -12,7 +12,7 @@ func _init(player, aMain).(player, aMain):
 	# Guitar GUI
 	var guitarBars = preload("res://Controllers/GuitarClicker/GuitarBars.tscn")
 	self.guitarGUI = guitarBars.instance()
-	self.guitarGUI.position = Vector2(GlobalVars.width/2, 19*GlobalVars.height/20)
+	self.guitarGUI.position = Vector2(GlobalVars.width/2, 8*GlobalVars.height/10)
 	self.add_child(self.guitarGUI)
 	self.guitarGUI.setParams(aMain)
 	
