@@ -28,8 +28,8 @@ func _buy():
 
 func save_tienda_actual():
 	var file = File.new()
-	file.open("res://CompraVenta/Tienda.json",File.WRITE)
-	file.store_string(JSON.print(Tienda_actual," ",true))
+	file.open(GlobalVars.TIENDA_PATH, File.WRITE)
+	file.store_string(JSON.print(Tienda_actual, " ", true))
 	file.close()
 
 func set_display_name(value):
@@ -38,11 +38,11 @@ func set_display_name(value):
 
 func set_quantity(value):
 	quantity = value
-	quantity_label.text = "Nivel: " + str(value)
+	quantity_label.text = "Level: " + str(value)
 
 func set_price(value):
 	price = value
-	buy.text = "Presio: " + str(value)
+	buy.text = "Price: " + str(value)
 
 func set_icon(value):
 	icon = value

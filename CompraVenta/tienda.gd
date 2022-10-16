@@ -10,11 +10,6 @@ var Items_Tienda = {} setget set_Tienda
 func _ready():
 	load_tienda()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func load_tienda():
 	self.Items_Tienda = GlobalVars.Items_Tiendita
 

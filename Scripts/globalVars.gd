@@ -36,13 +36,18 @@ func increaseMaxVal():
 
 # Tienda
 var Items_Tiendita = {} setget set_Tiendita
+const STORE_PATH = "res://CompraVenta/Tienda.json"
+const TIENDA_PATH = "user://Tienda.json" 			# Path for Android saves
 
 func _ready():
 	load_tiendita()
 
 func load_tiendita():
 	var file = File.new()
-	file.open("res://CompraVenta/Tienda.json",File.READ)
+	if file.file_exists(TIENDA_PATH):
+		file.open(TIENDA_PATH, File.READ)
+	else:
+		file.open(STORE_PATH, File.READ) # just initialize with the base store
 	var content = file.get_as_text()
 	file.close()
 	self.Items_Tiendita = JSON.parse(content).result
