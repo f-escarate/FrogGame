@@ -16,7 +16,7 @@ func _init(player, main).(player, main):
 	# Bar
 	var rhythmBar = preload("res://Controllers/NormalClicker/rhythmBar.tscn")
 	self.bar = rhythmBar.instance()
-	self.bar.position = Vector2(GlobalVars.width/2, GlobalVars.height/15)
+	self.bar.position = Vector2(GlobalVars.width/2, GlobalVars.height/10)
 	self.add_child(self.bar)
 	self.barSize = self.bar.size/2
 
@@ -56,5 +56,4 @@ func isPressed():
 		self.main.makeProgress(GlobalVars.NORMAL_CLICKER_PROGRESS)
 		self.main.okMsg()
 		return
-	.isPressed()
 	

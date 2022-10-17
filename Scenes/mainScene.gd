@@ -15,6 +15,7 @@ onready var char_tween = $Position/Tween
 onready var currentController = NormalClicker.new(musicPlayer, self)
 onready var floatingText = preload("res://Scenes/FloatingText.tscn")
 onready var factory = EnemyFactory.new()
+onready var explosion = preload("res://effects/explosion.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,7 +61,7 @@ func makeProgress(multiplier = 1):
 func okMsg(msg = "OK!!!"):
 	var ftext = floatingText.instance()
 	ftext.setText(msg)
-	gui.add_child(ftext)
+	char_position.add_child(ftext)
 	
 func setController(controller):
 	currentController.queue_free()
@@ -68,7 +69,10 @@ func setController(controller):
 	pivot.add_child(controller)
 	
 func spawnBoss():
+	var explosion1 = explosion.instance()
+	char_position.add_child(explosion1)
 	factory.createWitch()
 	char_tween.interpolate_property(mc, "position", Vector2(0, 0), Vector2(-200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.start()
+
