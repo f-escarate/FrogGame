@@ -11,11 +11,11 @@ var main
 func _ready():
 	button.connect("pressed", self, "isPressed")
 
-func guitarMark(speed : float, noteIndex : int):
+func guitarMark(speed : float, noteIndex : int, initPos = 0):
 	# adding Mark
 	var mark = Mark.instance()
 	self.markContainer.add_child(mark)
-	mark.set_params(speed, self.length, noteIndex)	
+	mark.set_params(speed, self.length, noteIndex, initPos)	
 
 func isPressed():
 	var firstMark = markContainer.get_child(0)

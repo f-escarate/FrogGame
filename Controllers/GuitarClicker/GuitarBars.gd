@@ -17,9 +17,8 @@ func _ready():
 
 func setParams(aMain):
 	self.main = aMain
-	
 
-func addMark(speed: float, noteIndex: int):
+func addMark(speed: float, noteIndex: int, markPos = 0):
 	var randIndex : int = randi()%4
-	bars[randIndex].guitarMark(speed, noteIndex)
+	bars[randIndex].guitarMark(speed, noteIndex, markPos)
 

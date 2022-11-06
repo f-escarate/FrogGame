@@ -5,8 +5,8 @@ var guitarGUI : Node2D
 const SPEED : float = 300.0
 
 func _init(player, aMain).(player, aMain):
-	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuNotAClub.tres")
-	self.musicPlayer.stream = load("res://Assets/Songs/KomikuNotAClub.mp3")
+	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuNotAClubEdited.tres")
+	self.musicPlayer.stream = load("res://Assets/Songs/KomikuNotAClubEdited.mp3")
 	self.musicPlayer.play()
 		
 	# Guitar GUI
@@ -17,12 +17,22 @@ func _init(player, aMain).(player, aMain):
 	self.guitarGUI.setParams(aMain)
 	
 func _ready():
-	# Get initial time
+	# Setting initial time
+	self.displayTime = 0
+	# Getting the time requiered to travel along the bar
 	var requiredTime = self.guitarGUI.depth/self.SPEED
-	self.displayTime = self.rhythm[0]-requiredTime
+	
+	# Spawning the initial marks (those who don't spawn at the top of the bar)
+	var currentTime = self.rhythm[self.displayIndex]
+	while currentTime < requiredTime:
+		var yPos = currentTime*self.SPEED
+		self.guitarGUI.addMark(self.SPEED, self.displayIndex, yPos)
+		self.advanceDisplayNote()
+		currentTime = self.rhythm[self.displayIndex]
+	
 
 func refreshNotes(delta):
-	# We get the current time	
+	# We get the current time
 	self.displayTime += delta
 	
 	# Spawn the marks that show the rhythm
