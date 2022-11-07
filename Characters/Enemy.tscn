@@ -139,7 +139,6 @@ parameters/playback = SubResource( 2 )
 [node name="eyesEnemy" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 hframes = 6
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="eyesEnemy"]
 anims/RESET = SubResource( 3 )
