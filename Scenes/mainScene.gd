@@ -7,6 +7,7 @@ onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
 onready var pivot = $Pivot
+onready var particlePivot = $ParticlePivot
 onready var musicPlayer = $AudioStreamPlayer
 onready var char_position = $Position
 onready var mc = $Position/mainCharacter
@@ -72,8 +73,11 @@ func setController(controller):
 	pivot.add_child(controller)
 	
 func spawnBoss():
+	# Adding the explosion particle
 	var explosion1 = explosion.instance()
-	char_position.add_child(explosion1)
+	particlePivot.add_child(explosion1)
+	
+	#Creating the enemy and setting the translations with the tween
 	factory.createRandomEnemy()
 	char_tween.interpolate_property(mc, "position", Vector2(0, 0), Vector2(-200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
@@ -81,7 +85,6 @@ func spawnBoss():
 
 	
 func despawnBoss():
-	print("Despawn watafak")
 	var boss = factory.get_child(0)
 	char_tween.interpolate_property(mc, "position", Vector2(-200, 0), Vector2(0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(boss, "position", Vector2(0, 0), Vector2(400, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	

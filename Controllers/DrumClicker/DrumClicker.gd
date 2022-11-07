@@ -33,8 +33,8 @@ func refreshNotes(delta) -> void:
 
 func spawnMark():
 	var mark = DrumMark.instance()
-	var x = rand_range(GlobalVars.safe_area.position.x+96, GlobalVars.safe_area.end.x-96)
-	var y = rand_range(GlobalVars.safe_area.position.y+400, GlobalVars.safe_area.end.y-400)
+	var x = rand_range(64, GlobalVars.width-64)
+	var y = rand_range(3*GlobalVars.height/20 + 64, 8*GlobalVars.height/10-64)
 	mark.position = Vector2(x, y)
 	mark.setParams(self.makeProgress, self.okMsg)
 	self.add_child(mark)

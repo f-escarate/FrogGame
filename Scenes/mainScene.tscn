@@ -31,6 +31,9 @@ stream = ExtResource( 4 )
 
 [node name="Pivot" type="Node2D" parent="."]
 
+[node name="ParticlePivot" type="Node2D" parent="."]
+position = Vector2( 360, 600 )
+
 [node name="GUI" type="Node2D" parent="."]
 
 [node name="Settings" type="TouchScreenButton" parent="GUI"]
