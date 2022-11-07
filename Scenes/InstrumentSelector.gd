@@ -1,8 +1,9 @@
 extends HBoxContainer
-enum instrument {MIC, GUITAR}
+enum instrument {MIC, GUITAR, DRUM}
 
 onready var mic = $Microphone
 onready var guitar = $Guitar
+onready var drum = $Drum
 onready var currentInstrument = instrument.MIC
 
 var player
@@ -12,6 +13,7 @@ var main
 func _ready():
 	mic.connect("pressed", self, "toMic")
 	guitar.connect("pressed", self, "toGuitar")
+	drum.connect("pressed", self, "toDrum")
 
 func setParams(musicPlayer, aMain):
 	self.player = musicPlayer
@@ -30,3 +32,10 @@ func toGuitar():
 		var clicker = GuitarClicker.new(self.player, self.main)
 		self.main.setController(clicker)
 		self.currentInstrument = instrument.GUITAR
+
+func toDrum():
+	if currentInstrument != instrument.DRUM:
+		self.main.mc.playDrum()
+		var clicker = DrumClicker.new(self.player, self.main)
+		self.main.setController(clicker)
+		self.currentInstrument = instrument.DRUM

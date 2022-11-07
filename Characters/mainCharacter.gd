@@ -8,8 +8,11 @@ onready var playback = anim_tree.get("parameters/playback")
 func _ready():
 	sing()
 
+func sing():
+	anim_player.play("singing")
+
 func playGuitar():
 	anim_player.play("playingGuitar")
 
-func sing():
+func playDrum():
 	anim_player.play("singing")

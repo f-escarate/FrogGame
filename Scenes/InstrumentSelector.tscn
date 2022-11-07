@@ -15,3 +15,8 @@ margin_bottom = 40.0
 margin_left = 16.0
 margin_right = 28.0
 margin_bottom = 40.0
+
+[node name="Drum" type="Button" parent="."]
+margin_left = 32.0
+margin_right = 44.0
+margin_bottom = 40.0

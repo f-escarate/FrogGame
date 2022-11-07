@@ -11,6 +11,7 @@ onready var isFighting:bool = false
 # Clicker Progress Bars
 const NORMAL_CLICKER_PROGRESS = 2
 const GUITAR_CLICKER_PROGRESS = 3
+const DRUM_CLICKER_PROGRESS = 4
 
 # Hit consts
 const GOOD_HIT = 0.09
