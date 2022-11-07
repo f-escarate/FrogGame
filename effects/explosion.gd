@@ -20,9 +20,11 @@ func _ready():
 	tween.interpolate_property(sprite, "scale", Vector2(8,8), Vector2(3,3), 2, 3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	tween.start()
 
+# That function is called by the animation player (when the explosion ends)
 func _remove():
 	queue_free()
 
+# That function is called by the animation player (when the letters ends)
 func resume():
 	get_tree().paused = false
 	

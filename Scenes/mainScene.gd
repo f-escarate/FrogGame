@@ -2,7 +2,6 @@ extends Control
 
 onready var gui = $GUI
 onready var settings = $GUI/Settings
-onready var store = $GUI/Store
 onready var flow_counter = $GUI/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
@@ -40,23 +39,27 @@ func _process(delta):
 func _on_Settings_Pressed():
 	pauseMenu.pauseGame()
 
-
 func makeProgress(multiplier = 1):
 	
 	GlobalVars.currentVal += 1*multiplier
 	
 	if GlobalVars.currentVal >= GlobalVars.maxVal:
+		var wasFighting = GlobalVars.isFighting # tells if the player was fighting before increasing maxVal
 		# Returns true if the player has cleared all the phases
-		if GlobalVars.increaseMaxVal():
+		GlobalVars.increaseMaxVal()
+		if GlobalVars.isFighting:
 			# Go to boss
 			self.spawnBoss()
+		elif wasFighting and not GlobalVars.isFighting:
+			# If the battle has ended, we remove the boss
+			self.despawnBoss()
 			
 		self.progressBar.max_value = GlobalVars.maxVal
 		
 	
 	self.progressBar.value = GlobalVars.currentVal
 	self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
-	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.NUMPHASES})
+	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.getTotalPhases()})
 
 func okMsg(msg = "OK!!!"):
 	var ftext = floatingText.instance()
@@ -71,8 +74,20 @@ func setController(controller):
 func spawnBoss():
 	var explosion1 = explosion.instance()
 	char_position.add_child(explosion1)
-	factory.createWitch()
+	factory.createRandomEnemy()
 	char_tween.interpolate_property(mc, "position", Vector2(0, 0), Vector2(-200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.start()
 
+	
+func despawnBoss():
+	print("Despawn watafak")
+	var boss = factory.get_child(0)
+	char_tween.interpolate_property(mc, "position", Vector2(-200, 0), Vector2(0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	char_tween.interpolate_property(boss, "position", Vector2(0, 0), Vector2(400, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
+	char_tween.connect("tween_all_completed", self, "_removeEnemy", [boss])
+	char_tween.start()
+
+func _removeEnemy(enemy):
+	factory.removeEnemy(enemy)
+	char_tween.disconnect("tween_all_completed", self, "_removeEnemy")

@@ -3,9 +3,10 @@ extends Node
 # Progress vars
 onready var maxVal = 7
 onready var currentVal = 0
-onready var growFactor = 1.2
-const NUMPHASES: int = 3
+onready var growFactor = 1.025
+const NUMPHASES: int = 5
 var currentPhase : int = 0
+onready var isFighting:bool = false
 
 # Clicker Progress Bars
 const NORMAL_CLICKER_PROGRESS = 2
@@ -28,11 +29,17 @@ onready var height = ProjectSettings.get_setting("display/window/size/height")
 
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)
-	self.growFactor *= 1.2
+	self.growFactor *= 1.025
 	self.currentVal = 0.0
-	self.currentPhase = (self.currentPhase+1)%NUMPHASES
-	return !bool(self.currentPhase)
+	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
+	
+	# the player goes to fight when the phase count is restarted
+	self.isFighting = !bool(self.currentPhase) and not self.isFighting
 
+func getTotalPhases():
+	if self.isFighting:
+		return 1
+	return self.NUMPHASES
 
 # Tienda
 var Items_Tiendita = {} setget set_Tiendita
