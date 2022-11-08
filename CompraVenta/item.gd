@@ -46,3 +46,4 @@ func set_price(value):
 
 func set_icon(value):
 	icon = value
+	icon_label.texture = load(value)

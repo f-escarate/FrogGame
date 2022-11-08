@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var items = $Container/Items
+onready var items = $ColorRect/ScrollContainer/Items
 
 var item_scene = preload("res://CompraVenta/Item.tscn")
 
@@ -27,3 +27,4 @@ func _update_tienda():
 		ui_item.display_name = item.item
 		ui_item.quantity = item.quantity
 		ui_item.price = item.price
+		ui_item.icon = item.icon

@@ -2,7 +2,7 @@ extends Control
 
 onready var gui = $GUI
 onready var settings = $GUI/Settings
-onready var flow_counter = $GUI/Label
+onready var flow_counter = $GUI/ProgressBar/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
@@ -23,12 +23,14 @@ func _ready():
 	self.rect_size = GlobalVars.screen_size
 	self.rect_position = GlobalVars.safe_area.position
 	
-	settings.connect("pressed", self, "_on_Settings_Pressed")
+	settings.connect("released", self, "_on_Settings_Pressed")
 	pivot.add_child(currentController)
 	char_position.add_child(factory)
 	
+	# Progress Bar values
 	self.progressBar.max_value = GlobalVars.maxVal
 	self.progressBar.value = GlobalVars.currentVal
+	self.refreshProgressText()
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 	
@@ -59,8 +61,14 @@ func makeProgress(multiplier = 1):
 		
 	
 	self.progressBar.value = GlobalVars.currentVal
-	self.flow_counter.text = "hits: {count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
-	self.flow_counter.text += "current phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.getTotalPhases()})
+	self.refreshProgressText()
+
+func refreshProgressText():
+	self.flow_counter.text = "{count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
+	if GlobalVars.isFighting:
+		self.flow_counter.text += "boss battle"
+		return
+	self.flow_counter.text += "phase: {count}/{total}\n".format({"count": GlobalVars.currentPhase+1, "total": GlobalVars.getTotalPhases()})
 
 func okMsg(msg = "OK!!!"):
 	var ftext = floatingText.instance()

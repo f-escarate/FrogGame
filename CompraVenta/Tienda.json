@@ -2,13 +2,31 @@
  "Currency": 0,
  "Inventory": [
   {
-   "icon": "res://icon.png",
+   "icon": "res://images/Items/item.png",
    "item": "asd",
    "price": 3,
    "quantity": 9
   },
   {
-   "icon": "res://icon.png",
+   "icon": "res://images/Items/item.png",
+   "item": "asddd",
+   "price": 5,
+   "quantity": 4
+  },
+{
+   "icon": "res://images/Items/item.png",
+   "item": "asddd",
+   "price": 5,
+   "quantity": 4
+  },
+  {
+   "icon": "res://images/Items/item.png",
+   "item": "asddd",
+   "price": 5,
+   "quantity": 4
+  },
+{
+   "icon": "res://images/Items/item.png",
    "item": "asddd",
    "price": 5,
    "quantity": 4
