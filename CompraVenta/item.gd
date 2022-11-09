@@ -16,15 +16,21 @@ func _ready():
 	
 
 func _buy():
-	set_quantity(quantity + 1)
-	
-	var i =0
-	while i < len(Tienda_actual["Inventory"]):
-		if display_name == Tienda_actual["Inventory"][i].item:
-			Tienda_actual["Inventory"][i].quantity = quantity
-			break
-		i = i +1
-	save_tienda_actual()
+	if GlobalVars.totalMoney >= price:
+		set_quantity(quantity + 1)
+		GlobalVars.totalMoney = GlobalVars.totalMoney - price
+		Tienda_actual["Currency"] = GlobalVars.totalMoney
+		var i =0
+		while i < len(Tienda_actual["Inventory"]):
+			if display_name == Tienda_actual["Inventory"][i].item:
+				Tienda_actual["Inventory"][i].quantity = quantity
+				Tienda_actual["Inventory"][i].price = price + floor(price/10+exp(quantity/10))
+				set_price(Tienda_actual["Inventory"][i].price)
+				break
+			i = i +1
+		save_tienda_actual()
+	else:
+		print(GlobalVars.totalMoney)
 
 func save_tienda_actual():
 	var file = File.new()

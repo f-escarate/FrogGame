@@ -17,16 +17,17 @@ const DRUM_CLICKER_PROGRESS = 4
 const GOOD_HIT = 0.09
 const PERFECT_HIT = 0.05
 
-# Money vars
-onready var earnMultiplier = 1
-onready var moneyPerClick = 1
-onready var totalMoney = 0
-
 # GUI vars
 onready var safe_area = OS.get_window_safe_area()
 onready var screen_size = safe_area.end - safe_area.position
 onready var width = ProjectSettings.get_setting("display/window/size/width")
 onready var height = ProjectSettings.get_setting("display/window/size/height")
+
+# Money vars
+onready var earnMultiplier = 1
+onready var moneyPerClick = 1
+onready var totalMoney = 0 
+onready var mejoraMamalona = 0
 
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)
@@ -59,6 +60,8 @@ func load_tiendita():
 	var content = file.get_as_text()
 	file.close()
 	self.Items_Tiendita = JSON.parse(content).result
+	self.totalMoney = Items_Tiendita["Currency"]
 
 func set_Tiendita(value):
 	Items_Tiendita = value
+
