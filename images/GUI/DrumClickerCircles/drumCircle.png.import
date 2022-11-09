@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/drumCircleBack.png-2fa504f0d4ea880afabab659080cec1c.stex"
+path="res://.import/drumCircle.png-5b05f2dbb342cc209eb95b5d1fdef4cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/drumText/drumCircleBack.png"
-dest_files=[ "res://.import/drumCircleBack.png-2fa504f0d4ea880afabab659080cec1c.stex" ]
+source_file="res://images/GUI/DrumClickerCircles/drumCircle.png"
+dest_files=[ "res://.import/drumCircle.png-5b05f2dbb342cc209eb95b5d1fdef4cc.stex" ]
 
 [params]
 

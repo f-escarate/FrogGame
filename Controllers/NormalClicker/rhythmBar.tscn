@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://images/GUI/NormalClickerBar/bar.png" type="Texture" id=1]
 [ext_resource path="res://Controllers/NormalClicker/rhythmBar.gd" type="Script" id=2]
 
 [node name="Bar" type="Sprite"]
-modulate = Color( 0.0509804, 0.705882, 0.184314, 0.333333 )
-position = Vector2( 133, 14.7 )
+position = Vector2( 3.05176e-05, 0 )
 scale = Vector2( 5.21875, 0.446875 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
