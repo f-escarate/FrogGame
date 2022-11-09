@@ -30,6 +30,11 @@ onready var totalMoney = 0
 onready var mejoraMamalona = 0
 var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
 
+# Enemies Vars
+var enemiesMsgs
+var ENEMIES_MSGS_PATH = "res://effects/enemies_msgs.json"
+
+
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)
 	self.growFactor *= 1.025
@@ -51,6 +56,7 @@ const TIENDA_PATH = "user://Tienda.json" 			# Path for Android saves
 
 func _ready():
 	load_tiendita()
+	load_enemies_msgs()
 
 func load_tiendita():
 	var file = File.new()
@@ -65,4 +71,13 @@ func load_tiendita():
 
 func set_Tiendita(value):
 	Items_Tiendita = value
+	
+func load_enemies_msgs():
+	var file = File.new()
+	file.open(ENEMIES_MSGS_PATH, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
+	print(self.enemiesMsgs)
+	
 

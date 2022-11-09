@@ -85,12 +85,15 @@ func setController(controller):
 	pivot.add_child(controller)
 	
 func spawnBoss():
-	# Adding the explosion particle
-	var explosion1 = explosion.instance()
-	particlePivot.add_child(explosion1)
+	# Creating the enemy
+	var enemyType : int = factory.createRandomEnemy()
 	
-	#Creating the enemy and setting the translations with the tween
-	factory.createRandomEnemy()
+	# Adding the explosion particle
+	var explosionParticle = explosion.instance()
+	explosionParticle.setEnemyType(enemyType)
+	particlePivot.add_child(explosionParticle)
+	
+	# Setting the translations with the tween
 	char_tween.interpolate_property(mc, "position", Vector2(0, 0), Vector2(-200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.start()

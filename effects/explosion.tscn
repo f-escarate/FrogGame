@@ -165,10 +165,7 @@ margin_top = -88.0
 margin_right = 237.0
 margin_bottom = 65.0
 theme = ExtResource( 3 )
-text = "The most wisdom 
-cat has appeard! 
-You have to learn a lot 
-of him and finally beat him!"
+text = "An enemy has appeared"
 align = 1
 
 [node name="Tween" type="Tween" parent="."]
