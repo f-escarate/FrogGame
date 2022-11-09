@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://GUI/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/mainCharacter.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://CompraVenta/tienda.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/background.tscn" type="PackedScene" id=9]
 [ext_resource path="res://images/GUI/pause_iconHover.png" type="Texture" id=10]
+[ext_resource path="res://images/GUI/money_icon.png" type="Texture" id=11]
 
 [node name="mainScene" type="Control"]
 anchor_right = 1.0
@@ -77,3 +78,18 @@ margin_bottom = 1327.0
 margin_top = 1071.0
 margin_bottom = 1111.0
 rect_scale = Vector2( 3, 1 )
+
+[node name="MoneyGUI" type="Sprite" parent="GUI"]
+position = Vector2( 45, 47 )
+texture = ExtResource( 11 )
+
+[node name="MoneyQuantity" type="Label" parent="GUI/MoneyGUI"]
+margin_left = 10.0
+margin_top = -3.0
+margin_right = 147.0
+margin_bottom = 33.0
+theme = ExtResource( 5 )
+text = "100000$"
+__meta__ = {
+"_edit_group_": true
+}

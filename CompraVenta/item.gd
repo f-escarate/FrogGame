@@ -13,13 +13,13 @@ var Tienda_actual =  GlobalVars.Items_Tiendita
 
 func _ready():
 	buy.connect("button_up",self,"_buy")
-	
 
 func _buy():
 	if GlobalVars.totalMoney >= price:
 		set_quantity(quantity + 1)
 		GlobalVars.totalMoney = GlobalVars.totalMoney - price
 		Tienda_actual["Currency"] = GlobalVars.totalMoney
+		GlobalVars.refreshMoneyGUI.call_func()	# refreshing the GUI of the Main Scene
 		var i =0
 		while i < len(Tienda_actual["Inventory"]):
 			if display_name == Tienda_actual["Inventory"][i].item:

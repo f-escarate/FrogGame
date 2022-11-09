@@ -6,6 +6,7 @@ onready var flow_counter = $GUI/ProgressBar/Label
 onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
+onready var money_quantity = $GUI/MoneyGUI/MoneyQuantity
 onready var pivot = $Pivot
 onready var particlePivot = $ParticlePivot
 onready var musicPlayer = $AudioStreamPlayer
@@ -32,6 +33,12 @@ func _ready():
 	self.progressBar.value = GlobalVars.currentVal
 	self.refreshProgressText()
 	
+	# Money values
+	self.refreshMoneyGUI()
+	# Setting the update GUI function for the store
+	var guiUpdateFunRef = funcref(self, "refreshMoneyGUI")
+	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
+	
 	self.instrumentSelector.setParams(musicPlayer, self)
 	
 
@@ -43,7 +50,6 @@ func _on_Settings_Pressed():
 	pauseMenu.pauseGame()
 
 func makeProgress(multiplier = 1):
-	
 	GlobalVars.currentVal += 1*multiplier
 	
 	if GlobalVars.currentVal >= GlobalVars.maxVal:
@@ -55,11 +61,9 @@ func makeProgress(multiplier = 1):
 			self.spawnBoss()
 		elif wasFighting and not GlobalVars.isFighting:
 			# If the battle has ended, we remove the boss
-			self.despawnBoss()
-			
+			self.despawnBoss()	
 		self.progressBar.max_value = GlobalVars.maxVal
 		
-	
 	self.progressBar.value = GlobalVars.currentVal
 	self.refreshProgressText()
 
@@ -91,7 +95,6 @@ func spawnBoss():
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.start()
 
-	
 func despawnBoss():
 	var boss = factory.get_child(0)
 	char_tween.interpolate_property(mc, "position", Vector2(-200, 0), Vector2(0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -102,3 +105,6 @@ func despawnBoss():
 func _removeEnemy(enemy):
 	factory.removeEnemy(enemy)
 	char_tween.disconnect("tween_all_completed", self, "_removeEnemy")
+
+func refreshMoneyGUI():
+	self.money_quantity.text = str(GlobalVars.totalMoney) + "$"

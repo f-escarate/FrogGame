@@ -28,6 +28,7 @@ onready var earnMultiplier = 1
 onready var moneyPerClick = 1
 onready var totalMoney = 0 
 onready var mejoraMamalona = 0
+var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
 
 func increaseMaxVal():
 	self.maxVal = int(self.maxVal*self.growFactor)
