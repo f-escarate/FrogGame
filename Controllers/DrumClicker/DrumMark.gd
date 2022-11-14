@@ -5,6 +5,7 @@ onready var button = $TextureButton
 onready var tween = $Tween
 onready var elapsedTime = 0
 onready var hitTime = 1.0
+const TOLERANCE = 2 # Hit tolerance factor
 var makeProgressRef
 var okMsgRef
 
@@ -24,11 +25,11 @@ func setParams(makeProgress, okMsg):
 
 func _process(delta):
 	self.elapsedTime += delta
-	if elapsedTime - self.hitTime > GlobalVars.GOOD_HIT:
+	if elapsedTime - self.hitTime > GlobalVars.GOOD_HIT * self.TOLERANCE:
 		queue_free()
 
 func isPressed():
-	if self.hitTime - elapsedTime < GlobalVars.GOOD_HIT:
+	if self.hitTime - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
 		self.makeProgressRef.call_func(GlobalVars.DRUM_CLICKER_PROGRESS)
 		self.okMsgRef.call_func()
 		return
