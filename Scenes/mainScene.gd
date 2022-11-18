@@ -61,9 +61,13 @@ func makeProgress(multiplier = 1):
 			self.spawnBoss()
 		elif wasFighting and not GlobalVars.isFighting:
 			# If the battle has ended, we remove the boss
-			self.despawnBoss()	
+			self.despawnBoss()
+			GlobalVars.lvlUp()
 		self.progressBar.max_value = GlobalVars.maxVal
 		
+		GlobalVars.earnMoney()
+		self.refreshMoneyGUI()
+	
 	self.progressBar.value = GlobalVars.currentVal
 	self.refreshProgressText()
 

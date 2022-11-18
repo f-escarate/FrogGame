@@ -6,6 +6,7 @@ onready var currentVal = 0
 onready var growFactor = 1.025
 const NUMPHASES: int = 5
 var currentPhase : int = 0
+var currentLvl : int = 1
 onready var isFighting:bool = false
 
 # Clicker Progress Bars
@@ -24,8 +25,7 @@ onready var width = ProjectSettings.get_setting("display/window/size/width")
 onready var height = ProjectSettings.get_setting("display/window/size/height")
 
 # Money vars
-onready var earnMultiplier = 1
-onready var moneyPerClick = 1
+onready var moneyEarned = 10
 onready var totalMoney = 0 
 onready var mejoraMamalona = 0
 var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
@@ -40,6 +40,7 @@ func increaseMaxVal():
 	self.growFactor *= 1.025
 	self.currentVal = 0.0
 	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
+	Items_Tiendita["Phase"] = self.currentPhase
 	
 	# the player goes to fight when the phase count is restarted
 	self.isFighting = !bool(self.currentPhase) and not self.isFighting
@@ -68,6 +69,8 @@ func load_tiendita():
 	file.close()
 	self.Items_Tiendita = JSON.parse(content).result
 	self.totalMoney = Items_Tiendita["Currency"]
+	self.currentPhase = Items_Tiendita["Phase"]
+	self.currentLvl = Items_Tiendita["Level"]
 
 func set_Tiendita(value):
 	Items_Tiendita = value
@@ -80,4 +83,22 @@ func load_enemies_msgs():
 	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
 	print(self.enemiesMsgs)
 	
+func earnMoney():
+	GlobalVars.totalMoney += self.moneyEarned
+	Items_Tiendita["Currency"] = GlobalVars.totalMoney
+	save_tienda_actual()
+
+func lvlUp():
+	self.currentLvl += 1
+	Items_Tiendita["Level"] = self.currentLvl
+	updateEarnRate()
+
+func updateEarnRate():
+	self.moneyEarned += floor(0.5*pow(self.currentLvl, 2))
+	
+func save_tienda_actual():
+	var file = File.new()
+	file.open(GlobalVars.TIENDA_PATH, File.WRITE)
+	file.store_string(JSON.print(Items_Tiendita, " ", true))
+	file.close()
 

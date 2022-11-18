@@ -28,15 +28,9 @@ func _buy():
 				set_price(Tienda_actual["Inventory"][i].price)
 				break
 			i = i +1
-		save_tienda_actual()
+		GlobalVars.save_tienda_actual()
 	else:
 		print(GlobalVars.totalMoney)
-
-func save_tienda_actual():
-	var file = File.new()
-	file.open(GlobalVars.TIENDA_PATH, File.WRITE)
-	file.store_string(JSON.print(Tienda_actual, " ", true))
-	file.close()
 
 func set_display_name(value):
 	display_name = value
