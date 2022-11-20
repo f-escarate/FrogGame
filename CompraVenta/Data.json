@@ -1,5 +1,7 @@
 {
     "Currency": 0,
+    "ProgressValue" : 0,
+    "ProgressLimit": 7,
     "Phase": 0,
     "Level" : 1,
     "Inventory": [

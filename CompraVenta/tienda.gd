@@ -11,7 +11,7 @@ func _ready():
 	load_tienda()
 
 func load_tienda():
-	self.Items_Tienda = GlobalVars.Items_Tiendita
+	self.Items_Tienda = GlobalVars.Data
 
 func set_Tienda(value):
 	Items_Tienda = value

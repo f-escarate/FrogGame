@@ -29,8 +29,8 @@ func _ready():
 	char_position.add_child(factory)
 	
 	# Progress Bar values
-	self.progressBar.max_value = GlobalVars.maxVal
-	self.progressBar.value = GlobalVars.currentVal
+	self.progressBar.max_value = GlobalVars.progressLimit
+	self.progressBar.value = GlobalVars.progressValue
 	self.refreshProgressText()
 	
 	# Money values
@@ -40,7 +40,6 @@ func _ready():
 	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -50,29 +49,30 @@ func _on_Settings_Pressed():
 	pauseMenu.pauseGame()
 
 func makeProgress(multiplier = 1):
-	GlobalVars.currentVal += 1*multiplier
-	
-	if GlobalVars.currentVal >= GlobalVars.maxVal:
-		var wasFighting = GlobalVars.isFighting # tells if the player was fighting before increasing maxVal
+	GlobalVars.increaseProgressValue(multiplier)
+	# If the progress exceeds the limit, then the limit is increased
+	if GlobalVars.progressValue >= GlobalVars.progressLimit:
+		var wasFighting = GlobalVars.isFighting # tells if the player was fighting before increasing progressLimit
 		# Returns true if the player has cleared all the phases
-		GlobalVars.increaseMaxVal()
+		GlobalVars.increaseProgressLimit()
 		if GlobalVars.isFighting:
-			# Go to boss
-			self.spawnBoss()
+			self.spawnBoss() # Go to boss
 		elif wasFighting and not GlobalVars.isFighting:
 			# If the battle has ended, we remove the boss
 			self.despawnBoss()
-			GlobalVars.lvlUp()
-		self.progressBar.max_value = GlobalVars.maxVal
+			GlobalVars.lvlUp() # Increasing the level
+		self.progressBar.max_value = GlobalVars.progressLimit
 		
 		GlobalVars.earnMoney()
 		self.refreshMoneyGUI()
 	
-	self.progressBar.value = GlobalVars.currentVal
+	# Saving progress
+	GlobalVars.save_data()
+	self.progressBar.value = GlobalVars.progressValue
 	self.refreshProgressText()
 
 func refreshProgressText():
-	self.flow_counter.text = "{count}/{total}\n".format({"count": GlobalVars.currentVal, "total": GlobalVars.maxVal})
+	self.flow_counter.text = "{count}/{total}\n".format({"count": GlobalVars.progressValue, "total": GlobalVars.progressLimit})
 	if GlobalVars.isFighting:
 		self.flow_counter.text += "boss battle"
 		return

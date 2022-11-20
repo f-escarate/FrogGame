@@ -1,13 +1,12 @@
 extends Node
 
 # Progress vars
-onready var maxVal = 7
-onready var currentVal = 0
-onready var growFactor = 1.025
-const NUMPHASES: int = 5
+onready var progressValue = 0
+onready var progressLimit = 7
+const NUMPHASES: int = 10
 var currentPhase : int = 0
 var currentLvl : int = 1
-onready var isFighting:bool = false
+onready var isFighting : bool = false
 
 # Clicker Progress Bars
 const NORMAL_CLICKER_PROGRESS = 2
@@ -34,14 +33,16 @@ var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the 
 var enemiesMsgs
 var ENEMIES_MSGS_PATH = "res://effects/enemies_msgs.json"
 
+func increaseProgressValue(multiplier):
+	self.progressValue += 1*multiplier
+	Data["ProgressValue"] = self.progressValue
 
-func increaseMaxVal():
-	self.maxVal = int(self.maxVal*self.growFactor)
-	self.growFactor *= 1.025
-	self.currentVal = 0.0
+func increaseProgressLimit():
+	self.progressLimit += floor((self.currentPhase+1)/self.NUMPHASES)
+	self.progressValue = 0.0
 	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
-	Items_Tiendita["Phase"] = self.currentPhase
-	
+	Data["Phase"] = self.currentPhase
+	Data["ProgressLimit"] = self.progressLimit
 	# the player goes to fight when the phase count is restarted
 	self.isFighting = !bool(self.currentPhase) and not self.isFighting
 
@@ -50,30 +51,32 @@ func getTotalPhases():
 		return 1
 	return self.NUMPHASES
 
-# Tienda
-var Items_Tiendita = {} setget set_Tiendita
-const STORE_PATH = "res://CompraVenta/Tienda.json"
-const TIENDA_PATH = "user://Tienda.json" 			# Path for Android saves
+# Data
+var Data = {} setget set_Data
+const DEFAULT_DATA_PATH = "res://CompraVenta/Data.json"
+const DATA_PATH = "user://Data.json" 			# Path for Android saves
 
 func _ready():
-	load_tiendita()
+	load_data()
 	load_enemies_msgs()
 
-func load_tiendita():
+func load_data():
 	var file = File.new()
-	if file.file_exists(TIENDA_PATH):
-		file.open(TIENDA_PATH, File.READ)
+	if file.file_exists(DATA_PATH):
+		file.open(DATA_PATH, File.READ)
 	else:
-		file.open(STORE_PATH, File.READ) # just initialize with the base store
+		file.open(DEFAULT_DATA_PATH, File.READ) # just initialize with the base store
 	var content = file.get_as_text()
 	file.close()
-	self.Items_Tiendita = JSON.parse(content).result
-	self.totalMoney = Items_Tiendita["Currency"]
-	self.currentPhase = Items_Tiendita["Phase"]
-	self.currentLvl = Items_Tiendita["Level"]
+	self.Data = JSON.parse(content).result
+	self.totalMoney = Data["Currency"]
+	self.currentPhase = Data["Phase"]
+	self.currentLvl = Data["Level"]
+	self.progressValue = Data["ProgressValue"]
+	self.progressLimit = Data["ProgressLimit"]
 
-func set_Tiendita(value):
-	Items_Tiendita = value
+func set_Data(value):
+	Data = value
 	
 func load_enemies_msgs():
 	var file = File.new()
@@ -81,24 +84,22 @@ func load_enemies_msgs():
 	var content = file.get_as_text()
 	file.close()
 	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
-	print(self.enemiesMsgs)
-	
+
 func earnMoney():
 	GlobalVars.totalMoney += self.moneyEarned
-	Items_Tiendita["Currency"] = GlobalVars.totalMoney
-	save_tienda_actual()
+	Data["Currency"] = GlobalVars.totalMoney
 
 func lvlUp():
 	self.currentLvl += 1
-	Items_Tiendita["Level"] = self.currentLvl
+	Data["Level"] = self.currentLvl
 	updateEarnRate()
 
 func updateEarnRate():
 	self.moneyEarned += floor(0.5*pow(self.currentLvl, 2))
 	
-func save_tienda_actual():
+func save_data():
 	var file = File.new()
-	file.open(GlobalVars.TIENDA_PATH, File.WRITE)
-	file.store_string(JSON.print(Items_Tiendita, " ", true))
+	file.open(GlobalVars.DATA_PATH, File.WRITE)
+	file.store_string(JSON.print(Data, " ", true))
 	file.close()
 

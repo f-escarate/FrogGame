@@ -9,7 +9,7 @@ var display_name = "" setget set_display_name
 var icon = "" setget set_icon
 var quantity = 0 setget set_quantity
 var price = 0 setget set_price
-var Tienda_actual =  GlobalVars.Items_Tiendita
+var Tienda_actual =  GlobalVars.Data
 
 func _ready():
 	buy.connect("button_up",self,"_buy")
@@ -28,7 +28,7 @@ func _buy():
 				set_price(Tienda_actual["Inventory"][i].price)
 				break
 			i = i +1
-		GlobalVars.save_tienda_actual()
+		GlobalVars.save_data()
 	else:
 		print(GlobalVars.totalMoney)
 
