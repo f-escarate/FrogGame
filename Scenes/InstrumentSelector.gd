@@ -14,6 +14,9 @@ func _ready():
 	mic.connect("pressed", self, "toMic")
 	guitar.connect("pressed", self, "toGuitar")
 	drum.connect("pressed", self, "toDrum")
+	
+	show_unlocked_instruments()
+	
 
 func setParams(musicPlayer, aMain):
 	self.player = musicPlayer
@@ -39,3 +42,10 @@ func toDrum():
 		var clicker = DrumClicker.new(self.player, self.main)
 		self.main.setController(clicker)
 		self.currentInstrument = instrument.DRUM
+
+func show_unlocked_instruments():
+	# Showing the unlocked instruments only
+	var instruments = [mic, guitar, drum]
+	for i in range(len(instruments)):
+		if GlobalVars.instruments_unlocked[i]:
+			instruments[i].visible = true

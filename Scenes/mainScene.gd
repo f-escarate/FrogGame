@@ -14,8 +14,8 @@ onready var char_position = $Position
 onready var mc = $Position/mainCharacter
 onready var char_tween = $Position/Tween
 onready var currentController = NormalClicker.new(musicPlayer, self)
-onready var floatingText = preload("res://Scenes/FloatingText.tscn")
 onready var factory = EnemyFactory.new()
+onready var floatingText = preload("res://effects/FloatingText.tscn")
 onready var explosion = preload("res://effects/explosion.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -35,9 +35,12 @@ func _ready():
 	
 	# Money values
 	self.refreshMoneyGUI()
-	# Setting the update GUI function for the store
-	var guiUpdateFunRef = funcref(self, "refreshMoneyGUI")
+	
+	# Setting global function references
+	var guiUpdateFunRef = funcref(self, "refreshMoneyGUI")	# For refreshing the money
 	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
+	var show_unlocked_instruments = funcref(instrumentSelector, "show_unlocked_instruments")
+	GlobalVars.refreshInstruments = show_unlocked_instruments
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 
@@ -81,6 +84,7 @@ func refreshProgressText():
 func okMsg(msg = "OK!!!"):
 	var ftext = floatingText.instance()
 	ftext.setText(msg)
+	ftext.setPosition(Vector2(0, -GlobalVars.height/4))
 	char_position.add_child(ftext)
 	
 func setController(controller):

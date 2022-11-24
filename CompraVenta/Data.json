@@ -9,25 +9,28 @@
       "buff_0": 1,
       "buff_real": 0,
       "icon": "res://images/Items/item.png",
-      "item": "asd",
-      "price": 10,
-      "quantity": 0
+      "item": "Mic",
+      "price": 60,
+      "quantity": 0,
+      "fun" : "upgrade_mic"
+     },
+     {
+      "buff_0": 150,
+      "buff_real": 0,
+      "icon": "res://images/Items/item.png",
+      "item": "Guitar",
+      "price": 100,
+      "quantity": 0,
+      "fun" : "upgrade_guitar"
      },
      {
       "buff_0": 5,
       "buff_real": 0,
       "icon": "res://images/Items/item.png",
-      "item": "asdd",
-      "price": 50,
-      "quantity": 0
-     },
-     {
-      "buff_0": 20,
-      "buff_real": 0,
-      "icon": "res://images/Items/item.png",
-      "item": "asddd",
+      "item": "Drum",
       "price": 250,
-      "quantity": 0
+      "quantity": 0,
+      "fun" : "upgrade_drum"
      },
      {
       "buff_0": 50,
@@ -35,7 +38,8 @@
       "icon": "res://images/Items/item.png",
       "item": "asdddd",
       "price": 1000,
-      "quantity": 0
+      "quantity": 0,
+      "fun" : "no_fun"
      },
      {
       "buff_0": 150,
@@ -43,7 +47,8 @@
       "icon": "res://images/Items/item.png",
       "item": "asddddd",
       "price": 2500,
-      "quantity": 0
+      "quantity": 0,
+      "fun" : "no_fun"
      }
     ]
    }

@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Controllers/GuitarClicker/GuitarClicker.gd"
 }, {
+"base": "Node",
+"class": "Item_Upgrades",
+"language": "GDScript",
+"path": "res://CompraVenta/item_upgrades.gd"
+}, {
 "base": "Clicker",
 "class": "NormalClicker",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "DrumClicker": "",
 "EnemyFactory": "",
 "GuitarClicker": "",
+"Item_Upgrades": "",
 "NormalClicker": ""
 }
 

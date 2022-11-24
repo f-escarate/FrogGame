@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
-[ext_resource path="res://Scenes/FloatingText.gd" type="Script" id=2]
+[ext_resource path="res://effects/FloatingText.gd" type="Script" id=2]
 
 [node name="Position2D" type="Position2D"]
 scale = Vector2( 0.7, 0.7 )
@@ -13,8 +13,10 @@ margin_left = -48.0
 margin_top = -17.0
 margin_right = 47.0
 margin_bottom = 19.0
+grow_horizontal = 2
 theme = ExtResource( 1 )
 text = "OK!!!"
+align = 1
 
 [node name="Tween" type="Tween" parent="."]
 
