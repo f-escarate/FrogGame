@@ -1,16 +1,13 @@
 extends Clicker
 class_name DrumClicker
 
-const HIT_TIME: float = 1.0
+const HIT_TIME: float = GlobalVars.DRUM_HIT_TIME
 onready var DrumMark = preload("res://Controllers/DrumClicker/DrumMark.tscn")
 var makeProgress
 var okMsg
 
 func _init(player, main).(player, main):
-	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuBicycle.tres")
-	self.musicPlayer.stream = load("res://Assets/Songs/KomikuBicycle.mp3")
-	# Play the song
-	self.musicPlayer.play()
+	self.setSong("KomikuBicycle")
 	
 	# Func refs
 	self.makeProgress = funcref(self.main, "makeProgress")
@@ -21,9 +18,16 @@ func _ready():
 	self.displayTime = 0
 
 # It's called every cycle in order to refresh the rhythm
-func refreshNotes(delta) -> void:
-	# We get the current time	
-	self.displayTime += delta
+func refreshNotes() -> void:
+	# We get the current time
+	self.displayTime = musicPlayer.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+	
+	# If we have gone over all the notes of the song, we have to handle the music restart cycle
+	if self.displayTime > rhythm[len(rhythm)-1] - self.HIT_TIME:
+		# If the current note time is one of the firsts times on the rhythm list
+		#  we subtract the song length to the display time
+		if self.rhythm[self.displayIndex] < self.rhythm[len(rhythm)-1]:
+			self.displayTime -= self.songLength
 	
 	# Spawn the marks that show the rhythm
 	var deltaT = (self.rhythm[self.displayIndex] - self.displayTime)
@@ -38,11 +42,3 @@ func spawnMark():
 	mark.position = Vector2(x, y)
 	mark.setParams(self.makeProgress, self.okMsg)
 	self.add_child(mark)
-
-# Updates the next note that has to be touched
-func advanceNote():
-	self.index += 1
-	# We repeat the song rhythm
-	if self.index == len(self.rhythm):
-		self.noteTime = 0
-		self.index = 0

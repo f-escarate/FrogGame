@@ -43,7 +43,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	currentController.refreshNotes(delta)
+	self.currentController.refreshNotes()
 	
 func _on_Settings_Pressed():
 	pauseMenu.pauseGame()

@@ -6,12 +6,11 @@ var barSize : float
 const SPEED: float = 2000.0
 var index : int = 0
 onready var noteTime: float = 0.0
+onready var t0 : float = 0.0
+var requiredTime
 
 func _init(player, main).(player, main):
-	self.rhythm = getRhythmListFromFile("res://Assets/Songs/KomikuBicycle.tres")
-	self.musicPlayer.stream = load("res://Assets/Songs/KomikuBicycle.mp3")
-	# Play the song
-	self.musicPlayer.play()
+	self.setSong("KomikuBicycle")
 		
 	# Bar
 	var rhythmBar = preload("res://Controllers/NormalClicker/rhythmBar.tscn")
@@ -22,14 +21,26 @@ func _init(player, main).(player, main):
 
 func _ready():
 	# Get initial display time
-	var requiredTime = self.barSize/self.SPEED
+	self.requiredTime = self.barSize/self.SPEED
 	self.displayTime = self.rhythm[0]-requiredTime
 
 # It's called every cycle in order to refresh the rhythm
-func refreshNotes(delta) -> void:
-	# We get the current time	
+func refreshNotes() -> void:
+	# We get the current time
+	var tf = musicPlayer.get_playback_position()
+	var delta = tf - t0
+	self.t0 = tf
+	delta = delta + self.songLength if delta < 0 else delta
 	self.noteTime += delta
-	self.displayTime += delta
+	
+	# Getting the displayTime
+	self.displayTime = tf + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+	# If we have gone over all the notes of the song, we have to handle the music restart cycle
+	if self.displayTime > self.rhythm[len(rhythm)-1] - self.requiredTime:
+		# If the current note time is one of the firsts times on the rhythm list
+		#  we subtract the song length to the display time
+		if self.rhythm[self.displayIndex] < self.rhythm[len(rhythm)-1]:
+			self.displayTime -= self.songLength
 	
 	# Spawn the marks that show the rhythm
 	var deltaX = (self.rhythm[self.displayIndex] - self.displayTime) * self.SPEED

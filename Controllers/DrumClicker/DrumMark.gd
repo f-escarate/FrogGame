@@ -4,7 +4,7 @@ onready var back = $Back
 onready var button = $TextureButton
 onready var tween = $Tween
 onready var elapsedTime = 0
-onready var hitTime = 1.0
+onready var hitTime = GlobalVars.DRUM_HIT_TIME
 const TOLERANCE = 2 # Hit tolerance factor
 var makeProgressRef
 var okMsgRef
@@ -32,5 +32,6 @@ func isPressed():
 	if self.hitTime - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
 		self.makeProgressRef.call_func(GlobalVars.DRUM_CLICKER_PROGRESS)
 		self.okMsgRef.call_func()
+		self.queue_free()
 		return
 		

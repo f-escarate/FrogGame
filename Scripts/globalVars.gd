@@ -16,6 +16,7 @@ const DRUM_CLICKER_PROGRESS = 4
 # Hit consts
 const GOOD_HIT = 0.09
 const PERFECT_HIT = 0.05
+const DRUM_HIT_TIME = 1.0
 
 # GUI vars
 onready var safe_area = OS.get_window_safe_area()
