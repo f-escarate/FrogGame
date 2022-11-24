@@ -3,35 +3,52 @@ extends Node2D
 onready var back = $Back
 onready var button = $TextureButton
 onready var tween = $Tween
-onready var elapsedTime = 0
-onready var hitTime = GlobalVars.DRUM_HIT_TIME
+onready var label = $Label
 const TOLERANCE = 2 # Hit tolerance factor
-var makeProgressRef
-var okMsgRef
+var makeProgressRef : FuncRef
+var restorePosRef : FuncRef
+var okMsgRef : FuncRef
+var gridPos : Vector2
+var labelNum : String
+var elapsedTime = 0
+var initial_scale : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var color1 = Color(1, 1, 0.7)
-	var color2 = Color(1, 0.7, 0.7)
+	var color1 = Color("#159fa7")
+	var color2 = Color("#ab29c1")
+	var color3 = Color("#a71515")
 	
-	tween.interpolate_property(back, "modulate", color1, color2, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.interpolate_property(back, "scale", back.scale, Vector2(0.5, 0.5), hitTime, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	back.scale *= self.initial_scale
+	self.label.text = self.labelNum
+	
+	tween.interpolate_property(back, "modulate", color1, color2, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(back, "modulate", color2, color3, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.5)
+	tween.interpolate_property(back, "scale", back.scale, Vector2(0.5, 0.5), GlobalVars.DRUM_HIT_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	button.connect("pressed", self, "isPressed")
+	
 
-func setParams(makeProgress, okMsg):
+func setParams(makeProgress, okMsg, restorePos, num, gridPosition, lifeTime):
 	self.makeProgressRef = makeProgress
 	self.okMsgRef = okMsg
+	self.labelNum = str(num)
+	self.restorePosRef = restorePos
+	self.gridPos = gridPosition
+	self.elapsedTime = lifeTime
+	self.initial_scale = 1 - (lifeTime/GlobalVars.DRUM_HIT_TIME)*0.5
 
 func _process(delta):
 	self.elapsedTime += delta
-	if elapsedTime - self.hitTime > GlobalVars.GOOD_HIT * self.TOLERANCE:
-		queue_free()
+	if elapsedTime - GlobalVars.DRUM_HIT_TIME > GlobalVars.GOOD_HIT * self.TOLERANCE:
+		self.removeMark()
 
 func isPressed():
-	if self.hitTime - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
+	if GlobalVars.DRUM_HIT_TIME - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
 		self.makeProgressRef.call_func(GlobalVars.DRUM_CLICKER_PROGRESS)
 		self.okMsgRef.call_func()
-		self.queue_free()
-		return
+		self.removeMark()
 		
+func removeMark():
+	self.restorePosRef.call_func(self.gridPos)
+	self.queue_free()

@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://images/GUI/DrumClickerCircles/drumCircle.png" type="Texture" id=1]
 [ext_resource path="res://images/GUI/DrumClickerCircles/drumCircleHover.png" type="Texture" id=2]
 [ext_resource path="res://Controllers/DrumClicker/DrumMark.gd" type="Script" id=3]
 [ext_resource path="res://images/GUI/DrumClickerCircles/drumCircleBack.png" type="Texture" id=4]
+[ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=5]
 
 [node name="DrumMark" type="Node2D"]
 scale = Vector2( 3, 3 )
 script = ExtResource( 3 )
 
 [node name="Back" type="Sprite" parent="."]
+modulate = Color( 0.0823529, 0.623529, 0.654902, 1 )
 texture = ExtResource( 4 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
@@ -22,3 +24,13 @@ texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = -12.0
+margin_top = -11.0
+margin_right = 22.0
+margin_bottom = 25.0
+rect_scale = Vector2( 0.7, 0.7 )
+theme = ExtResource( 5 )
+align = 1
+valign = 1
