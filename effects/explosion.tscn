@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://images/explo.png" type="Texture" id=1]
+[ext_resource path="res://images/particles/explosion2.png" type="Texture" id=1]
 [ext_resource path="res://effects/explosion.gd" type="Script" id=2]
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=3]
 
@@ -48,7 +48,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "finishExplosion"
-length = 0.5
+length = 0.25
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -56,7 +57,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 11, 12, 13, 14, 15 ]
@@ -68,7 +69,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.25 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -140,6 +141,7 @@ end_node = "finishExplosion"
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.717647, 0.537255, 0.913725, 1 )
 position = Vector2( 2, -6 )
 scale = Vector2( 3.61713, 3.77313 )
 texture = ExtResource( 1 )
@@ -169,3 +171,5 @@ text = "An enemy has appeared"
 align = 1
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
