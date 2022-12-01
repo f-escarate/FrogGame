@@ -40,7 +40,7 @@ func _ready():
 	var guiUpdateFunRef = funcref(self, "refreshMoneyGUI")	# For refreshing the money
 	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
 	var show_unlocked_instruments = funcref(instrumentSelector, "show_unlocked_instruments")
-	GlobalVars.refreshInstruments = show_unlocked_instruments
+	Instruments.refreshInstruments = show_unlocked_instruments
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 

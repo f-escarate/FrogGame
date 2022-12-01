@@ -26,12 +26,13 @@ func _update_tienda():
 		var ui_item = item_scene.instance()
 		items.add_child(ui_item)
 		ui_item.display_name = item.item
-		ui_item.quantity = item.quantity
+		ui_item.lvl = item.lvl
 		ui_item.price = item.price
 		ui_item.icon_path = item.icon_path
 		ui_item.description = item.description
+		ui_item.info_fun = item.info_fun
 		ui_item.show_description_ref = funcref(self, "_showDescription")
 
-func _showDescription(text):
-	description.setText(text)
+func _showDescription(text, stats):
+	description.setText(text, stats)
 	description.changeVisibility()

@@ -47,7 +47,6 @@ const DATA_PATH = "user://Data.json" 			# Path for Android saves
 func _ready():
 	load_data()
 	load_enemies_msgs()
-	load_instruments_data()
 
 func load_data():
 	var file = File.new()
@@ -102,65 +101,3 @@ func load_enemies_msgs():
 	var content = file.get_as_text()
 	file.close()
 	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
-	
-# Instruments vars/consts
-const DEFAULT_INSTRUMENT_INFO_PATH = "res://Scenes/instruments.json"
-const INSTRUMENT_INFO_PATH = "user://instruments.json" 			# Path for Android saves
-var NORMAL_CLICKER_PROGRESS = 2
-var GUITAR_CLICKER_PROGRESS = 3
-var DRUM_CLICKER_PROGRESS = 4
-
-var instruments_unlocked : Array
-var instruments_click_progress : Array
-var refreshInstruments : FuncRef # Function reference used to refresh the unlocked instruments
-
-
-func read_instrument_file():
-	var file = File.new()
-	if file.file_exists(INSTRUMENT_INFO_PATH):
-		file.open(INSTRUMENT_INFO_PATH, File.READ)
-	else:
-		file.open(DEFAULT_INSTRUMENT_INFO_PATH, File.READ)
-	var content = file.get_as_text()
-	file.close()
-	var data = JSON.parse(content).result
-	return data
-
-func write_instrument_data(content):
-	var file = File.new()
-	file.open(GlobalVars.INSTRUMENT_INFO_PATH, File.WRITE)
-	file.store_string(JSON.print(content, " ", true))
-	file.close()
-
-func load_instruments_data():
-	var data = read_instrument_file()
-	self.instruments_unlocked = data["unlocked"]
-	self.instruments_click_progress = data["click_progress"]
-	
-	NORMAL_CLICKER_PROGRESS = data["click_progress"][0]
-	GUITAR_CLICKER_PROGRESS = data["click_progress"][1]
-	DRUM_CLICKER_PROGRESS = data["click_progress"][2]
-
-func unlock_instrument(index : int):
-	# Reading
-	var content = read_instrument_file()
-	# Unlocking instrument
-	content["unlocked"][index] = true
-	self.instruments_unlocked = content["unlocked"]
-	# Writing
-	write_instrument_data(content)
-	# Refreshing GUI
-	self.refreshInstruments.call_func()
-
-func upgrade_instrument(index : int, factor : int):
-	# Reading
-	var content = read_instrument_file()
-	# Upgrading instrument
-	content["click_progress"][index] = factor
-	# Writing
-	write_instrument_data(content)
-	# Reloading data
-	NORMAL_CLICKER_PROGRESS = content["click_progress"][0]
-	GUITAR_CLICKER_PROGRESS = content["click_progress"][1]
-	DRUM_CLICKER_PROGRESS = content["click_progress"][2]
-	self.instruments_click_progress = content["click_progress"]

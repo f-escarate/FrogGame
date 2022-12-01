@@ -23,7 +23,7 @@ margin_bottom = 32.0
 mouse_filter = 1
 size_flags_horizontal = 2
 
-[node name="Quantity" type="Label" parent="."]
+[node name="Level" type="Label" parent="."]
 margin_left = 352.0
 margin_top = 18.0
 margin_right = 352.0

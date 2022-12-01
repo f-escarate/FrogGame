@@ -21,6 +21,6 @@ func isPressed():
 	var firstMark = markContainer.get_child(0)
 	if firstMark != null and abs(firstMark.rect_position.y-self.length) < GlobalVars.GOOD_HIT*firstMark.speed:
 		firstMark.queue_free()
-		self.main.makeProgress(GlobalVars.GUITAR_CLICKER_PROGRESS)
+		self.main.makeProgress(Instruments.instruments_click_progress[Instruments.GUITAR])
 		self.main.okMsg()
 		return

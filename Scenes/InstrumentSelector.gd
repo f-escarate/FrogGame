@@ -1,10 +1,9 @@
 extends HBoxContainer
-enum instrument {MIC, GUITAR, DRUM}
 
 onready var mic = $Microphone
 onready var guitar = $Guitar
 onready var drum = $Drum
-onready var currentInstrument = instrument.MIC
+onready var currentInstrument = Instruments.MIC
 
 var player
 var main
@@ -23,29 +22,29 @@ func setParams(musicPlayer, aMain):
 	self.main = aMain
 
 func toMic():
-	if currentInstrument != instrument.MIC:
+	if currentInstrument != Instruments.MIC:
 		self.main.mc.sing()
 		var clicker = NormalClicker.new(self.player, self.main)
 		self.main.setController(clicker)
-		self.currentInstrument = instrument.MIC
+		self.currentInstrument = Instruments.MIC
 
 func toGuitar():
-	if currentInstrument != instrument.GUITAR:
+	if currentInstrument != Instruments.GUITAR:
 		self.main.mc.playGuitar()
 		var clicker = GuitarClicker.new(self.player, self.main)
 		self.main.setController(clicker)
-		self.currentInstrument = instrument.GUITAR
+		self.currentInstrument = Instruments.GUITAR
 
 func toDrum():
-	if currentInstrument != instrument.DRUM:
+	if currentInstrument != Instruments.DRUM:
 		self.main.mc.playDrum()
 		var clicker = DrumClicker.new(self.player, self.main)
 		self.main.setController(clicker)
-		self.currentInstrument = instrument.DRUM
+		self.currentInstrument = Instruments.DRUM
 
 func show_unlocked_instruments():
 	# Showing the unlocked instruments only
 	var instruments = [mic, guitar, drum]
 	for i in range(len(instruments)):
-		if GlobalVars.instruments_unlocked[i]:
+		if Instruments.instruments_unlocked[i]:
 			instruments[i].visible = true

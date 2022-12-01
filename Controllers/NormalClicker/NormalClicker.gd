@@ -64,7 +64,7 @@ func advanceNote():
 func isPressed():		
 	if self.rhythm[self.index] - self.noteTime < GlobalVars.GOOD_HIT:
 		advanceNote()
-		self.main.makeProgress(GlobalVars.NORMAL_CLICKER_PROGRESS)
+		self.main.makeProgress(Instruments.instruments_click_progress[Instruments.MIC])
 		self.main.okMsg()
 		return
 	

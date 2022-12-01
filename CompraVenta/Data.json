@@ -11,8 +11,9 @@
       "icon_path": "res://images/Items/item.png",
       "item": "Mic",
       "price": 60,
-      "quantity": 0,
+      "lvl": 0,
       "fun" : "upgrade_mic",
+      "info_fun": "get_mic_info",
       "description": "The microphone allows Ranaldinho to show his wonderful voice"
      },
      {
@@ -21,8 +22,9 @@
       "icon_path": "res://images/Items/item.png",
       "item": "Guitar",
       "price": 100,
-      "quantity": 0,
+      "lvl": 0,
       "fun" : "upgrade_guitar",
+      "info_fun": "get_guitar_info",
       "description": "Ranaldinho looks cool improving this skill"
      },
      {
@@ -31,8 +33,9 @@
       "icon_path": "res://images/Items/item.png",
       "item": "Drum",
       "price": 250,
-      "quantity": 0,
+      "lvl": 0,
       "fun" : "upgrade_drum",
+      "info_fun": "get_drum_info",
       "description": "More people could hear the Ranaldinho's rhythm with that instrument."
      },
      {
@@ -41,19 +44,21 @@
       "icon_path": "res://images/Items/item.png",
       "item": "Ads",
       "price": 1000,
-      "quantity": 0,
-      "fun" : "no_fun",
+      "lvl": 0,
+      "fun" : "increase_fans",
+      "info_fun": "get_fans_info",
       "description": "The ads can be useful to attract new fans."
      },
      {
       "buff_0": 150,
       "buff_real": 0,
       "icon_path": "res://images/Items/item.png",
-      "item": "autotune",
+      "item": "Lessons",
       "price": 2500,
-      "quantity": 0,
-      "fun" : "no_fun",
-      "description": "Your music could sound better with that upgrade"
+      "lvl": 0,
+      "fun" : "music_lessons",
+      "info_fun": "get_lessons_info",
+      "description": "Get music lessons could help Ranaldinho to improve his music abilities"
      }
     ]
    }
