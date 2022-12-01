@@ -4,7 +4,7 @@ onready var back = $Back
 onready var button = $TextureButton
 onready var tween = $Tween
 onready var label = $Label
-const TOLERANCE = 2 # Hit tolerance factor
+const TOLERANCE = 3 # Hit tolerance factor
 var makeProgressRef : FuncRef
 var restorePosRef : FuncRef
 var okMsgRef : FuncRef
@@ -24,7 +24,7 @@ func _ready():
 	
 	tween.interpolate_property(back, "modulate", color1, color2, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.interpolate_property(back, "modulate", color2, color3, 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.5)
-	tween.interpolate_property(back, "scale", back.scale, Vector2(0.5, 0.5), GlobalVars.DRUM_HIT_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(back, "scale", back.scale, 0.5*back.scale, GlobalVars.DRUM_HIT_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 	button.connect("pressed", self, "isPressed")
 	

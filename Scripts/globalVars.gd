@@ -12,8 +12,8 @@ const PERFECT_HIT = 0.05
 const DRUM_HIT_TIME = 1.0
 
 # Progress vars
-onready var progressValue = 0
-onready var progressLimit = 7
+var progressValue
+var progressLimit
 const NUMPHASES: int = 10
 var currentPhase : int = 0
 var currentLvl : int = 1
@@ -24,13 +24,15 @@ func increaseProgressValue(multiplier):
 	Data["ProgressValue"] = self.progressValue
 
 func increaseProgressLimit():
-	self.progressLimit += floor((self.currentPhase+1)/self.NUMPHASES)
+	self.progressLimit = self.currentLvl*3 + self.currentPhase
 	self.progressValue = 0.0
 	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
 	Data["Phase"] = self.currentPhase
 	Data["ProgressLimit"] = self.progressLimit
 	# the player goes to fight when the phase count is restarted
 	self.isFighting = !bool(self.currentPhase) and not self.isFighting
+	if self.isFighting:
+		self.progressLimit *= 3
 
 func getTotalPhases():
 	if self.isFighting:
@@ -109,6 +111,7 @@ var GUITAR_CLICKER_PROGRESS = 3
 var DRUM_CLICKER_PROGRESS = 4
 
 var instruments_unlocked : Array
+var instruments_click_progress : Array
 var refreshInstruments : FuncRef # Function reference used to refresh the unlocked instruments
 
 
@@ -132,6 +135,7 @@ func write_instrument_data(content):
 func load_instruments_data():
 	var data = read_instrument_file()
 	self.instruments_unlocked = data["unlocked"]
+	self.instruments_click_progress = data["click_progress"]
 	
 	NORMAL_CLICKER_PROGRESS = data["click_progress"][0]
 	GUITAR_CLICKER_PROGRESS = data["click_progress"][1]
@@ -159,3 +163,4 @@ func upgrade_instrument(index : int, factor : int):
 	NORMAL_CLICKER_PROGRESS = content["click_progress"][0]
 	GUITAR_CLICKER_PROGRESS = content["click_progress"][1]
 	DRUM_CLICKER_PROGRESS = content["click_progress"][2]
+	self.instruments_click_progress = content["click_progress"]

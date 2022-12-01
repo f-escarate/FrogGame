@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://images/GUI/DrumClickerCircles/arrow.png" type="Texture" id=1]
+[ext_resource path="res://Controllers/DrumClicker/Arrow.gd" type="Script" id=2]
+
+[node name="Texture" type="TextureRect"]
+show_behind_parent = true
+margin_left = -8.0
+margin_right = 8.0
+margin_bottom = 40.0
+grow_vertical = 0
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 8, 0 )
+texture = ExtResource( 1 )
+stretch_mode = 2
+flip_v = true
+script = ExtResource( 2 )

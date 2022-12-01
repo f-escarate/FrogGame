@@ -7,18 +7,19 @@
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=5]
 
 [node name="DrumMark" type="Node2D"]
-scale = Vector2( 3, 3 )
 script = ExtResource( 3 )
 
 [node name="Back" type="Sprite" parent="."]
 modulate = Color( 0.0823529, 0.623529, 0.654902, 1 )
+scale = Vector2( 3, 3 )
 texture = ExtResource( 4 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = -48.0
+margin_top = -48.0
+margin_right = -16.0
+margin_bottom = -16.0
+rect_scale = Vector2( 3, 3 )
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 2 )
 texture_hover = ExtResource( 2 )
@@ -26,11 +27,11 @@ texture_hover = ExtResource( 2 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Label" type="Label" parent="."]
-margin_left = -12.0
-margin_top = -11.0
-margin_right = 22.0
-margin_bottom = 25.0
-rect_scale = Vector2( 0.7, 0.7 )
+margin_left = -36.0
+margin_top = -31.0
+margin_right = -2.0
+margin_bottom = 5.0
+rect_scale = Vector2( 2.1, 2.1 )
 theme = ExtResource( 5 )
 align = 1
 valign = 1

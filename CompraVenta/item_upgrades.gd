@@ -1,28 +1,21 @@
 extends Node
 class_name Item_Upgrades
 
-const MIC = 0
-const GUITAR = 1
-const DRUM = 2
-
 func upgrade_mic():
-	var new_value = 5			# Esto se debe hacer usando una formula
-	GlobalVars.upgrade_instrument(MIC, new_value)
+	upgrade_instrument(Instruments.MIC)
 
 func upgrade_guitar():
-	if GlobalVars.instruments_unlocked[GUITAR]:
-		var new_value = 5			# Esto se debe hacer usando una formula
-		GlobalVars.upgrade_instrument(GUITAR, new_value)
-	else:
-		GlobalVars.unlock_instrument(GUITAR)
+	upgrade_instrument(Instruments.GUITAR)
 
 func upgrade_drum():
-	if GlobalVars.instruments_unlocked[DRUM]:
+	upgrade_instrument(Instruments.DRUM)
+
+func upgrade_instrument(instrument):
+	if GlobalVars.instruments_unlocked[instrument]:
 		var new_value = 5			# Esto se debe hacer usando una formula
-		GlobalVars.upgrade_instrument(DRUM, new_value)
-	else:
-		GlobalVars.unlock_instrument(DRUM)
+		GlobalVars.upgrade_instrument(instrument, new_value)
+		return
+	GlobalVars.unlock_instrument(instrument)
 
 func no_fun():
-	print("taka")
 	pass

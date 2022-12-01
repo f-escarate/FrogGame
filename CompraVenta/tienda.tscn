@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Fonts/FatPix.tres" type="DynamicFont" id=1]
 [ext_resource path="res://CompraVenta/Item.tscn" type="PackedScene" id=2]
 [ext_resource path="res://CompraVenta/tienda.gd" type="Script" id=3]
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=4]
+[ext_resource path="res://CompraVenta/item_description.tscn" type="PackedScene" id=5]
 
 [node name="tienda" type="MarginContainer"]
 margin_left = 10.0
@@ -12,6 +13,10 @@ margin_bottom = 200.0
 size_flags_vertical = 3
 theme = ExtResource( 4 )
 script = ExtResource( 3 )
+
+[node name="Description" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 350, -134 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 700.0

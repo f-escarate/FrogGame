@@ -57,6 +57,7 @@ config/icon="res://icon.png"
 [autoload]
 
 GlobalVars="*res://Scripts/globalVars.gd"
+Instruments="*res://Scripts/Instruments.gd"
 
 [display]
 

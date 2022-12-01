@@ -8,47 +8,52 @@
      {
       "buff_0": 1,
       "buff_real": 0,
-      "icon": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/item.png",
       "item": "Mic",
       "price": 60,
       "quantity": 0,
-      "fun" : "upgrade_mic"
+      "fun" : "upgrade_mic",
+      "description": "The microphone allows Ranaldinho to show his wonderful voice"
      },
      {
       "buff_0": 150,
       "buff_real": 0,
-      "icon": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/item.png",
       "item": "Guitar",
       "price": 100,
       "quantity": 0,
-      "fun" : "upgrade_guitar"
+      "fun" : "upgrade_guitar",
+      "description": "Ranaldinho looks cool improving this skill"
      },
      {
       "buff_0": 5,
       "buff_real": 0,
-      "icon": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/item.png",
       "item": "Drum",
       "price": 250,
       "quantity": 0,
-      "fun" : "upgrade_drum"
+      "fun" : "upgrade_drum",
+      "description": "More people could hear the Ranaldinho's rhythm with that instrument."
      },
      {
       "buff_0": 50,
       "buff_real": 0,
-      "icon": "res://images/Items/item.png",
-      "item": "asdddd",
+      "icon_path": "res://images/Items/item.png",
+      "item": "Ads",
       "price": 1000,
       "quantity": 0,
-      "fun" : "no_fun"
+      "fun" : "no_fun",
+      "description": "The ads can be useful to attract new fans."
      },
      {
       "buff_0": 150,
       "buff_real": 0,
-      "icon": "res://images/Items/item.png",
-      "item": "asddddd",
+      "icon_path": "res://images/Items/item.png",
+      "item": "autotune",
       "price": 2500,
       "quantity": 0,
-      "fun" : "no_fun"
+      "fun" : "no_fun",
+      "description": "Your music could sound better with that upgrade"
      }
     ]
    }
