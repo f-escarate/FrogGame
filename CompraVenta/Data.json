@@ -8,7 +8,7 @@
      {
       "buff_0": 1,
       "buff_real": 0,
-      "icon_path": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/mic.png",
       "item": "Mic",
       "price": 60,
       "lvl": 0,
@@ -19,7 +19,7 @@
      {
       "buff_0": 150,
       "buff_real": 0,
-      "icon_path": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/guitar.png",
       "item": "Guitar",
       "price": 100,
       "lvl": 0,
@@ -30,7 +30,7 @@
      {
       "buff_0": 5,
       "buff_real": 0,
-      "icon_path": "res://images/Items/item.png",
+      "icon_path": "res://images/Items/drum.png",
       "item": "Drum",
       "price": 250,
       "lvl": 0,

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
 [ext_resource path="res://GUI/PauseMenu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fonts/FatPix-SVG.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://images/GUI/gui_background.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 21
@@ -23,25 +24,38 @@ HSlider/styles/slider = SubResource( 2 )
 
 [node name="PauseMenu" type="MarginContainer"]
 pause_mode = 2
-margin_left = -107.0
-margin_right = 106.0
-margin_bottom = 162.0
-rect_pivot_offset = Vector2( 107, 0 )
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 300, 280 )
+rect_pivot_offset = Vector2( 150, 0 )
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 300.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 150, 0 )
+texture = ExtResource( 4 )
+expand = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 213.0
-margin_bottom = 176.0
+margin_left = 48.0
+margin_top = 52.0
+margin_right = 252.0
+margin_bottom = 228.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 213.0
+margin_right = 204.0
 margin_bottom = 36.0
 text = "Pause Menu"
 
 [node name="Volume2" type="Label" parent="VBoxContainer"]
 margin_top = 40.0
-margin_right = 213.0
+margin_right = 204.0
 margin_bottom = 62.0
 custom_fonts/font = SubResource( 1 )
 text = " Volume"
@@ -49,7 +63,7 @@ text = " Volume"
 [node name="Volume" type="HSlider" parent="VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 66.0
-margin_right = 213.0
+margin_right = 204.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 30 )
 size_flags_stretch_ratio = 0.0
@@ -61,13 +75,13 @@ value = 1.0
 [node name="Resume" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 100.0
-margin_right = 213.0
+margin_right = 204.0
 margin_bottom = 136.0
 text = "Resume"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 140.0
-margin_right = 213.0
+margin_right = 204.0
 margin_bottom = 176.0
 text = "Exit"

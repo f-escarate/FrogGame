@@ -83,7 +83,7 @@ func noMoneyMsg():
 	self.add_child(ftext)
 
 func _showInfo(event):
-	if event is InputEventScreenTouch and event.is_pressed():
+	if event is InputEventScreenTouch and not event.is_pressed():
 		var fun_ref = funcref(GlobalVars.item_upgrades, str(self.info_fun))
 		var stats_text = fun_ref.call_func(lvl)
 		show_description_ref.call_func(self.description, stats_text)

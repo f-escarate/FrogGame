@@ -4,7 +4,6 @@ onready var items = $ColorRect/ScrollContainer/Items
 onready var description = $Description
 
 var item_scene = preload("res://CompraVenta/Item.tscn")
-
 var Items_Tienda = {} setget set_Tienda
 
 # Called when the node enters the scene tree for the first time.

@@ -2,65 +2,67 @@
 
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
 [ext_resource path="res://CompraVenta/item_description.gd" type="Script" id=2]
-[ext_resource path="res://images/GUI/description_background.png" type="Texture" id=3]
+[ext_resource path="res://images/GUI/gui_background.png" type="Texture" id=3]
 [ext_resource path="res://images/GUI/close_icon.png" type="Texture" id=4]
 
 [node name="Description" type="Node2D"]
-position = Vector2( -1, -89 )
 script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -250.0
-margin_top = -370.0
+margin_top = -450.0
 margin_right = 250.0
-margin_bottom = 230.0
+margin_bottom = 150.0
 rect_scale = Vector2( 1, 0.75 )
 texture = ExtResource( 3 )
 
 [node name="Title" type="Label" parent="."]
 modulate = Color( 0.937255, 0.823529, 0.588235, 1 )
 margin_left = -176.0
-margin_top = -345.0
+margin_top = -425.0
 margin_right = 132.0
-margin_bottom = -308.0
+margin_bottom = -388.0
 rect_scale = Vector2( 1.15, 1.15 )
 theme = ExtResource( 1 )
 text = "Item description"
 align = 1
+valign = 1
 autowrap = true
 clip_text = true
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2( 0, 8 )
+position = Vector2( 0, -72 )
 points = PoolVector2Array( -150, -311, 153, -311 )
 width = 7.0
 default_color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -230.0
-margin_top = -290.0
+margin_top = -370.0
 margin_right = 230.0
-margin_bottom = -90.0
+margin_bottom = -170.0
 theme = ExtResource( 1 )
 align = 1
+valign = 1
 autowrap = true
 clip_text = true
 
 [node name="Stats" type="Label" parent="."]
 margin_left = -230.0
-margin_top = -81.0
+margin_top = -161.0
 margin_right = 230.0
-margin_bottom = 19.0
+margin_bottom = -61.0
 theme = ExtResource( 1 )
 align = 1
+valign = 1
 autowrap = true
 clip_text = true
 
 [node name="Button" type="Button" parent="."]
 margin_left = -20.0
-margin_top = 25.0
+margin_top = -55.0
 margin_right = 20.0
-margin_bottom = 65.0
+margin_bottom = -15.0
 icon = ExtResource( 4 )
 flat = true
 icon_align = 1

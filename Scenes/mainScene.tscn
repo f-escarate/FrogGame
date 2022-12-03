@@ -64,20 +64,22 @@ phase: 0/10"
 align = 1
 
 [node name="tienda" parent="GUI" instance=ExtResource( 8 )]
-margin_top = 1127.0
-margin_bottom = 1327.0
+margin_top = 1128.0
+margin_bottom = 1328.0
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 1 )]
-margin_left = 260.0
-margin_top = 367.0
-margin_right = 473.0
-margin_bottom = 543.0
+margin_left = 210.0
+margin_top = 315.0
+margin_right = 510.0
+margin_bottom = 595.0
 rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 1.5 )
 
 [node name="Instruments" parent="GUI" instance=ExtResource( 7 )]
-margin_top = 1071.0
-margin_bottom = 1111.0
-rect_scale = Vector2( 3, 1 )
+margin_left = 15.0
+margin_top = 1041.0
+margin_right = 255.0
+margin_bottom = 1121.0
 
 [node name="MoneyGUI" type="Sprite" parent="GUI"]
 position = Vector2( 45, 47 )
