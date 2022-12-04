@@ -18,6 +18,7 @@ var fun_ref : FuncRef
 var info_fun_ref: FuncRef
 var Tienda_actual =  GlobalVars.Data
 var show_description_ref: FuncRef
+var isDragging : bool = false
 
 func _ready():
 	buy.connect("button_up",self,"_buy")
@@ -82,10 +83,16 @@ func noMoneyMsg():
 	self.add_child(ftext)
 
 func _showInfo(event):
-	if event is InputEventScreenTouch and not event.is_pressed():
+	if event is InputEventScreenTouch and not event.is_pressed() and not self.isDragging:
 		var get_info_fun_ref = funcref(GlobalVars.item_upgrades, str(self.info_fun))
 		var stats_text = get_info_fun_ref.call_func(lvl)
 		show_description_ref.call_func(self.description, stats_text)
+		
+	if event.is_pressed() and self.isDragging:
+		self.isDragging = false
+		
+	if event is InputEventScreenDrag:
+		self.isDragging = true
 		
 func setFields(name, lvl, price, icon_path, description, get_info_fun_ref, show_fun_ref):
 	self.display_name = name
