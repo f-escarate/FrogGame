@@ -46,7 +46,7 @@ pressed = ExtResource( 10 )
 [node name="ProgressBar" type="ProgressBar" parent="GUI"]
 margin_left = 210.0
 margin_top = 13.0
-margin_right = 511.0
+margin_right = 510.0
 margin_bottom = 58.0
 rect_pivot_offset = Vector2( 150, 0 )
 theme = ExtResource( 5 )
@@ -66,14 +66,6 @@ align = 1
 [node name="tienda" parent="GUI" instance=ExtResource( 8 )]
 margin_top = 1128.0
 margin_bottom = 1328.0
-
-[node name="PauseMenu" parent="GUI" instance=ExtResource( 1 )]
-margin_left = 210.0
-margin_top = 315.0
-margin_right = 510.0
-margin_bottom = 595.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 150, 1.5 )
 
 [node name="Instruments" parent="GUI" instance=ExtResource( 7 )]
 margin_left = 15.0
@@ -95,3 +87,11 @@ text = "100000$"
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="PauseMenu" parent="GUI" instance=ExtResource( 1 )]
+margin_left = 60.0
+margin_top = 313.5
+margin_right = 360.0
+margin_bottom = 593.5
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 150, 1.5 )

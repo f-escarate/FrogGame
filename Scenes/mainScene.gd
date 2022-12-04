@@ -18,6 +18,7 @@ onready var currentController = NormalClicker.new(musicPlayer, self)
 onready var factory = EnemyFactory.new()
 onready var floatingText = preload("res://effects/FloatingText.tscn")
 onready var explosion = preload("res://effects/explosion.tscn")
+onready var bossCountdown = preload("res://GUI/BossCountdown.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -97,6 +98,13 @@ func spawnBoss():
 	# Creating the enemy
 	var enemyType : int = factory.createRandomEnemy()
 	
+	# Adding boss countdown
+	var countdown = bossCountdown.instance()
+	var fun_ref = funcref(self, "_defeat")
+	countdown.setDefeatFun(fun_ref)
+	countdown.position = Vector2(progressBar.rect_size.x, 50)
+	progressBar.add_child(countdown)
+	
 	# Adding the explosion particle
 	var explosionParticle = explosion.instance()
 	explosionParticle.setEnemyType(enemyType)
@@ -121,3 +129,7 @@ func _removeEnemy(enemy):
 
 func refreshMoneyGUI():
 	self.money_quantity.text = str(GlobalVars.totalMoney) + "$"
+
+# Function called when the player is defeated by a boss
+func _defeat():
+	print("defeat")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://GUI/BossCountdown.gd" type="Script" id=2]
+
+[node name="Countdown" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+text = "40"
