@@ -1,7 +1,7 @@
 extends Node2D
 class_name EnemyFactory
 
-onready var enemy = preload("res://Characters/Enemy.tscn")
+onready var gato = preload("res://Characters/Gato.tscn")
 onready var pato = preload("res://Characters/Pato.tscn")
 onready var createEnemy = ["createWitch", "createDuck"] # list of all enemies functions
 
@@ -12,7 +12,7 @@ func createRandomEnemy() -> int:
 	return i									# Returns the index (type of enemy created)
 
 func createWitch():
-	var witch = enemy.instance()
+	var witch = gato.instance()
 	add_child(witch)
 
 func createDuck():
@@ -20,5 +20,5 @@ func createDuck():
 	add_child(duck)
 	
 func removeEnemy(enemy):
-	enemy.queue_free()
+	enemy.remove()
 	remove_child(enemy)

@@ -7,6 +7,7 @@ onready var progressBar = $GUI/ProgressBar
 onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
 onready var money_quantity = $GUI/MoneyGUI/MoneyQuantity
+onready var store = $GUI/tienda
 onready var pivot = $Pivot
 onready var particlePivot = $ParticlePivot
 onready var musicPlayer = $AudioStreamPlayer
@@ -115,6 +116,7 @@ func despawnBoss():
 
 func _removeEnemy(enemy):
 	factory.removeEnemy(enemy)
+	self.store.update_store()
 	char_tween.disconnect("tween_all_completed", self, "_removeEnemy")
 
 func refreshMoneyGUI():

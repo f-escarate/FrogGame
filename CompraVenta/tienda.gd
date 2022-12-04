@@ -15,22 +15,19 @@ func load_tienda():
 
 func set_Tienda(value):
 	Items_Tienda = value
-	_update_tienda()
+	update_store()
 
-func _update_tienda():
+func update_store():
 	for child in items.get_children():
 		items.remove_child(child)
 		child.queue_free()
-	for item in Items_Tienda["Inventory"]:
+	for item_name in Items_Tienda["Inventory"]:
+		var item = Items_Tienda["Inventory"][item_name]
 		var ui_item = item_scene.instance()
 		items.add_child(ui_item)
-		ui_item.display_name = item.item
-		ui_item.lvl = item.lvl
-		ui_item.price = item.price
-		ui_item.icon_path = item.icon_path
-		ui_item.description = item.description
-		ui_item.info_fun = item.info_fun
-		ui_item.show_description_ref = funcref(self, "_showDescription")
+		var show_fun_ref = funcref(self, "_showDescription")
+		ui_item.setFields(item_name, item.lvl, item.price, item.icon_path,
+						 item.description, item.info_fun, show_fun_ref)
 
 func _showDescription(text, stats):
 	description.setText(text, stats)

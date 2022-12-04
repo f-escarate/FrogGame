@@ -33,13 +33,12 @@ func _buy():
 		GlobalVars.refreshMoneyGUI.call_func()	# refreshing the GUI of the Main Scene
 		
 		# Searching the element in the inventory
-		for element in Tienda_actual["Inventory"]:
-			if display_name == element.item:
-				element.lvl = lvl
-				element.price = price + floor(price/10+exp(lvl/10))
-				self.set_price(element.price)
-				self.call_upgrade_function(element.fun)
-				break
+		var element = Tienda_actual["Inventory"][display_name]
+		element.lvl = lvl
+		element.price = price + floor(price/10+exp(lvl/10))
+		self.set_price(element.price)
+		self.call_upgrade_function(element.fun)
+			
 		GlobalVars.save_data()
 	else:
 		noMoneyMsg()
@@ -84,6 +83,15 @@ func noMoneyMsg():
 
 func _showInfo(event):
 	if event is InputEventScreenTouch and not event.is_pressed():
-		var fun_ref = funcref(GlobalVars.item_upgrades, str(self.info_fun))
-		var stats_text = fun_ref.call_func(lvl)
+		var get_info_fun_ref = funcref(GlobalVars.item_upgrades, str(self.info_fun))
+		var stats_text = get_info_fun_ref.call_func(lvl)
 		show_description_ref.call_func(self.description, stats_text)
+		
+func setFields(name, lvl, price, icon_path, description, get_info_fun_ref, show_fun_ref):
+	self.display_name = name
+	self.lvl = lvl
+	self.price = price
+	self.icon_path = icon_path
+	self.description = description
+	self.info_fun = get_info_fun_ref
+	self.show_description_ref = show_fun_ref
