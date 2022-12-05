@@ -62,6 +62,7 @@ func load_data():
 	self.currentLvl = Data["Level"]
 	self.progressValue = Data["ProgressValue"]
 	self.progressLimit = Data["ProgressLimit"]
+	self.fansNumber = Data["Fans"]
 
 func set_Data(value):
 	Data = value
@@ -80,7 +81,7 @@ onready var item_upgrades = Item_Upgrades.new()
 var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
 
 func earnMoney():
-	GlobalVars.totalMoney += self.moneyEarned
+	GlobalVars.totalMoney += self.moneyEarned*(1+self.fansNumber)
 	Data["Currency"] = GlobalVars.totalMoney
 
 func lvlUp():
@@ -94,6 +95,7 @@ func updateEarnRate():
 # Enemies Vars
 var enemiesMsgs
 const ENEMIES_MSGS_PATH = "res://effects/enemies_msgs.json"
+const ENEMY_TIME = 30
 
 func load_enemies_msgs():
 	var file = File.new()
@@ -101,3 +103,14 @@ func load_enemies_msgs():
 	var content = file.get_as_text()
 	file.close()
 	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
+
+# Fans vars
+var fansNumber : int
+var fanGUIRefresh_fun_ref : FuncRef
+
+func addFans(n):
+	self.fansNumber = max(0, self.fansNumber+n)
+	self.Data["Fans"] = self.fansNumber
+	fanGUIRefresh_fun_ref.call_func()
+	self.save_data()
+	

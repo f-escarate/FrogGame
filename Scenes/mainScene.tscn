@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://GUI/PauseMenu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/mainCharacter.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/background.tscn" type="PackedScene" id=9]
 [ext_resource path="res://images/GUI/pause_iconHover.png" type="Texture" id=10]
 [ext_resource path="res://images/GUI/money_icon.png" type="Texture" id=11]
+[ext_resource path="res://Characters/Fans.tscn" type="PackedScene" id=12]
 
 [node name="mainScene" type="Control"]
 anchor_right = 1.0
@@ -27,6 +28,9 @@ position = Vector2( 360, 600 )
 
 [node name="Tween" type="Tween" parent="Position"]
 pause_mode = 2
+
+[node name="Fans" parent="." instance=ExtResource( 12 )]
+position = Vector2( 360, 850 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -89,9 +93,9 @@ __meta__ = {
 }
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 1 )]
-margin_left = 60.0
-margin_top = 313.5
-margin_right = 360.0
-margin_bottom = 593.5
+margin_left = 210.0
+margin_top = 307.0
+margin_right = 510.0
+margin_bottom = 587.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 150, 1.5 )

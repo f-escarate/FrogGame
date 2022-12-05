@@ -14,6 +14,7 @@ onready var musicPlayer = $AudioStreamPlayer
 onready var char_position = $Position
 onready var mc = $Position/mainCharacter
 onready var char_tween = $Position/Tween
+onready var fans = $Fans
 onready var currentController = NormalClicker.new(musicPlayer, self)
 onready var factory = EnemyFactory.new()
 onready var floatingText = preload("res://effects/FloatingText.tscn")
@@ -43,6 +44,8 @@ func _ready():
 	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
 	var show_unlocked_instruments = funcref(instrumentSelector, "show_unlocked_instruments")
 	Instruments.refreshInstruments = show_unlocked_instruments
+	var fansUpdateFunRef = funcref(self, "refreshFansGUI")	# For refreshing the fans
+	GlobalVars.fanGUIRefresh_fun_ref = fansUpdateFunRef
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 
@@ -132,4 +135,8 @@ func refreshMoneyGUI():
 
 # Function called when the player is defeated by a boss
 func _defeat():
+	GlobalVars.addFans(-1)
 	print("defeat")
+
+func refreshFansGUI():
+	self.fans.refresh()

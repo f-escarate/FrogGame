@@ -4,16 +4,17 @@
     "ProgressLimit": 7,
     "Phase": 0,
     "Level" : 1,
+    "Fans" : 0,
     "Inventory": {
         "Ads":  {
                     "buff_0": 50,
                     "buff_real": 0,
                     "icon_path": "res://images/Items/item.png",
-                    "price": 1000,
+                    "price": 50,
                     "lvl": 0,
                     "fun" : "increase_fans",
                     "info_fun": "get_fans_info",
-                    "description": "The ads can be useful to attract new fans."
+                    "description": "The ads can be useful to attract new fans. They could sponsor you and help you to success."
                     },
         "Guitar": {
                     "buff_0": 150,
