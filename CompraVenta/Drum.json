@@ -6,5 +6,5 @@
     "lvl": 0,
     "fun" : "upgrade_drum",
     "info_fun": "get_drum_info",
-    "description": "More people could hear the Ranaldinho's rhythm with that instrument."
+    "description": "More people could hear the Ranaldinho's rhythm with that instrument. Each upgrade increases the progress per click"
 }

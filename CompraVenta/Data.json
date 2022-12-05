@@ -16,16 +16,6 @@
                     "info_fun": "get_fans_info",
                     "description": "The ads can be useful to attract new fans. They could sponsor you and help you to success."
                     },
-        "Guitar": {
-                    "buff_0": 150,
-                    "buff_real": 0,
-                    "icon_path": "res://images/Items/guitar.png",
-                    "price": 100,
-                    "lvl": 0,
-                    "fun" : "upgrade_guitar",
-                    "info_fun": "get_guitar_info",
-                    "description": "Ranaldinho looks cool improving this skill"
-                    },
         "Lessons":{
                     "buff_0": 150,
                     "buff_real": 0,

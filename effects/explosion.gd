@@ -7,8 +7,8 @@ onready var words = $Label
 onready var tween = $Tween
 onready var sprite = $Sprite
 onready var sfx_player = $AudioStreamPlayer
-onready var enemiesExplosionColors = [Color("#d28c0dcc"), Color("#d2e59906")]
-onready var enemiesTextColors = [Color("#b789e9"), Color("#e0bc41")]
+onready var enemiesExplosionColors = [Color("#d28c0dcc"), Color("#d2e59906"), Color("#a45900")]
+onready var enemiesTextColors = [Color("#b789e9"), Color("#e0bc41"), Color("#ffca8a")]
 var enemyType : int
 
 # Called when the node enters the scene tree for the first time.

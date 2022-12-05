@@ -3,7 +3,8 @@ class_name EnemyFactory
 
 onready var gato = preload("res://Characters/Gato.tscn")
 onready var pato = preload("res://Characters/Pato.tscn")
-onready var createEnemy = ["createWitch", "createDuck"] # list of all enemies functions
+onready var oso = preload("res://Characters/Oso.tscn")
+onready var createEnemy = ["createWitch", "createDuck", "createBear"] # list of all enemies functions
 
 func createRandomEnemy() -> int:
 	var i : int = randi()%len(self.createEnemy)	# Selects a random index to choose a enemy creating function
@@ -18,6 +19,10 @@ func createWitch():
 func createDuck():
 	var duck = pato.instance()
 	add_child(duck)
+
+func createBear():
+	var bear = oso.instance()
+	add_child(bear)
 	
 func removeEnemy(enemy):
 	enemy.remove()
