@@ -15,4 +15,4 @@ func playGuitar():
 	anim_player.play("playingGuitar")
 
 func playDrum():
-	anim_player.play("singing")
+	anim_player.play("playingDrum")

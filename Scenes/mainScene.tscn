@@ -30,7 +30,6 @@ position = Vector2( 360, 600 )
 pause_mode = 2
 
 [node name="Fans" parent="." instance=ExtResource( 12 )]
-modulate = Color( 1, 0.792157, 0.541176, 1 )
 position = Vector2( 360, 850 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

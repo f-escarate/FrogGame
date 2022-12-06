@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Characters/mainCharacter.gd" type="Script" id=1]
-[ext_resource path="res://images/frogBodyMedRes.png" type="Texture" id=2]
+[ext_resource path="res://images/frogActions.png" type="Texture" id=2]
 [ext_resource path="res://images/blink.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=16]
@@ -17,6 +17,24 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "playingDrum"
+length = 0.9
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 27, 28, 29, 30, 31, 32 ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -139,10 +157,11 @@ position = Vector2( 2.5625, -13.1617 )
 scale = Vector2( 2.20675, 2.20675 )
 texture = ExtResource( 2 )
 hframes = 13
-vframes = 2
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="body"]
 anims/RESET = SubResource( 16 )
+anims/playingDrum = SubResource( 27 )
 anims/playingGuitar = SubResource( 17 )
 anims/singing = SubResource( 18 )
 
