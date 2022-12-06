@@ -9,7 +9,7 @@
         "Ads":  {
                     "buff_0": 50,
                     "buff_real": 0,
-                    "icon_path": "res://images/Items/item.png",
+                    "icon_path": "res://images/Items/ads.png",
                     "price": 50,
                     "lvl": 0,
                     "fun" : "increase_fans",
@@ -19,7 +19,7 @@
         "Lessons":{
                     "buff_0": 150,
                     "buff_real": 0,
-                    "icon_path": "res://images/Items/item.png",
+                    "icon_path": "res://images/Items/lessons.png",
                     "price": 2500,
                     "lvl": 0,
                     "fun" : "music_lessons",
