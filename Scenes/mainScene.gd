@@ -1,6 +1,5 @@
 extends Control
 
-onready var gui = $GUI
 onready var settings = $GUI/Settings
 onready var flow_counter = $GUI/ProgressBar/Label
 onready var progressBar = $GUI/ProgressBar
@@ -40,12 +39,9 @@ func _ready():
 	self.refreshMoneyGUI()
 	
 	# Setting global function references
-	var guiUpdateFunRef = funcref(self, "refreshMoneyGUI")	# For refreshing the money
-	GlobalVars.refreshMoneyGUI = guiUpdateFunRef
-	var show_unlocked_instruments = funcref(instrumentSelector, "show_unlocked_instruments")
-	Instruments.refreshInstruments = show_unlocked_instruments
-	var fansUpdateFunRef = funcref(self, "refreshFansGUI")	# For refreshing the fans
-	GlobalVars.fanGUIRefresh_fun_ref = fansUpdateFunRef
+	GlobalVars.refreshMoneyGUI = funcref(self, "refreshMoneyGUI")	# For refreshing the money
+	Instruments.refreshInstruments = funcref(instrumentSelector, "show_unlocked_instruments")
+	GlobalVars.fanGUIRefresh_fun_ref = funcref(self, "refreshFansGUI")	# For refreshing the fans
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 
@@ -136,7 +132,20 @@ func refreshMoneyGUI():
 # Function called when the player is defeated by a boss
 func _defeat():
 	GlobalVars.addFans(-1)
-	print("defeat")
+	despawnBoss()
+	GlobalVars.refreshProgress()
+	self.progressBar.value = GlobalVars.progressValue
+	self.progressBar.max_value = GlobalVars.progressLimit
+	GlobalVars.isFighting = false
+	# Saving progress
+	GlobalVars.save_data()
+	self.refreshProgressText()
+	# Defeat
+	var ftext = floatingText.instance()
+	ftext.setText("You have been defeated")
+	ftext.setColor(Color(1,0,0))
+	particlePivot.add_child(ftext)
+	
 
 func refreshFansGUI():
 	self.fans.refresh()

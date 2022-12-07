@@ -63,6 +63,8 @@ Instruments="*res://Scripts/Instruments.gd"
 
 window/size/width=720
 window/size/height=1280
+window/size/test_width=500
+window/size/test_height=920
 window/dpi/allow_hidpi=true
 window/handheld/orientation="portrait"
 window/stretch/mode="2d"

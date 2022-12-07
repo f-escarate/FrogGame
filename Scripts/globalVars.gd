@@ -23,16 +23,20 @@ func increaseProgressValue(multiplier):
 	self.progressValue += 1*multiplier
 	Data["ProgressValue"] = self.progressValue
 
-func increaseProgressLimit():
+func refreshProgress():
+	self.progressValue = self.progressValue-self.progressLimit
 	self.progressLimit = self.currentLvl*3 + self.currentPhase
-	self.progressValue = 0.0
+
+func increaseProgressLimit():
+	refreshProgress()
 	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
-	Data["Phase"] = self.currentPhase
-	Data["ProgressLimit"] = self.progressLimit
 	# the player goes to fight when the phase count is restarted
 	self.isFighting = !bool(self.currentPhase) and not self.isFighting
 	if self.isFighting:
 		self.progressLimit *= 3
+	
+	Data["Phase"] = self.currentPhase
+	Data["ProgressLimit"] = self.progressLimit
 
 func getTotalPhases():
 	if self.isFighting:
