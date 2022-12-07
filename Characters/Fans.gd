@@ -6,12 +6,19 @@ onready var r2 = get_node("%Row2")
 onready var r3 = get_node("%Row3")
 onready var rows : Array = [r1, r2 ,r3]
 onready var fanScene = preload("./Fan.tscn")
+onready var tween = $Tween
+
+onready var r1_positions = [Vector2(-293, -3), Vector2(-300, 3), Vector2(-307, -3)]
+onready var r2_positions = [Vector2(-290, 97), Vector2(-285, 103), Vector2(-280, 97)]
+onready var r3_positions = [Vector2(-293, 197), Vector2(-300, 203), Vector2(-307, 197)]
+
 var fans
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.fans = 0
 	self.refresh()
+	self._start_tween()
 
 func refresh():
 	var n = GlobalVars.fansNumber - self.fans 	# new fans to add
@@ -56,3 +63,19 @@ func argmax(L):
 			max_ = a
 			argmax = i
 	return argmax	
+	
+
+func _start_tween():
+	tween.interpolate_property(r1, "rect_position", r1_positions[0], r1_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT)    
+	tween.interpolate_property(r2, "rect_position", r2_positions[0], r2_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
+	tween.interpolate_property(r3, "rect_position", r3_positions[0], r3_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
+	tween.interpolate_property(r1, "rect_position", r1_positions[1], r1_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4)    
+	tween.interpolate_property(r2, "rect_position", r2_positions[1], r2_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
+	tween.interpolate_property(r3, "rect_position", r3_positions[1], r3_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
+	tween.start()
+	
+	yield(get_tree().create_timer(0.8), "timeout")
+	r1_positions.invert()
+	r2_positions.invert()
+	r3_positions.invert()
+	_start_tween()
