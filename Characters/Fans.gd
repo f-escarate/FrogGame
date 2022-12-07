@@ -1,16 +1,19 @@
-extends Node2D
+extends Control
 
-const ROWS = 3
+const MAX_CHILD_COUNT = 5
 onready var r1 = get_node("%Row1")
 onready var r2 = get_node("%Row2")
 onready var r3 = get_node("%Row3")
-onready var rows : Array = [r1, r2 ,r3]
+onready var r4 = get_node("%Row4")
+onready var rows : Array = [r1, r2 ,r3, r4]
 onready var fanScene = preload("./Fan.tscn")
 onready var tween = $Tween
+onready var label = $Label
 
-onready var r1_positions = [Vector2(-293, -3), Vector2(-300, 3), Vector2(-307, -3)]
-onready var r2_positions = [Vector2(-290, 97), Vector2(-285, 103), Vector2(-280, 97)]
-onready var r3_positions = [Vector2(-293, 197), Vector2(-300, 203), Vector2(-307, 197)]
+onready var r1_positions = [Vector2(-7, -3), Vector2(0, 3), Vector2(7, -3)]
+onready var r2_positions = [Vector2(-3, 47), Vector2(-10, 53), Vector2(-17, 47)]
+onready var r3_positions = [Vector2(-7, 107), Vector2(0, 113), Vector2(7, 107)]
+onready var r4_positions = [Vector2(-3, 177), Vector2(-10, 183), Vector2(-17, 177)]
 
 var fans
 
@@ -23,59 +26,50 @@ func _ready():
 func refresh():
 	var n = GlobalVars.fansNumber - self.fans 	# new fans to add
 	self.fans = GlobalVars.fansNumber			# new total number of fans
+	self.label.text = "Fans: %s" % [self.fans]
 	
-	if n < 0:
-		for i in range(-1*n):
-			self.removeFan()
+	if n < 0 and self.fans<len(rows)*MAX_CHILD_COUNT:
+		self.removeFans(-1*n)
 		return
+	addFans(n)
+
+
+func addFans(n):
+	for row in rows:
+		var child_count = row.get_child_count()
+		while child_count < MAX_CHILD_COUNT and n > 0:
+			var new_fan = fanScene.instance()
+			row.add_child(new_fan)
+			child_count = row.get_child_count()
+			n -= 1
 	
-	for i in range(n):
-		addFan()
 
-func addFan():
-	var children_numbers = [r1.get_child_count(), r2.get_child_count(), r3.get_child_count()]
-	var row_selected = rows[argmin(children_numbers)]
-	var new_fan = fanScene.instance()
-	row_selected.add_child(new_fan)
-
-func removeFan():
-	var children_numbers = [r1.get_child_count(), r2.get_child_count(), r3.get_child_count()]
-	var row_selected = rows[argmax(children_numbers)]
-	var child = row_selected.get_child(0)
-	child.queue_free()
-
-func argmin(L):
-	var min_ = INF
-	var argmin = null
-	for i in range(len(L)):
-		var a = L[i]
-		if a < min_:
-			min_ = a
-			argmin = i
-	return argmin	
-
-func argmax(L):
-	var max_ = -1
-	var argmax = null
-	for i in range(len(L)):
-		var a = L[i]
-		if a > max_:
-			max_ = a
-			argmax = i
-	return argmax	
+func removeFans(n):
+	for i in rows.size():
+		var row = rows[-i-1]
+		var child_count = row.get_child_count()
+		while child_count > 0 and n > 0:
+			var child = row.get_child(0)
+			child.queue_free()
+			child_count = row.get_child_count()
+			n -= 1
 	
 
 func _start_tween():
-	tween.interpolate_property(r1, "rect_position", r1_positions[0], r1_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT)    
-	tween.interpolate_property(r2, "rect_position", r2_positions[0], r2_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
-	tween.interpolate_property(r3, "rect_position", r3_positions[0], r3_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
-	tween.interpolate_property(r1, "rect_position", r1_positions[1], r1_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4)    
-	tween.interpolate_property(r2, "rect_position", r2_positions[1], r2_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
-	tween.interpolate_property(r3, "rect_position", r3_positions[1], r3_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
+	tween.interpolate_property($posR1, "position", r1_positions[0], r1_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT)    
+	tween.interpolate_property($posR2, "position", r2_positions[0], r2_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
+	tween.interpolate_property($posR3, "position", r3_positions[0], r3_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
+	tween.interpolate_property($posR4, "position", r4_positions[0], r4_positions[1], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT) 
+	
+	tween.interpolate_property($posR1, "position", r1_positions[1], r1_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4)    
+	tween.interpolate_property($posR2, "position", r2_positions[1], r2_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
+	tween.interpolate_property($posR3, "position", r3_positions[1], r3_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
+	tween.interpolate_property($posR4, "position", r4_positions[1], r4_positions[2], 0.4, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.4) 
 	tween.start()
 	
 	yield(get_tree().create_timer(0.8), "timeout")
 	r1_positions.invert()
 	r2_positions.invert()
 	r3_positions.invert()
+	r4_positions.invert()
 	_start_tween()

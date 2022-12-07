@@ -22,7 +22,8 @@ script = ExtResource( 6 )
 position = Vector2( 360, 600 )
 
 [node name="Position" type="Node2D" parent="."]
-position = Vector2( 360, 600 )
+position = Vector2( 360, 450 )
+scale = Vector2( 0.8, 0.8 )
 
 [node name="mainCharacter" parent="Position" instance=ExtResource( 2 )]
 
@@ -30,7 +31,10 @@ position = Vector2( 360, 600 )
 pause_mode = 2
 
 [node name="Fans" parent="." instance=ExtResource( 12 )]
-position = Vector2( 360, 850 )
+margin_left = 360.0
+margin_top = 770.0
+margin_right = 360.0
+margin_bottom = 810.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -93,6 +97,7 @@ __meta__ = {
 }
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 1 )]
+visible = false
 margin_left = 210.0
 margin_top = 307.0
 margin_right = 510.0
