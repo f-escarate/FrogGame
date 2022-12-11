@@ -1,0 +1,169 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://GUI/credits.gd" type="Script" id=2]
+[ext_resource path="res://images/GUI/gui_background.png" type="Texture" id=3]
+[ext_resource path="res://images/GUI/close_icon.png" type="Texture" id=4]
+[ext_resource path="res://images/patoIcon.png" type="Texture" id=5]
+[ext_resource path="res://images/diseño2.png" type="Texture" id=6]
+[ext_resource path="res://images/bearIcon.png" type="Texture" id=7]
+[ext_resource path="res://images/catIcon.png" type="Texture" id=8]
+
+[node name="Credits" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -250.0
+margin_top = -600.0
+margin_right = 250.0
+rect_pivot_offset = Vector2( 276, 169.333 )
+texture = ExtResource( 3 )
+
+[node name="Title" type="Label" parent="."]
+modulate = Color( 0.949219, 0.529069, 0.222473, 1 )
+margin_left = -176.0
+margin_top = -571.0
+margin_right = 132.0
+margin_bottom = -534.0
+rect_scale = Vector2( 1.15, 1.15 )
+theme = ExtResource( 1 )
+text = "Credits"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 0, -218 )
+points = PoolVector2Array( -93, -311, 91, -311 )
+width = 7.0
+default_color = Color( 0, 0, 0, 1 )
+
+[node name="Devs" type="Label" parent="."]
+margin_left = -150.0
+margin_top = -507.0
+margin_right = 152.0
+margin_bottom = -296.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 149.5, 6.10352e-05 )
+theme = ExtResource( 1 )
+text = "Camila Figueroa
+Israel Rodriguez
+Felipe Escarate"
+align = 1
+valign = 2
+autowrap = true
+clip_text = true
+
+[node name="Title" type="Label" parent="Devs"]
+modulate = Color( 0.94902, 0.807843, 0.0745098, 1 )
+margin_left = 42.625
+margin_top = 8.75
+margin_right = 256.625
+margin_bottom = 57.75
+rect_scale = Vector2( 1.25, 1.25 )
+rect_pivot_offset = Vector2( 107, 25 )
+theme = ExtResource( 1 )
+text = "Developers"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Label" type="Label" parent="Devs"]
+margin_left = 199.0
+margin_top = 184.0
+margin_right = 207.0
+margin_bottom = 220.0
+rect_rotation = -118.9
+rect_scale = Vector2( 0.803, 1.025 )
+text = "'"
+
+[node name="Music" type="Label" parent="."]
+margin_left = -150.0
+margin_top = -319.0
+margin_right = 152.0
+margin_bottom = -205.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 149.5, 6.10352e-05 )
+theme = ExtResource( 1 )
+text = "Komiku"
+align = 1
+valign = 2
+autowrap = true
+clip_text = true
+
+[node name="Title" type="Label" parent="Music"]
+modulate = Color( 0.94902, 0.807843, 0.0745098, 1 )
+margin_left = 42.625
+margin_top = 8.75
+margin_right = 256.625
+margin_bottom = 57.75
+rect_scale = Vector2( 1.25, 1.25 )
+rect_pivot_offset = Vector2( 107, 25 )
+theme = ExtResource( 1 )
+text = "Music"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Font" type="Label" parent="."]
+margin_left = -150.0
+margin_top = -208.0
+margin_right = 152.0
+margin_bottom = -93.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 149.5, 6.10352e-05 )
+theme = ExtResource( 1 )
+text = "
+Nguyen Hai Dang"
+align = 1
+valign = 2
+autowrap = true
+clip_text = true
+
+[node name="Title" type="Label" parent="Font"]
+modulate = Color( 0.94902, 0.807843, 0.0745098, 1 )
+margin_left = 42.625
+margin_top = 8.75
+margin_right = 256.625
+margin_bottom = 57.75
+rect_scale = Vector2( 1.25, 1.25 )
+rect_pivot_offset = Vector2( 107, 25 )
+theme = ExtResource( 1 )
+text = "Font"
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Button" type="Button" parent="."]
+margin_left = -20.0
+margin_top = -55.0
+margin_right = 20.0
+margin_bottom = -15.0
+icon = ExtResource( 4 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Diseño2" type="Sprite" parent="."]
+position = Vector2( 179, -178 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 6 )
+
+[node name="PatoIcon" type="Sprite" parent="."]
+position = Vector2( -177, -183 )
+scale = Vector2( 0.238998, 0.238998 )
+texture = ExtResource( 5 )
+
+[node name="BearIcon" type="Sprite" parent="."]
+position = Vector2( 184.125, -407 )
+scale = Vector2( 0.226445, 0.226445 )
+texture = ExtResource( 7 )
+
+[node name="CatIcon" type="Sprite" parent="."]
+position = Vector2( -181, -420 )
+scale = Vector2( 0.22539, 0.22539 )
+texture = ExtResource( 8 )
