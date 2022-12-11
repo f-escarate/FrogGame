@@ -93,7 +93,8 @@ func okMsg(msg = "OK!!!"):
 func winMsg():
 	var ftext = floatingText.instance()
 	ftext.setText("You have won the\n music battle !!!")
-	ftext.setTime(4)
+	
+	ftext.setTimes(0.3, 1, 0.3)
 	particlePivot.add_child(ftext)
 	
 func setController(controller):
@@ -139,21 +140,26 @@ func refreshMoneyGUI():
 
 # Function called when the player is defeated by a boss
 func _defeat():
-	GlobalVars.addFans(-1)
 	despawnBoss()
-	GlobalVars.refreshProgress()
+	# Updating progress
+	GlobalVars.isFighting = false		# Ending fight
+	GlobalVars.refreshProgress()		# Going to 0 phase
+	GlobalVars.progressValue = 0		# Setting progress to 0
+	# Refreshing GUI
 	self.progressBar.value = GlobalVars.progressValue
 	self.progressBar.max_value = GlobalVars.progressLimit
-	GlobalVars.isFighting = false
-	# Saving progress
-	GlobalVars.save_data()
 	self.refreshProgressText()
-	# Defeat
+	# Defeat text
 	var ftext = floatingText.instance()
-	ftext.setText("You have been defeated")
+	if GlobalVars.fansNumber:
+		ftext.setText("You have been defeated\n One fan has gone")
+	else:
+		ftext.setText("You have been defeated\n You don't have fans that\n could be dissapointed")
 	ftext.setColor(Color(1,0,0))
-	ftext.setTime(4)
+	ftext.setTimes(0.3, 2, 0.3)
 	particlePivot.add_child(ftext)
+	# Fan remove
+	GlobalVars.addFans(-1)
 	
 
 func refreshFansGUI():

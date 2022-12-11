@@ -24,18 +24,30 @@ func increaseProgressValue(multiplier):
 	Data["ProgressValue"] = self.progressValue
 
 func refreshProgress():
-	self.progressValue = self.progressValue-self.progressLimit
+	self.currentPhase = (self.currentPhase+1)%(self.getTotalPhases()+1)
 	self.progressLimit = self.currentLvl*3 + self.currentPhase
+	
+	
+func _increaseProgressLimit():
+	# the player goes to fight when the phase count is restarted
+	self.isFighting = self.currentPhase == self.NUMPHASES and !self.isFighting
+	
+	if isFighting:
+		self.progressValue = 0
+		self.progressLimit = (self.currentLvl*3 + self.NUMPHASES)*3
+		return
+		
+	if self.progressValue >= self.progressLimit:
+		self.progressValue = self.progressValue-self.progressLimit
+		refreshProgress()
+		increaseProgressLimit()
+
 
 func increaseProgressLimit():
-	refreshProgress()
-	self.currentPhase = (self.currentPhase+1)%self.getTotalPhases()
-	# the player goes to fight when the phase count is restarted
-	self.isFighting = !bool(self.currentPhase) and not self.isFighting
-	if self.isFighting:
-		self.progressLimit *= 3
+	_increaseProgressLimit()
 	
 	Data["Phase"] = self.currentPhase
+	Data["ProgressValue"] = self.progressValue
 	Data["ProgressLimit"] = self.progressLimit
 
 func getTotalPhases():
@@ -78,14 +90,14 @@ func save_data():
 	file.close()
 
 # Money vars
-onready var moneyEarned = 10
-onready var totalMoney = 0 
+onready var moneyEarned :int = 10
+onready var totalMoney : int = 0 
 onready var mejoraMamalona = 0
 onready var item_upgrades = Item_Upgrades.new()
 var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
 
 func earnMoney():
-	GlobalVars.totalMoney += self.moneyEarned*(1+self.fansNumber)
+	GlobalVars.totalMoney += self.moneyEarned*(1+self.fansNumber*0.2)
 	Data["Currency"] = GlobalVars.totalMoney
 
 func lvlUp():
