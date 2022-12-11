@@ -65,6 +65,8 @@ func makeProgress(multiplier = 1):
 			# If the battle has ended, we remove the boss
 			self.despawnBoss()
 			GlobalVars.lvlUp() # Increasing the level
+			self.winMsg()
+			
 		self.progressBar.max_value = GlobalVars.progressLimit
 		
 		GlobalVars.earnMoney()
@@ -87,6 +89,12 @@ func okMsg(msg = "OK!!!"):
 	ftext.setText(msg)
 	ftext.setPosition(Vector2(0, -GlobalVars.height/4))
 	char_position.add_child(ftext)
+
+func winMsg():
+	var ftext = floatingText.instance()
+	ftext.setText("You have won the\n music battle !!!")
+	ftext.setTime(4)
+	particlePivot.add_child(ftext)
 	
 func setController(controller):
 	currentController.queue_free()
@@ -144,6 +152,7 @@ func _defeat():
 	var ftext = floatingText.instance()
 	ftext.setText("You have been defeated")
 	ftext.setColor(Color(1,0,0))
+	ftext.setTime(4)
 	particlePivot.add_child(ftext)
 	
 

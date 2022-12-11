@@ -99,7 +99,7 @@ func updateEarnRate():
 # Enemies Vars
 var enemiesMsgs
 const ENEMIES_MSGS_PATH = "res://effects/enemies_msgs.json"
-const ENEMY_TIME = 30
+const ENEMY_TIME = 20
 
 func load_enemies_msgs():
 	var file = File.new()
