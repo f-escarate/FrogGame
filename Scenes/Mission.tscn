@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Mission.gd" type="Script" id=2]
+[ext_resource path="res://images/GUI/noTickIcon.jpg" type="Texture" id=3]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchor_right = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+alignment = 1
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 666.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+text = "- You have to do something"
+valign = 1
+autowrap = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 670.0
+margin_right = 720.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+stretch_mode = 5

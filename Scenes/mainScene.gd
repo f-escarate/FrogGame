@@ -7,6 +7,7 @@ onready var pauseMenu = $GUI/PauseMenu
 onready var instrumentSelector = $GUI/Instruments
 onready var money_quantity = $GUI/MoneyGUI/MoneyQuantity
 onready var store = $GUI/tienda
+onready var missions = $GUI/Missions
 onready var pivot = $Pivot
 onready var particlePivot = $ParticlePivot
 onready var musicPlayer = $AudioStreamPlayer
@@ -76,6 +77,7 @@ func makeProgress(multiplier = 1):
 	GlobalVars.save_data()
 	self.progressBar.value = GlobalVars.progressValue
 	self.refreshProgressText()
+	self.missions.checkMissions()
 
 func refreshProgressText():
 	self.flow_counter.text = "{count}/{total}\n".format({"count": GlobalVars.progressValue, "total": GlobalVars.progressLimit})
@@ -160,7 +162,7 @@ func _defeat():
 	particlePivot.add_child(ftext)
 	# Fan remove
 	GlobalVars.addFans(-1)
-	
 
 func refreshFansGUI():
 	self.fans.refresh()
+	self.missions.checkMissions()

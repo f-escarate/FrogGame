@@ -1,0 +1,19 @@
+[
+    {
+        "Text": "Beat all the bosses",
+        "fun" : "allBossesBeaten"
+    },
+    {
+        "Text": "Get all the instruments",
+        "fun": "hasAllInstruments"
+    },
+    {
+        "Text": "Get 20 fans",
+        "fun": "has20Fans"
+    },
+    {
+        "Text": "Upgrade guitar to level 5",
+        "fun": "guitarLvl5"
+    }
+    
+]
