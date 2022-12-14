@@ -25,7 +25,7 @@ func increaseProgressValue(multiplier):
 
 func refreshProgress():
 	self.currentPhase = (self.currentPhase+1)%(self.getTotalPhases()+1)
-	self.progressLimit = self.currentLvl*3 + self.currentPhase
+	self.progressLimit = self.currentLvl*5 + self.currentPhase*2
 	
 	
 func _increaseProgressLimit():
@@ -90,7 +90,7 @@ func save_data():
 	file.close()
 
 # Money vars
-onready var moneyEarned :int = 10
+onready var moneyEarned :int = 5
 onready var totalMoney : int = 0 
 onready var mejoraMamalona = 0
 onready var item_upgrades = Item_Upgrades.new()
@@ -106,7 +106,7 @@ func lvlUp():
 	updateEarnRate()
 
 func updateEarnRate():
-	self.moneyEarned += floor(0.5*pow(self.currentLvl, 2))
+	self.moneyEarned += floor(0.25*pow(self.currentLvl, 2))
 
 # Enemies Vars
 var enemiesMsgs
