@@ -20,7 +20,7 @@ var currentLvl : int = 1
 onready var isFighting : bool = false
 
 func increaseProgressValue(multiplier):
-	self.progressValue += 1*multiplier
+	self.progressValue += floor((1+ self.mejoraMamalona/4)*multiplier)
 	Data["ProgressValue"] = self.progressValue
 
 func refreshProgress():
@@ -80,6 +80,7 @@ func load_data():
 	self.progressLimit = Data["ProgressLimit"]
 	self.fansNumber = Data["Fans"]
 	self.defeatedBosses = Data["DefeatedBosses"]
+	self.mejoraMamalona = Data["Inventory"]["Lessons"]["buff_real"]
 
 func set_Data(value):
 	Data = value
@@ -87,6 +88,7 @@ func set_Data(value):
 func save_data():
 	self.Data["Currency"] = self.totalMoney
 	self.Data["DefeatedBosses"] = self.defeatedBosses
+	GlobalVars.Data["Inventory"]["Lessons"]["buff_real"] = self.mejoraMamalona
 
 	var file = File.new()
 	file.open(GlobalVars.DATA_PATH, File.WRITE)
@@ -94,14 +96,13 @@ func save_data():
 	file.close()
 
 # Money vars
-onready var moneyEarned :int = 5
+onready var moneyEarned :int = 10
 onready var totalMoney : int = 0 
-onready var mejoraMamalona = 0
 onready var item_upgrades = Item_Upgrades.new()
 var refreshMoneyGUI : FuncRef # Function reference used to refresh money on the GUI of the Main Scene
 
 func earnMoney():
-	GlobalVars.totalMoney += self.moneyEarned*(1+self.fansNumber*0.2)
+	GlobalVars.totalMoney += self.moneyEarned*(1+self.fansNumber*0.1 + GlobalVars.mejoraMamalona/2)
 	Data["Currency"] = GlobalVars.totalMoney
 
 func lvlUp():
@@ -140,3 +141,10 @@ func addFans(n):
 # Missions vars
 var defeatedBosses : Array
 var refreshMissionsRef : FuncRef
+
+# Lessons vars
+onready var mejoraMamalona = 0 setget set_mamalon
+
+func set_mamalon(value):
+	mejoraMamalona = value
+

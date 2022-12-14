@@ -35,7 +35,7 @@ func _buy():
 		# Searching the element in the inventory
 		var element = Tienda_actual["Inventory"][display_name]
 		element.lvl = lvl
-		element.price = price + floor(price/5+exp(lvl/5))
+		element.price = price + floor(price/6+exp(lvl/6))
 		self.set_price(element.price)
 		self.call_upgrade_function(element.fun)
 			
