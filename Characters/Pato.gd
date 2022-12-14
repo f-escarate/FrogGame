@@ -10,7 +10,7 @@ func remove():
 	#  by adding it to the Inventory/Store
 	if not ("Drum" in GlobalVars.Data["Inventory"]):
 		var file = File.new()
-		file.open("res://CompraVenta/Drum.json", File.READ)
+		file.open("res://JSONs/Drum.json", File.READ)
 		var content = file.get_as_text()
 		file.close()
 		var drum_data = JSON.parse(content).result

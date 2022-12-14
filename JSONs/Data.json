@@ -1,0 +1,40 @@
+{
+    "Currency": 0,
+    "ProgressValue" : 0,
+    "ProgressLimit": 7,
+    "Phase": 0,
+    "Level" : 1,
+    "Fans" : 0,
+    "Inventory": {
+        "Ads":  {
+                    "buff_0": 50,
+                    "buff_real": 0,
+                    "icon_path": "res://images/Items/ads.png",
+                    "price": 50,
+                    "lvl": 0,
+                    "fun" : "increase_fans",
+                    "info_fun": "get_fans_info",
+                    "description": "The ads can be useful to attract new fans. They could sponsor you and help you to success."
+                    },
+        "Lessons":{
+                    "buff_0": 150,
+                    "buff_real": 0,
+                    "icon_path": "res://images/Items/lessons.png",
+                    "price": 2500,
+                    "lvl": 0,
+                    "fun" : "music_lessons",
+                    "info_fun": "get_lessons_info",
+                    "description": "Get music lessons could help Ranaldinho to improve his music abilities"
+                    },
+        "Mic" : {
+                    "buff_0": 1,
+                    "buff_real": 0,
+                    "icon_path": "res://images/Items/mic.png",
+                    "price": 60,
+                    "lvl": 0,
+                    "fun" : "upgrade_mic",
+                    "info_fun": "get_mic_info",
+                    "description": "The microphone allows Ranaldinho to show his wonderful voice"
+                    }
+    }
+   }

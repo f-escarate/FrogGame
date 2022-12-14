@@ -57,7 +57,7 @@ func getTotalPhases():
 
 # Data
 var Data = {} setget set_Data
-const DEFAULT_DATA_PATH = "res://CompraVenta/Data.json"
+const DEFAULT_DATA_PATH = "res://JSONs/Data.json"
 const DATA_PATH = "user://Data.json" 			# Path for Android saves
 
 func _ready():
@@ -110,7 +110,7 @@ func updateEarnRate():
 
 # Enemies Vars
 var enemiesMsgs
-const ENEMIES_MSGS_PATH = "res://effects/enemies_msgs.json"
+const ENEMIES_MSGS_PATH = "res://JSONs/enemies_msgs.json"
 const ENEMY_TIME = 20
 
 func load_enemies_msgs():

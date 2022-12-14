@@ -5,7 +5,7 @@ const GUITAR = 1
 const DRUM = 2
 
 # Instruments vars/consts
-const DEFAULT_INSTRUMENT_INFO_PATH = "res://Scenes/instruments.json"
+const DEFAULT_INSTRUMENT_INFO_PATH = "res://JSONs/instruments.json"
 const INSTRUMENT_INFO_PATH = "user://instruments.json" 			# Path for Android saves
 
 var instruments_unlocked : Array

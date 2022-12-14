@@ -1,0 +1,17 @@
+{
+ "Instruments": [
+  "MIC",
+  "GUITAR",
+  "DRUM"
+ ],
+ "unlocked": [
+  true,
+  false,
+  false
+ ],
+ "click_progress": [
+    2,
+    3,
+    4
+ ]
+}
