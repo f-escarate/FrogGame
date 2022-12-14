@@ -1,19 +1,23 @@
 [
     {
         "Text": "Beat all the bosses",
-        "fun" : "allBossesBeaten"
+        "fun": "allBossesBeaten",
+        "reward": 1000 
     },
     {
         "Text": "Get all the instruments",
-        "fun": "hasAllInstruments"
+        "fun": "hasAllInstruments",
+        "reward": 900
     },
     {
         "Text": "Get 20 fans",
-        "fun": "has20Fans"
+        "fun": "has20Fans",
+        "reward": 750 
     },
     {
         "Text": "Upgrade guitar to level 5",
-        "fun": "guitarLvl5"
+        "fun": "guitarLvl5",
+        "reward": 500
     }
     
 ]

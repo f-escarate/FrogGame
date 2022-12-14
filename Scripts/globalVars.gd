@@ -79,11 +79,15 @@ func load_data():
 	self.progressValue = Data["ProgressValue"]
 	self.progressLimit = Data["ProgressLimit"]
 	self.fansNumber = Data["Fans"]
+	self.defeatedBosses = Data["DefeatedBosses"]
 
 func set_Data(value):
 	Data = value
 	
 func save_data():
+	self.Data["Currency"] = self.totalMoney
+	self.Data["DefeatedBosses"] = self.defeatedBosses
+
 	var file = File.new()
 	file.open(GlobalVars.DATA_PATH, File.WRITE)
 	file.store_string(JSON.print(Data, " ", true))
@@ -109,7 +113,8 @@ func updateEarnRate():
 	self.moneyEarned += floor(0.25*pow(self.currentLvl, 2))
 
 # Enemies Vars
-var enemiesMsgs
+var enemiesMsgs : Array
+var enemiesNames : Array
 const ENEMIES_MSGS_PATH = "res://JSONs/enemies_msgs.json"
 const ENEMY_TIME = 20
 
@@ -118,7 +123,9 @@ func load_enemies_msgs():
 	file.open(ENEMIES_MSGS_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
-	self.enemiesMsgs = JSON.parse(content).result["Msgs"]
+	var json_res = JSON.parse(content).result
+	self.enemiesMsgs = json_res["Msgs"]
+	self.enemiesNames = json_res["Enemies"]
 
 # Fans vars
 var fansNumber : int
@@ -130,3 +137,6 @@ func addFans(n):
 	fanGUIRefresh_fun_ref.call_func()
 	self.save_data()
 	
+# Missions vars
+var defeatedBosses : Array
+var refreshMissionsRef : FuncRef

@@ -30,7 +30,6 @@ func _buy():
 	if GlobalVars.totalMoney >= price:
 		set_lvl(lvl + 1)
 		GlobalVars.totalMoney = GlobalVars.totalMoney - price
-		Tienda_actual["Currency"] = GlobalVars.totalMoney
 		GlobalVars.refreshMoneyGUI.call_func()	# refreshing the GUI of the Main Scene
 		
 		# Searching the element in the inventory
@@ -40,6 +39,7 @@ func _buy():
 		self.set_price(element.price)
 		self.call_upgrade_function(element.fun)
 			
+		GlobalVars.refreshMissionsRef.call_func()
 		GlobalVars.save_data()
 	else:
 		noMoneyMsg()

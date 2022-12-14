@@ -36,5 +36,6 @@
                     "info_fun": "get_mic_info",
                     "description": "The microphone allows Ranaldinho to show his wonderful voice"
                     }
-    }
+    },
+    "DefeatedBosses" : []
    }

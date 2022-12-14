@@ -43,6 +43,7 @@ func _ready():
 	GlobalVars.refreshMoneyGUI = funcref(self, "refreshMoneyGUI")	# For refreshing the money
 	Instruments.refreshInstruments = funcref(instrumentSelector, "show_unlocked_instruments")
 	GlobalVars.fanGUIRefresh_fun_ref = funcref(self, "refreshFansGUI")	# For refreshing the fans
+	GlobalVars.refreshMissionsRef = funcref(missions, "checkMissions")	# For refreshing the fans
 	
 	self.instrumentSelector.setParams(musicPlayer, self)
 
@@ -64,12 +65,9 @@ func makeProgress(multiplier = 1):
 			self.spawnBoss() # Go to boss
 		elif wasFighting and not GlobalVars.isFighting:
 			# If the battle has ended, we remove the boss
-			self.despawnBoss()
-			GlobalVars.lvlUp() # Increasing the level
-			self.winMsg()
+			self.beatBoss()
 			
 		self.progressBar.max_value = GlobalVars.progressLimit
-		
 		GlobalVars.earnMoney()
 		self.refreshMoneyGUI()
 	
@@ -78,6 +76,19 @@ func makeProgress(multiplier = 1):
 	self.progressBar.value = GlobalVars.progressValue
 	self.refreshProgressText()
 	self.missions.checkMissions()
+
+func beatBoss():
+	var boss = factory.get_child(0)
+	# adding its type to the list of defeated bosses
+	if !GlobalVars.defeatedBosses.has(boss.type): 
+		GlobalVars.defeatedBosses.append(boss.type)
+	self.despawnBoss(boss)
+	GlobalVars.lvlUp() # Increasing the level
+	# Win message
+	var ftext = floatingText.instance()
+	ftext.setText("You have won the\n battle !!!")
+	ftext.setTimes(0.3, 1, 0.3)
+	particlePivot.add_child(ftext)
 
 func refreshProgressText():
 	self.flow_counter.text = "{count}/{total}\n".format({"count": GlobalVars.progressValue, "total": GlobalVars.progressLimit})
@@ -91,13 +102,6 @@ func okMsg(msg = "OK!!!"):
 	ftext.setText(msg)
 	ftext.setPosition(Vector2(0, -GlobalVars.height/4))
 	char_position.add_child(ftext)
-
-func winMsg():
-	var ftext = floatingText.instance()
-	ftext.setText("You have won the\n music battle !!!")
-	
-	ftext.setTimes(0.3, 1, 0.3)
-	particlePivot.add_child(ftext)
 	
 func setController(controller):
 	currentController.queue_free()
@@ -125,8 +129,7 @@ func spawnBoss():
 	char_tween.interpolate_property(factory, "position", Vector2(0, 0), Vector2(200, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.start()
 
-func despawnBoss():
-	var boss = factory.get_child(0)
+func despawnBoss(boss):
 	char_tween.interpolate_property(mc, "position", Vector2(-200, 0), Vector2(0, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	char_tween.interpolate_property(boss, "position", Vector2(0, 0), Vector2(400, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)	
 	char_tween.connect("tween_all_completed", self, "_removeEnemy", [boss])
@@ -142,7 +145,8 @@ func refreshMoneyGUI():
 
 # Function called when the player is defeated by a boss
 func _defeat():
-	despawnBoss()
+	var boss = factory.get_child(0)
+	despawnBoss(boss)
 	# Updating progress
 	GlobalVars.isFighting = false		# Ending fight
 	GlobalVars.refreshProgress()		# Going to 0 phase
@@ -165,4 +169,3 @@ func _defeat():
 
 func refreshFansGUI():
 	self.fans.refresh()
-	self.missions.checkMissions()
