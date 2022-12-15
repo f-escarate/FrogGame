@@ -72,16 +72,15 @@ func makeProgress(multiplier = 1):
 		self.refreshMoneyGUI()
 	
 	# Saving progress
-	GlobalVars.save_data()
 	self.progressBar.value = GlobalVars.progressValue
 	self.refreshProgressText()
 	self.missions.checkMissions()
+	GlobalVars.save_data()
 
 func beatBoss():
 	var boss = factory.get_child(0)
-	# adding its type to the list of defeated bosses
-	if !GlobalVars.defeatedBosses.has(boss.type): 
-		GlobalVars.defeatedBosses.append(boss.type)
+	# setting the current defeated boss
+	GlobalVars.defeatedBoss = boss.type
 	self.despawnBoss(boss)
 	GlobalVars.lvlUp() # Increasing the level
 	# Win message

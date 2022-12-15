@@ -7,11 +7,22 @@ onready var showMissionButton = $ShowMissionButton
 onready var exit = $Background/Button
 onready var funNames : Array = []
 onready var args : Array = []
-onready var missionsIndexes : Array = []
-onready var MISSION_QUANTITY = 3
+onready var missionsIndexes : Array
+const MISSIONS_PATH = "user://missions.json"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var file = File.new()
+	if !file.file_exists(MISSIONS_PATH):
+		file.open("res://JSONs/missions.json", File.READ)
+		var content = file.get_as_text()
+		file.close()
+		var json_missions = JSON.parse(content).result
+		file = File.new()
+		file.open(MISSIONS_PATH, File.WRITE)
+		file.store_string(JSON.print(json_missions, " ", true))
+		file.close()
+	
 	refreshMissions()
 	exit.connect("button_down", self, "changeVisibility")
 	showMissionButton.connect("released", self, "changeVisibility")
@@ -22,30 +33,32 @@ func changeVisibility():
 
 func refreshMissions():
 	var file = File.new()
-	file.open("res://JSONs/missions.json", File.READ)
+	file.open(MISSIONS_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var json_missions = JSON.parse(content).result
-
-	for i in range(MISSION_QUANTITY):
-		addRandomMission()
+	self.missionsIndexes = json_missions["currentMissionsIndexes"]
+	
+	for index in missionsIndexes:
+		var mission = json_missions["allMissions"][index]
+		addMission(mission, index)
 
 func addMission(json_mission, index):
 	var removeMissionRef = funcref(self, "removeMission")
 	var ui_mission = mission.instance()
 	self.missions.add_child(ui_mission)
 	
-	if json_mission["args"] != null:
+	if json_mission["format"]:
 		json_mission["Text"] = json_mission["Text"] % json_mission["args"]
 	
 	ui_mission.setFields(json_mission["Text"], json_mission["reward"], removeMissionRef, index)
 	self.funNames.append(json_mission["fun"])
 	self.args.append(json_mission["args"])
-	self.missionsIndexes.append(index)
 	
 func checkMissions():
 	for i in range(len(funNames)):
 		checkMission(i)
+	GlobalVars.defeatedBoss = ""
 
 func checkMission(i):
 	var fun_ref = funcref(self, funNames[i])
@@ -55,9 +68,9 @@ func checkMission(i):
 		ui_mission.setCompleted()
 
 func removeMission(index):
-	var i = self.missionsIndexes.find(index, 0)
 	# Updating mission values
-	updateMissionValues(i)
+	updateMissionValues(index)
+	var i = self.missionsIndexes.find(index, 0)
 	# Removing info
 	self.funNames.remove(i)
 	self.missionsIndexes.remove(i)
@@ -66,72 +79,100 @@ func removeMission(index):
 	var ui_mission = self.missions.get_child(i)
 	self.missions.remove_child(ui_mission)
 	ui_mission.queue_free()
-	
 	# Adding another random mission
 	self.addRandomMission()
+	self.writeMissionCurrentIndexes()
 
 func addRandomMission():
 	var file = File.new()
-	file.open("res://JSONs/missions.json", File.READ)
+	file.open(MISSIONS_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
-	var json_missions = JSON.parse(content).result
+	var json_missions = JSON.parse(content).result["allMissions"]
 	
 	var index : int = randi()%len(json_missions)	# Selecting a random mission
 	while true:			
-		# Checking that isn't repeated and is a renewable mission
-		if !(index in self.missionsIndexes) and json_missions[index]["renewable"]:
+		# Checking that isn't repeated and is a available mission
+		if !(index in self.missionsIndexes) and json_missions[index]["available"]:
 			addMission(json_missions[index], index)
+			self.missionsIndexes.append(index)
 			break
 		index = randi()%len(json_missions)
 	
 	# checking new mission
 	checkMission(len(missionsIndexes)-1)
 
-func increaseIntArg(missionIndex, multiplier = 2):
+func writeMissionCurrentIndexes():
 	var file = File.new()
-	file.open("res://JSONs/missions.json", File.READ)
+	file.open(MISSIONS_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var json_missions = JSON.parse(content).result
-	json_missions[missionIndex]["args"] *= multiplier
+	json_missions["currentMissionsIndexes"] = self.missionsIndexes
 	file = File.new()
-	file.open("res://JSONs/missions.json", File.WRITE)
+	file.open(MISSIONS_PATH, File.WRITE)
 	file.store_string(JSON.print(json_missions, " ", true))
 	file.close()
 
-func noRenewable(missionIndex):
+
+func _changeMissionArgs(missionIndex, args):
 	var file = File.new()
-	file.open("res://JSONs/missions.json", File.READ)
+	file.open(MISSIONS_PATH, File.READ)
 	var content = file.get_as_text()
 	file.close()
 	var json_missions = JSON.parse(content).result
-	json_missions[missionIndex]["renewable"] = false
+	json_missions["allMissions"][missionIndex]["args"] = args
 	file = File.new()
-	file.open("res://JSONs/missions.json", File.WRITE)
+	file.open(MISSIONS_PATH, File.WRITE)
 	file.store_string(JSON.print(json_missions, " ", true))
 	file.close()
 
 # Updates the mission values if is a mission that depends on a number
-#  and if is a mission that has to be called once, then make it no renewable
-func updateMissionValues(i):
-	var arg = self.args[i]
-	if arg == null:
-		noRenewable(self.missionsIndexes[i])
-	elif typeof(arg) == TYPE_REAL:
-		increaseIntArg(self.missionsIndexes[i])
+#  and if is a mission that has to be called once, then make it unavailable
+func updateMissionValues(index):
+	var file = File.new()
+	file.open(MISSIONS_PATH, File.READ)
+	var content = file.get_as_text()
+	file.close()
+	var json_missions = JSON.parse(content).result
+
+	var arg = json_missions["allMissions"][index]["args"]
+	if json_missions["allMissions"][index].has("once"):
+		# Making unavailable
+		json_missions["allMissions"][index]["available"] = false
+	
+	if json_missions["allMissions"][index].has("unlocks"):
+		# Unlocking another mission
+		var missionIndex = json_missions["allMissions"][index]["unlocks"]
+		json_missions["allMissions"][missionIndex]["available"] = true
+
+	if typeof(arg) == TYPE_REAL:
+		json_missions["allMissions"][index]["args"] *= 2
+	
+	file = File.new()
+	file.open(MISSIONS_PATH, File.WRITE)
+	file.store_string(JSON.print(json_missions, " ", true))
+	file.close()
 	
 # ----------------- Missions functions -----------------------------
 
-func allBossesBeaten(_noArgs):
-	return len(GlobalVars.defeatedBosses) == len(GlobalVars.enemiesNames)
+func bossesBeaten(args):
+	var missingBosses = args[0]
+	var defeatedBosses = args[1]
+	var missionIndex = args[2]
+	if !(GlobalVars.defeatedBoss in missingBosses):
+			return false
+		
+	missingBosses.erase(GlobalVars.defeatedBoss)
+	defeatedBosses.append(GlobalVars.defeatedBoss)
+	if len(missingBosses) == 0:
+		_changeMissionArgs(missionIndex, [defeatedBosses, missingBosses, missionIndex])
+		return true
+	_changeMissionArgs(missionIndex, [missingBosses, defeatedBosses, missionIndex])
+	return false
 
-func hasAllInstruments(_noArgs):
-	var i = 0
-	var numInstruments = len(Instruments.instruments_unlocked)
-	while i < numInstruments and Instruments.instruments_unlocked[i]:
-		i += 1
-	return i == numInstruments
+func hasAnInstrument(instrumentIndex):
+	return Instruments.instruments_unlocked[instrumentIndex]
 	
 func hasNFans(N):
 	return GlobalVars.fansNumber >= N

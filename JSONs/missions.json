@@ -1,44 +1,91 @@
-[
- {
-  "Text": "Beat all the bosses",
-  "args": null,
-  "fun": "allBossesBeaten",
-  "renewable": true,
-  "reward": 1000
- },
- {
-  "Text": "Get all the instruments",
-  "args": null,
-  "fun": "hasAllInstruments",
-  "renewable": true,
-  "reward": 900
- },
- {
-  "Text": "Get %d fans",
-  "args": 5,
-  "fun": "hasNFans",
-  "renewable": true,
-  "reward": 750
- },
- {
-  "Text": "Upgrade mic to level %d",
-  "args": 5,
-  "fun": "micLvl",
-  "renewable": true,
-  "reward": 500
- },
- {
-  "Text": "Upgrade guitar to level %d",
-  "args": 5,
-  "fun": "guitarLvl",
-  "renewable": true,
-  "reward": 500
- },
- {
-  "Text": "Upgrade drum to level %d",
-  "args": 5,
-  "fun": "drumLvl",
-  "renewable": true,
-  "reward": 500
- }
-]
+{
+ "allMissions": [
+  {
+   "Text": "Beat The Wisdom Cat",
+   "args": [["Witch"], [], 0],
+   "available": true,
+   "format": false,
+   "fun": "bossesBeaten",
+   "reward": 100
+  },
+  {
+   "Text": "Beat Lady Bearnardita",
+   "args": [["Bear"], [], 1],
+   "available": true,
+   "format": false,
+   "fun": "bossesBeaten",
+   "reward": 100,
+   "unlocks": 4
+  },
+  {
+   "Text": "Beat Duck Carlos",
+   "args": [["Duck"], [], 2],
+   "available": true,
+   "format": false,
+   "fun": "bossesBeaten",
+   "reward": 100,
+   "unlocks": 5
+  },
+  {
+   "Text": "Beat all the bosses",
+   "args": [["Witch", "Duck", "Bear"], [], 3],
+   "available": true,
+   "format": false,
+   "fun": "bossesBeaten",
+   "reward": 600
+  },
+  {
+   "Text": "Buy the Guitar",
+   "args": 1,
+   "available": false,
+   "format": false,
+   "fun": "hasAnInstrument",
+   "reward": 50,
+   "unlocks": 8,
+   "once": "Flag: that mission appears once"
+  },
+  {
+    "Text": "Buy the Drum",
+    "args": 2,
+    "available": false,
+    "format": false,
+    "fun": "hasAnInstrument",
+    "reward": 50,
+    "unlocks": 9,
+    "once": "Flag: that mission appears once"
+   },
+  {
+   "Text": "Get %d fans",
+   "args": 5,
+   "available": true,
+   "format": true,
+   "fun": "hasNFans",
+   "reward": 750
+  },
+  {
+   "Text": "Upgrade mic to level %d",
+   "args": 5,
+   "available": true,
+   "format": true,
+   "fun": "micLvl",
+   "reward": 500
+  },
+  {
+   "Text": "Upgrade guitar to level %d",
+   "args": 5,
+   "available": false,
+   "format": true,
+   "fun": "guitarLvl",
+   "reward": 500
+  },
+  {
+   "Text": "Upgrade drum to level %d",
+   "args": 5,
+   "available": false,
+   "format": true,
+   "fun": "drumLvl",
+   "reward": 500
+  }
+ ],
+ "currentMissionsIndexes": [0, 1, 2]
+}

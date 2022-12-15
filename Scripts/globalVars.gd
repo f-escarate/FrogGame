@@ -79,7 +79,7 @@ func load_data():
 	self.progressValue = Data["ProgressValue"]
 	self.progressLimit = Data["ProgressLimit"]
 	self.fansNumber = Data["Fans"]
-	self.defeatedBosses = Data["DefeatedBosses"]
+	self.defeatedBoss = Data["LastDefeatedBoss"]
 	self.mejoraMamalona = Data["Inventory"]["Lessons"]["buff_real"]
 
 func set_Data(value):
@@ -87,7 +87,7 @@ func set_Data(value):
 	
 func save_data():
 	self.Data["Currency"] = self.totalMoney
-	self.Data["DefeatedBosses"] = self.defeatedBosses
+	self.Data["LastDefeatedBoss"] = self.defeatedBoss
 	GlobalVars.Data["Inventory"]["Lessons"]["buff_real"] = self.mejoraMamalona
 
 	var file = File.new()
@@ -139,7 +139,7 @@ func addFans(n):
 	self.save_data()
 	
 # Missions vars
-var defeatedBosses : Array
+var defeatedBoss : String
 var refreshMissionsRef : FuncRef
 
 # Lessons vars
