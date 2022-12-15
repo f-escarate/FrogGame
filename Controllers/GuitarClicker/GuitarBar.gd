@@ -23,4 +23,6 @@ func isPressed():
 		firstMark.queue_free()
 		self.main.makeProgress(Instruments.instruments_click_progress[Instruments.GUITAR])
 		self.main.okMsg()
+		GlobalVars.comboCount += 1
+		self.main.comboMsg()
 		return

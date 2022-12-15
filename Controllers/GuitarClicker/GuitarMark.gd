@@ -8,6 +8,7 @@ var index : int
 func _process(delta):
 	rect_position.y += speed * delta
 	if  self.depth - rect_position.y < -speed*GlobalVars.GOOD_HIT:
+		GlobalVars.comboCount = 0
 		queue_free()
 	if  self.depth - rect_position.y < speed*GlobalVars.GOOD_HIT:
 		self.visible = false

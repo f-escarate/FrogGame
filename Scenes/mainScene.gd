@@ -15,6 +15,7 @@ onready var char_position = $Position
 onready var mc = $Position/mainCharacter
 onready var char_tween = $Position/Tween
 onready var fans = $Fans
+onready var combo_pos = $ComboPos
 onready var currentController = NormalClicker.new(musicPlayer, self)
 onready var factory = EnemyFactory.new()
 onready var floatingText = preload("res://effects/FloatingText.tscn")
@@ -106,6 +107,14 @@ func okMsg(msg = "OK!!!"):
 	ftext.setText(msg)
 	ftext.setPosition(Vector2(0, -GlobalVars.height/4))
 	char_position.add_child(ftext)
+
+func comboMsg(msg = ""):
+	var ftext = floatingText.instance()
+	msg = "x"+String(GlobalVars.comboCount)+" Combo"
+	ftext.text_color = Color( 1, 0.843137, 0, 1 )
+	ftext.setText(msg)
+	ftext.setPosition(Vector2(0,0))
+	combo_pos.add_child(ftext)
 	
 func setController(controller):
 	currentController.queue_free()

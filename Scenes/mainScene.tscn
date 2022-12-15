@@ -106,3 +106,6 @@ margin_right = 510.0
 margin_bottom = 587.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 150, 1.5 )
+
+[node name="ComboPos" type="Node2D" parent="."]
+position = Vector2( 139, 168 )

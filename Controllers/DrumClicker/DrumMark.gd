@@ -4,7 +4,7 @@ onready var back = $Back
 onready var button = $TextureButton
 onready var tween = $Tween
 onready var label = $Label
-const TOLERANCE = 3 # Hit tolerance factor
+const TOLERANCE = 5 # Hit tolerance factor
 var makeProgressRef : FuncRef
 var restorePosRef : FuncRef
 var okMsgRef : FuncRef
@@ -41,12 +41,15 @@ func setParams(makeProgress, okMsg, restorePos, num, gridPosition, lifeTime):
 func _process(delta):
 	self.elapsedTime += delta
 	if elapsedTime - GlobalVars.DRUM_HIT_TIME > GlobalVars.GOOD_HIT * self.TOLERANCE:
+		GlobalVars.comboCount = 0
 		self.removeMark()
 
 func isPressed():
 	if GlobalVars.DRUM_HIT_TIME - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
 		self.makeProgressRef.call_func(Instruments.instruments_click_progress[Instruments.DRUM])
 		self.okMsgRef.call_func()
+		self.comboMsgRef.call_func()
+		GlobalVars.comboCount += 1
 		self.removeMark()
 		
 func removeMark():

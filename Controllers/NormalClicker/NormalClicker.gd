@@ -51,6 +51,7 @@ func refreshNotes() -> void:
 	# Advance to the next note if the player didn't touch the current one
 	var diff = self.rhythm[self.index] - self.noteTime
 	if diff < -GlobalVars.GOOD_HIT:
+		GlobalVars.comboCount = 0
 		advanceNote()
 
 # Updates the next note that has to be touched
@@ -63,6 +64,8 @@ func advanceNote():
 			
 func isPressed():		
 	if self.rhythm[self.index] - self.noteTime < GlobalVars.GOOD_HIT:
+		GlobalVars.comboCount += 1
+		self.main.comboMsg()
 		advanceNote()
 		self.main.makeProgress(Instruments.instruments_click_progress[Instruments.MIC])
 		self.main.okMsg()

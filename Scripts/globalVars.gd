@@ -148,3 +148,8 @@ onready var mejoraMamalona = 0 setget set_mamalon
 func set_mamalon(value):
 	mejoraMamalona = value
 
+# Combo
+var comboCount = 0 setget set_combo
+
+func set_combo(value):
+	comboCount = value
