@@ -77,8 +77,8 @@ func noMoneyMsg():
 	var ftext = floatingText.instance()
 	ftext.z_index = 2
 	ftext.setColor(Color("#ed5f47"))
-	var middle = self.rect_size.x/2 + self.rect_position.x
-	ftext.setPosition(Vector2(middle,0))
+	var middle = Vector2(self.rect_size.x/2 + self.rect_position.x, self.rect_size.y/2)
+	ftext.setPosition(middle)
 	ftext.setText("not enough money")
 	self.add_child(ftext)
 
