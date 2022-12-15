@@ -55,6 +55,11 @@ func _on_Settings_Pressed():
 	pauseMenu.pauseGame()
 
 func makeProgress(multiplier = 1):
+	if GlobalVars.isFighting:
+		var enemyInstrument = factory.get_child(0).INSTRUMENT
+		var sameInstrument = int(enemyInstrument == instrumentSelector.currentInstrument)
+		multiplier += sameInstrument*multiplier/5
+	
 	GlobalVars.increaseProgressValue(multiplier)
 	# If the progress exceeds the limit, then the limit is increased
 	if GlobalVars.progressValue >= GlobalVars.progressLimit:
