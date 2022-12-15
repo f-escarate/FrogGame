@@ -2,7 +2,7 @@
     "buff_0": 150,
     "buff_real": 0,
     "icon_path": "res://images/Items/guitar.png",
-    "price": 100,
+    "price": 250,
     "lvl": 0,
     "fun" : "upgrade_guitar",
     "info_fun": "get_guitar_info",
