@@ -39,11 +39,11 @@ func instrument_formula(val, lvl):
 	else:
 		return val + floor(lvl/10) + 1 
 
-func increase_fans(lvl):
+func increase_fans(_lvl):
 	var n = 1		# Hay que hacer una fórmula
 	GlobalVars.addFans(n)
 
-func get_fans_info(lvl):
+func get_fans_info(_lvl):
 	return "You have %s fans. Each ad attracts one more." % [GlobalVars.fansNumber]
 
 func music_lessons(lvl):
@@ -51,4 +51,4 @@ func music_lessons(lvl):
 	GlobalVars.save_data()
 
 func get_lessons_info(lvl):
-	return "Vas en la X clase"
+	return "You have done %s lessons" % [lvl]

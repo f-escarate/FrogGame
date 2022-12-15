@@ -2,6 +2,7 @@ extends HBoxContainer
 
 onready var label = $Label
 onready var claimButton = $Claim
+onready var completed : bool = false
 var missionText
 var reward
 var index # Is the index according to the JSON file
@@ -19,9 +20,11 @@ func setFields(text, money, removeFun, index):
 	self.removeFunRef = removeFun
 	
 func setCompleted():
-	claimButton.modulate = Color(1,1,1)
-	claimButton.connect("button_up", self, "claimReward")
-
+	if !completed:
+		claimButton.modulate = Color(1,1,1)
+		claimButton.connect("button_up", self, "claimReward")
+		completed = true
+		
 func claimReward():
 	GlobalVars.totalMoney = GlobalVars.totalMoney + self.reward
 	GlobalVars.refreshMoneyGUI.call_func()

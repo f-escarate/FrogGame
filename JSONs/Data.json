@@ -24,7 +24,7 @@
                     "lvl": 0,
                     "fun" : "music_lessons",
                     "info_fun": "get_lessons_info",
-                    "description": "Get music lessons could help Ranaldinho to improve his music abilities"
+                    "description": "Music lessons could help Ranaldinho to improve his music abilities and economic knowledge."
                     },
         "Mic" : {
                     "buff_0": 1,

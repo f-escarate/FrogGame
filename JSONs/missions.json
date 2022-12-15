@@ -1,23 +1,44 @@
 [
-    {
-        "Text": "Beat all the bosses",
-        "fun": "allBossesBeaten",
-        "reward": 1000 
-    },
-    {
-        "Text": "Get all the instruments",
-        "fun": "hasAllInstruments",
-        "reward": 900
-    },
-    {
-        "Text": "Get 20 fans",
-        "fun": "has20Fans",
-        "reward": 750 
-    },
-    {
-        "Text": "Upgrade guitar to level 5",
-        "fun": "guitarLvl5",
-        "reward": 500
-    }
-    
+ {
+  "Text": "Beat all the bosses",
+  "args": null,
+  "fun": "allBossesBeaten",
+  "renewable": true,
+  "reward": 1000
+ },
+ {
+  "Text": "Get all the instruments",
+  "args": null,
+  "fun": "hasAllInstruments",
+  "renewable": true,
+  "reward": 900
+ },
+ {
+  "Text": "Get %d fans",
+  "args": 5,
+  "fun": "hasNFans",
+  "renewable": true,
+  "reward": 750
+ },
+ {
+  "Text": "Upgrade mic to level %d",
+  "args": 5,
+  "fun": "micLvl",
+  "renewable": true,
+  "reward": 500
+ },
+ {
+  "Text": "Upgrade guitar to level %d",
+  "args": 5,
+  "fun": "guitarLvl",
+  "renewable": true,
+  "reward": 500
+ },
+ {
+  "Text": "Upgrade drum to level %d",
+  "args": 5,
+  "fun": "drumLvl",
+  "renewable": true,
+  "reward": 500
+ }
 ]
