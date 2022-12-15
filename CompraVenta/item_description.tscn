@@ -10,18 +10,16 @@ script = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = -250.0
-margin_top = -450.0
+margin_top = -600.0
 margin_right = 250.0
-margin_bottom = 150.0
-rect_scale = Vector2( 1, 0.75 )
 texture = ExtResource( 3 )
 
 [node name="Title" type="Label" parent="."]
 modulate = Color( 0.937255, 0.823529, 0.588235, 1 )
 margin_left = -176.0
-margin_top = -425.0
+margin_top = -569.0
 margin_right = 132.0
-margin_bottom = -388.0
+margin_bottom = -532.0
 rect_scale = Vector2( 1.15, 1.15 )
 theme = ExtResource( 1 )
 text = "Item description"
@@ -31,16 +29,16 @@ autowrap = true
 clip_text = true
 
 [node name="Line2D" type="Line2D" parent="."]
-position = Vector2( 0, -72 )
+position = Vector2( 0, -216 )
 points = PoolVector2Array( -150, -311, 153, -311 )
 width = 7.0
 default_color = Color( 0, 0, 0, 1 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -230.0
-margin_top = -370.0
+margin_top = -499.0
 margin_right = 230.0
-margin_bottom = -170.0
+margin_bottom = -199.0
 theme = ExtResource( 1 )
 align = 1
 valign = 1
@@ -49,9 +47,9 @@ clip_text = true
 
 [node name="Stats" type="Label" parent="."]
 margin_left = -230.0
-margin_top = -161.0
+margin_top = -187.0
 margin_right = 230.0
-margin_bottom = -61.0
+margin_bottom = -87.0
 theme = ExtResource( 1 )
 align = 1
 valign = 1

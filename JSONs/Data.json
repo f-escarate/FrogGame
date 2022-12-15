@@ -34,7 +34,7 @@
                     "lvl": 0,
                     "fun" : "upgrade_mic",
                     "info_fun": "get_mic_info",
-                    "description": "The microphone allows Ranaldinho to show his wonderful voice"
+                    "description": "The microphone allows Ranaldinho to show his wonderful voice.\n [Good against the Wisdom Cat]"
                     }
     },
     "LastDefeatedBoss" : ""
