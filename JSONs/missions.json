@@ -4,7 +4,6 @@
    "Text": "Beat The Wisdom Cat",
    "args": [["Witch"], [], 0],
    "available": true,
-   "format": false,
    "fun": "bossesBeaten",
    "reward": 100
   },
@@ -12,7 +11,6 @@
    "Text": "Beat Lady Bearnardita",
    "args": [["Bear"], [], 1],
    "available": true,
-   "format": false,
    "fun": "bossesBeaten",
    "reward": 100,
    "unlocks": 4
@@ -21,7 +19,6 @@
    "Text": "Beat Duck Carlos",
    "args": [["Duck"], [], 2],
    "available": true,
-   "format": false,
    "fun": "bossesBeaten",
    "reward": 100,
    "unlocks": 5
@@ -30,7 +27,6 @@
    "Text": "Beat all the bosses",
    "args": [["Witch", "Duck", "Bear"], [], 3],
    "available": true,
-   "format": false,
    "fun": "bossesBeaten",
    "reward": 600
   },
@@ -38,7 +34,6 @@
    "Text": "Buy the Guitar",
    "args": 1,
    "available": false,
-   "format": false,
    "fun": "hasAnInstrument",
    "reward": 50,
    "unlocks": 8,
@@ -48,7 +43,6 @@
     "Text": "Buy the Drum",
     "args": 2,
     "available": false,
-    "format": false,
     "fun": "hasAnInstrument",
     "reward": 50,
     "unlocks": 9,
@@ -58,7 +52,7 @@
    "Text": "Get %d fans",
    "args": 5,
    "available": true,
-   "format": true,
+   "format": [5],
    "fun": "hasNFans",
    "reward": 750
   },
@@ -66,7 +60,7 @@
    "Text": "Upgrade mic to level %d",
    "args": 5,
    "available": true,
-   "format": true,
+   "format": [5],
    "fun": "micLvl",
    "reward": 500
   },
@@ -74,7 +68,7 @@
    "Text": "Upgrade guitar to level %d",
    "args": 5,
    "available": false,
-   "format": true,
+   "format": [5],
    "fun": "guitarLvl",
    "reward": 500
   },
@@ -82,10 +76,18 @@
    "Text": "Upgrade drum to level %d",
    "args": 5,
    "available": false,
-   "format": true,
+   "format": [5],
    "fun": "drumLvl",
    "reward": 500
+  },
+  {
+   "Text": "Reach a %d hits combo",
+   "args": [0, 5, 10],
+   "available": true,
+   "format": [5],
+   "fun": "reachCombo",
+   "reward": 50
   }
  ],
- "currentMissionsIndexes": [0, 1, 2]
+ "currentMissionsIndexes": [0, 1, 10]
 }

@@ -48,8 +48,8 @@ func addMission(json_mission, index):
 	var ui_mission = mission.instance()
 	self.missions.add_child(ui_mission)
 	
-	if json_mission["format"]:
-		json_mission["Text"] = json_mission["Text"] % json_mission["args"]
+	if json_mission.has("format"):
+		json_mission["Text"] = json_mission["Text"] % json_mission["format"]
 	
 	ui_mission.setFields(json_mission["Text"], json_mission["reward"], removeMissionRef, index)
 	self.funNames.append(json_mission["fun"])
@@ -159,8 +159,15 @@ func updateMissionValues(index):
 
 	if typeof(arg) == TYPE_REAL:
 		json_missions["allMissions"][index]["args"] *= 2
+		if json_missions["allMissions"][index].has("format"):
+			json_missions["allMissions"][index]["format"][0] *= 2		
 	elif typeof(arg) == TYPE_ARRAY and len(args)==3:
-		_changeMissionArgs(index, [arg[1], arg[0], arg[2]])
+		if typeof(arg[0]) == TYPE_REAL: 
+			
+			json_missions["allMissions"][index]["args"] = [0, arg[1]+5, index]
+			json_missions["allMissions"][index]["format"][0] +=5
+		else:
+			_changeMissionArgs(index, [arg[1], arg[0], arg[2]])
 	
 	file = File.new()
 	file.open(MISSIONS_PATH, File.WRITE)
@@ -209,4 +216,8 @@ func drumLvl(lvl):
 		return inventory["Drum"]["lvl"] >= lvl
 	return false
 
-
+func reachCombo(args):
+	if GlobalVars.comboCount > args[0]:
+		_changeMissionArgs(args[2], [GlobalVars.comboCount, args[1], args[2]])
+		args[0] = GlobalVars.comboCount
+	return args[0]>=args[1]
