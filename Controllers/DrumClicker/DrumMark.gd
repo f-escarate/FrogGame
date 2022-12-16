@@ -48,7 +48,6 @@ func isPressed():
 	if GlobalVars.DRUM_HIT_TIME - elapsedTime < GlobalVars.GOOD_HIT * self.TOLERANCE:
 		self.makeProgressRef.call_func(Instruments.instruments_click_progress[Instruments.DRUM])
 		self.okMsgRef.call_func()
-		self.comboMsgRef.call_func()
 		GlobalVars.comboCount += 1
 		self.removeMark()
 		

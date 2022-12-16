@@ -66,6 +66,7 @@ func checkMissions():
 	else:
 		self.showMissionButton.normal = load("res://images/misions.png")
 		self.showMissionButton.pressed = load("res://images/pressed1.png")
+		
 	GlobalVars.defeatedBoss = ""
 
 func checkMission(i):
@@ -92,6 +93,7 @@ func removeMission(index):
 	# Adding another random mission
 	self.addRandomMission()
 	self.writeMissionCurrentIndexes()
+	checkMissions()
 
 func addRandomMission():
 	var file = File.new()
