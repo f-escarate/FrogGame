@@ -33,7 +33,6 @@ func refresh():
 		return
 	addFans(n)
 
-
 func addFans(n):
 	for row in rows:
 		var child_count = row.get_child_count()

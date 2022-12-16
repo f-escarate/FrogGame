@@ -26,6 +26,7 @@ func _ready():
 	words.text = GlobalVars.enemiesMsgs[self.enemyType]
 	
 	self.sprite.modulate = self.enemiesExplosionColors[self.enemyType]
+	self.sprite.modulate.a = 0.5
 	
 	var color1 = self.enemiesTextColors[self.enemyType]
 	var color2 = color1
