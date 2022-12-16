@@ -11,6 +11,7 @@ var arrows_container : Node2D
 var makeProgress
 var restorePosRef
 var okMsg
+var comboMsg
 var grid : Array
 var numXpos : int
 var numYpos : int
@@ -22,6 +23,7 @@ func _init(player, main).(player, main):
 	# Func refs
 	self.makeProgress = funcref(self.main, "makeProgress")
 	self.okMsg = funcref(self.main, "okMsg")
+	self.comboMsg = funcref(self.main, "comboMsg")
 	self.restorePosRef = funcref(self, "restorePos")
 	
 	self.circles_container = Node2D.new()
@@ -100,7 +102,7 @@ func spawnMark(lifeTime = 0.0):
 	# Mark creation
 	var mark = DrumMark.instance()
 	mark.position = candidate_position
-	mark.setParams(self.makeProgress, self.okMsg, self.restorePosRef, (self.displayIndex)%13, gridPos, lifeTime)
+	mark.setParams(self.makeProgress, self.okMsg, self.comboMsg, self.restorePosRef, (self.displayIndex)%13, gridPos, lifeTime)
 	
 	# Arrow spawining
 	var markCount = self.circles_container.get_child_count()

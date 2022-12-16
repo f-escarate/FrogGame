@@ -4,10 +4,11 @@ onready var back = $Back
 onready var button = $TextureButton
 onready var tween = $Tween
 onready var label = $Label
-const TOLERANCE = 5 # Hit tolerance factor
+const TOLERANCE = 6 # Hit tolerance factor
 var makeProgressRef : FuncRef
 var restorePosRef : FuncRef
 var okMsgRef : FuncRef
+var comboMsgRef : FuncRef
 var gridPos : Vector2
 var labelNum : String
 var elapsedTime = 0
@@ -29,9 +30,10 @@ func _ready():
 	button.connect("pressed", self, "isPressed")
 	
 
-func setParams(makeProgress, okMsg, restorePos, num, gridPosition, lifeTime):
+func setParams(makeProgress, okMsg, comboMsg, restorePos, num, gridPosition, lifeTime):
 	self.makeProgressRef = makeProgress
 	self.okMsgRef = okMsg
+	self.comboMsgRef = comboMsg
 	self.labelNum = str(num)
 	self.restorePosRef = restorePos
 	self.gridPos = gridPosition
@@ -49,6 +51,7 @@ func isPressed():
 		self.makeProgressRef.call_func(Instruments.instruments_click_progress[Instruments.DRUM])
 		self.okMsgRef.call_func()
 		GlobalVars.comboCount += 1
+		self.comboMsgRef.call_func()
 		self.removeMark()
 		
 func removeMark():
