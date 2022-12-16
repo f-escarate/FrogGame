@@ -60,7 +60,7 @@ func checkMissions():
 	for i in range(len(funNames)):
 		if checkMission(i) == true:
 			aux = true
-	if aux == true:
+	if aux:
 		self.showMissionButton.normal = load("res://images/onemision.png")
 		self.showMissionButton.pressed = load("res://images/pressed2.png")
 	else:
@@ -76,7 +76,6 @@ func checkMission(i):
 		var ui_mission = self.missions.get_child(i)
 		ui_mission.setCompleted()
 	return missionComplete
-	
 
 func removeMission(index):
 	# Updating mission values
@@ -93,7 +92,7 @@ func removeMission(index):
 	# Adding another random mission
 	self.addRandomMission()
 	self.writeMissionCurrentIndexes()
-	checkMissions()
+	self.checkMissions()
 
 func addRandomMission():
 	var file = File.new()
@@ -160,6 +159,8 @@ func updateMissionValues(index):
 
 	if typeof(arg) == TYPE_REAL:
 		json_missions["allMissions"][index]["args"] *= 2
+	elif typeof(arg) == TYPE_ARRAY and len(args)==3:
+		_changeMissionArgs(index, [arg[1], arg[0], arg[2]])
 	
 	file = File.new()
 	file.open(MISSIONS_PATH, File.WRITE)
@@ -172,13 +173,14 @@ func bossesBeaten(args):
 	var missingBosses = args[0]
 	var defeatedBosses = args[1]
 	var missionIndex = args[2]
+	if missingBosses == []:
+		return true
 	if !(GlobalVars.defeatedBoss in missingBosses):
 			return false
 		
 	missingBosses.erase(GlobalVars.defeatedBoss)
 	defeatedBosses.append(GlobalVars.defeatedBoss)
 	if len(missingBosses) == 0:
-		_changeMissionArgs(missionIndex, [defeatedBosses, missingBosses, missionIndex])
 		return true
 	_changeMissionArgs(missionIndex, [missingBosses, defeatedBosses, missionIndex])
 	return false
