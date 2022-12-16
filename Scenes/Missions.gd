@@ -56,8 +56,16 @@ func addMission(json_mission, index):
 	self.args.append(json_mission["args"])
 	
 func checkMissions():
+	var aux = false
 	for i in range(len(funNames)):
-		checkMission(i)
+		if checkMission(i) == true:
+			aux = true
+	if aux == true:
+		self.showMissionButton.normal = load("res://images/onemision.png")
+		self.showMissionButton.pressed = load("res://images/pressed2.png")
+	else:
+		self.showMissionButton.normal = load("res://images/misions.png")
+		self.showMissionButton.pressed = load("res://images/pressed1.png")
 	GlobalVars.defeatedBoss = ""
 
 func checkMission(i):
@@ -66,6 +74,8 @@ func checkMission(i):
 	if missionComplete:
 		var ui_mission = self.missions.get_child(i)
 		ui_mission.setCompleted()
+	return missionComplete
+	
 
 func removeMission(index):
 	# Updating mission values

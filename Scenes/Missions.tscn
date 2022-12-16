@@ -4,16 +4,16 @@
 [ext_resource path="res://images/GUI/close_icon.png" type="Texture" id=2]
 [ext_resource path="res://GUI/mainTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Scenes/Missions.gd" type="Script" id=4]
-[ext_resource path="res://images/GUI/mission_icon.png" type="Texture" id=5]
-[ext_resource path="res://images/GUI/mission_iconHover.png" type="Texture" id=6]
+[ext_resource path="res://images/pressed1.png" type="Texture" id=5]
+[ext_resource path="res://images/misions.png" type="Texture" id=6]
 
 [node name="Missions" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="ShowMissionButton" type="TouchScreenButton" parent="."]
 position = Vector2( 656, 81 )
-normal = ExtResource( 5 )
-pressed = ExtResource( 6 )
+normal = ExtResource( 6 )
+pressed = ExtResource( 5 )
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
