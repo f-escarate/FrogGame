@@ -111,7 +111,7 @@ func okMsg(msg = "OK!!!"):
 func comboMsg(msg = ""):
 	var ftext = floatingText.instance()
 	msg = "x"+String(GlobalVars.comboCount)+" Combo"
-	ftext.text_color = Color( 1, 0.843137, 0, 1 )
+	ftext.text_color = Color( randf(), randf(), randf(), 1)
 	ftext.setText(msg)
 	ftext.setPosition(Vector2(0,0))
 	combo_pos.add_child(ftext)
